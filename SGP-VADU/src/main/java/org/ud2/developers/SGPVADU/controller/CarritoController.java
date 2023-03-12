@@ -16,7 +16,6 @@ public class CarritoController {
 
     @GetMapping("/")
     public String mostrarCarrito(Model model) {
-        model.addAttribute("productos", serviceProductos.obtenerEnVenta());
         return "carrito";
     }
 }
