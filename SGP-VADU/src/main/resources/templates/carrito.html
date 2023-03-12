@@ -36,7 +36,7 @@
 											th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong></h4>
 									</p>
 									<p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
-									<a th:href="@{/carrito/eliminar(id=${producto.id})}" class="btn btn-danger btn-sm me-1 mb-2"
+									<a th:href="@{/carrito/eliminar(id=${carrito.producto.id})}" class="btn btn-danger btn-sm me-1 mb-2"
 										title="Eliminar item de carrito"> <i
 										class="fa-solid fa-trash"></i>
 									</a>
