@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.ud2.developers.SGPVADU.entity.Carrito;
 import org.ud2.developers.SGPVADU.service.IntServiceCarrito;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 
@@ -21,7 +22,12 @@ public class CarritoController {
 	@GetMapping("/index")
     public String mostrarCarrito(Model model) {
 		model.addAttribute("carritos", serviceCarrito.obtenerCarrito());
-		model.addAttribute("total", serviceCarrito.contarCarrito());
+		Double total = 0.0; 
+		for(Carrito carrito : serviceCarrito.obtenerCarrito()) {
+			total += carrito.getProducto().getPrecioKg();
+		}
+		model.addAttribute("total", total);
+		model.addAttribute("cantidad", serviceCarrito.contarCarrito());
         return "carrito";
     }
 }
