@@ -18,12 +18,12 @@
 	<main role="main">
 		<hr>
 		<div class="container pb-3">
-			<div class="card bg-dark text-white">
+			<div class="card text-white">
 				<h4 class="card-header text-white"
 					style="background-color: #c62020;">
 					<strong>Datos del producto</strong>
 				</h4>
-				<div class="card-body">
+				<div class="card-body bg-dark ">
 					<form method="post" enctype="multipart/form-data"
 						th:action="@{/productos/agregar}" th:object="${producto}">
 						<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
