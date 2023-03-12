@@ -11,7 +11,12 @@ public class HomeController {
     
 	@Autowired
 	private IntServiceProductos serviceProductos;
-
+	
+    @GetMapping("/carrito")
+    public String mostrarCarrito(Model model) {
+        return "carrito";
+    }
+    
 	@GetMapping("/")
 	public String mostrarIndex(Model model) {
 		model.addAttribute("productos", serviceProductos.obtenerEnVenta());
