@@ -21,7 +21,7 @@ public class CarritoController {
 
 	@GetMapping("/eliminar")
 	public String eliminarCarrito(Carrito carrito) {
-		serviceProductos.eliminar(carrito.getProducto().getId());
+		serviceProductos.eliminar(carrito.getId());
 		return "redirect:/carrito/index";
 	}
 
