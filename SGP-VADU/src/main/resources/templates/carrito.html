@@ -36,7 +36,8 @@
 											th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong></h4>
 									</p>
 									<p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
-									<a th:href="@{/carrito/eliminar(id=${carrito.id})}" class="btn btn-danger btn-sm me-1 mb-2"
+									<a th:href="@{/carrito/eliminar(id=${carrito.id})}"
+										class="btn btn-danger btn-sm me-1 mb-2"
 										title="Eliminar item de carrito"> <i
 										class="fa-solid fa-trash"></i>
 									</a>
@@ -47,10 +48,10 @@
 											onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
 											<i class="fa-solid fa-minus"></i>
 										</button>
-										<div class="form-outline">
-											<input id="form1" min="0" name="quantity" value="0"
+										<div class="form-group">
+											<input id="form1" min="0" name="cantidad" value="0"
 												type="number" class="form-control" style="height: 35px" />
-											<label class="form-label ms-54" for="form1">Cantidad(kg)</label>
+											<label class="form-label ms-4" for="form1">Cantidad(kg)</label>
 										</div>
 										<button class="btn btn-primary px-3 ms-2"
 											onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -72,9 +73,9 @@
 							<h5 class="mb-0">Total</h5>
 						</div>
 						<div class="card-body">
-							<ul class="list-group list-group-flush bg-light">
+							<ul class="list-group list-group-flush list-light">
 								<li
-									class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+									class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 bg-light">
 									Total por productos <span th:text="'$' + ${total}"></span>
 								</li>
 								<li
