@@ -28,7 +28,7 @@
 							<div class="row" th:each="carrito:${carritos}">
 								<div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
 									<img th:src="@{/images/{img}(img=${carrito.producto.imagen})}"
-										class="card-img-top" width="200px" height="225px">
+										class="card-img-top" width="175px" height="200px">
 								</div>
 								<div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
 									<p>
@@ -36,10 +36,10 @@
 											th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong></h4>
 									</p>
 									<p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
-									<button type="button" class="btn btn-danger btn-sm me-1 mb-2"
-										data-mdb-toggle="tooltip" title="Remove item">
-										<i class="fa-solid fa-trash"></i>
-									</button>
+									<a th:href="@{/carrito/eliminar(id=${producto.id})}" class="btn btn-danger btn-sm me-1 mb-2"
+										title="Eliminar item de carrito"> <i
+										class="fa-solid fa-trash"></i>
+									</a>
 								</div>
 								<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 									<div class="d-flex mb-4" style="max-width: 300px">
@@ -49,8 +49,8 @@
 										</button>
 										<div class="form-outline">
 											<input id="form1" min="0" name="quantity" value="0"
-												type="number" class="form-control" style="height: 50px" />
-											<label class="form-label ms-4" for="form1">Cantidad(kg)</label>
+												type="number" class="form-control" style="height: 15px" />
+											<label class="form-label ms-5" for="form1">Cantidad(kg)</label>
 										</div>
 										<button class="btn btn-primary px-3 ms-2"
 											onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -61,8 +61,8 @@
 										<strong th:text="'$' + ${carrito.producto.precioKg}"></strong>
 									</p>
 								</div>
+								<hr class="my-4" />
 							</div>
-							<hr class="my-4" />
 						</div>
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 									</div> <span><strong th:text="'$' + ${total+25}"></strong></span>
 								</li>
 							</ul>
-							<button type="button" class="btn btn-primary btn-lg btn-block">
+							<button type="button" class="btn btn-success btn-lg btn-block">
 								Realizar compra</button>
 						</div>
 					</div>

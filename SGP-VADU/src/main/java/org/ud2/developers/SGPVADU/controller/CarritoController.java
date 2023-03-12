@@ -12,22 +12,28 @@ import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 @Controller
 @RequestMapping("/carrito")
 public class CarritoController {
-	
+
 	@Autowired
 	private IntServiceCarrito serviceCarrito;
-	
+
 	@Autowired
 	private IntServiceProductos serviceProductos;
-	
+
+	@GetMapping("/eliminar")
+	public String eliminarCarrito(Carrito carrito) {
+		serviceProductos.eliminar(carrito.getProducto().getId());
+		return "redirect:/carrito/index";
+	}
+
 	@GetMapping("/index")
-    public String mostrarCarrito(Model model) {
+	public String mostrarCarrito(Model model) {
 		model.addAttribute("carritos", serviceCarrito.obtenerCarrito());
-		Double total = 0.0; 
-		for(Carrito carrito : serviceCarrito.obtenerCarrito()) {
+		Double total = 0.0;
+		for (Carrito carrito : serviceCarrito.obtenerCarrito()) {
 			total += carrito.getProducto().getPrecioKg();
 		}
 		model.addAttribute("total", total);
 		model.addAttribute("cantidad", serviceCarrito.contarCarrito());
-        return "carrito";
-    }
+		return "carrito";
+	}
 }
