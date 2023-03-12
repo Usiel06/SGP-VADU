@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" th:href="@{/images/logo.png}">
+<title>SGP-VADU | Creación de Productos</title>
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<header th:insert="fragmentos/menu.html::menu"></header>
+
+	<main role="main">
+		<hr>
+		<div class="container pb-3">
+			<div class="card bg-dark text-white">
+				<h4 class="card-header text-white"
+					style="background-color: #c62020;">
+					<strong>Datos del producto</strong>
+				</h4>
+				<div class="card-body">
+					<form method="post" enctype="multipart/form-data"
+						th:action="@{/productos/agregar}" th:object="${producto}">
+						<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+							role='alert'>
+							Por favor corrija los siguientes errores:
+							<ul>
+								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+							</ul>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="pb-1" for="nombre">Nombre</label> <input
+										type="hidden" th:field="*{id}"> <input type="text"
+										class="form-control" th:field="*{nombre}" id="nombre"
+										name="nombre" placeholder="Nombre del producto"
+										required="required" autofocus>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<label class="pb-1" for="descripcion">Descripción</label> <input
+										type="text" class="form-control" th:field="*{descripcion}"
+										id="descripcion" name="descripcion"
+										placeholder="Breve descripción del producto"
+										required="required">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 pt-2">
+								<div class="form-group">
+									<label for="categoria">Categoría</label> <select
+										class="form-control" th:field="*{categoria.id}"
+										name="categoria" id="categoria">
+										<option th:each="categoria:${categorias}"
+											th:value="${categoria.id}" th:text="${categoria.nombre}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 pt-2">
+								<div class="form-group">
+									<label class="pb-1" for="fecha">Fecha de Ingreso
+										(dd/mm/yyyy)</label> <input type="text" class="form-control"
+										th:field="*{fechaIngreso}" name="fechaIngreso"
+										id="fechaIngreso" placeholder="Fecha de ingreso"
+										required="required" readonly>
+								</div>
+							</div>
+							<div class="col-md-3 pt-2">
+								<div class="form-group">
+									<label class="pb-1" for="precioKg">Precio (kg)</label> <input
+										type="text" class="form-control" th:field="*{precioKg}"
+										name="precioKg" id="precioKg" placeholder="Precio por kg"
+										required="required">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-check">
+									<label class="form-check-label" for="estatus0"></label><br>
+									<input class="form-check-input" th:field="*{estatus}"
+										type="radio" name="estatus" id="estatus" value="1"
+										checked="checked" required> <label
+										class="form-check-label" for="estatus1">En venta</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" th:field="*{estatus}"
+										type="radio" name="estatus" id="estatus" value="0" required>
+									<label class="form-check-label" for="destacado2">Descontinuado</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 pt-2">
+								<div class="form-group">
+									<label class="pb-1" for="cantidadIngreso">Cantidad de
+										kg a ingresar</label> <input type="text" class="form-control"
+										th:field="*{cantidadIngreso}" name="cantidadIngreso"
+										id="cantidadIngreso" placeholder="Cantidad de kg a ingresar"
+										required="required">
+								</div>
+							</div>
+							<div class="col-md-4 pt-2">
+								<div class="form-group">
+									<label class="pb-1" for="tempAlmacen">Temperatura de
+										almacen (grados centígrados)</label> <input type="number"
+										class="form-control" th:field="*{tempAlmacen}"
+										name="tempAlmacen" id="tempAlmacen"
+										placeholder="Temperatura de almacen">
+								</div>
+							</div>
+							<div class="col-md-4 pt-2">
+								<div class="form-group">
+									<label class="pb-1" for="vidaUtil">Vida util (días)</label> <input
+										type="number" class="form-control" th:field="*{vidaUtil}"
+										name="vidaUtil" id="vidaUtil"
+										placeholder="Vida util del producto en días">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="text-center pt-3">
+								<div class="form-group">
+									<label for="archivoImagen">Imagen</label> <input type="file"
+										class="form-control-file" name="archivoImagen"
+										id="archivoImagen">
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="text-center">
+								<label for="imagen">Vista previa</label> <img
+									class="rounded mx-auto d-block pt-2"
+									th:src="@{/images/{img}(img=${producto.imagen})}"
+									alt="Generic placeholder image" width="250px" height="250px">
+							</div>
+						</div>
+						<div class="text-center pt-3">
+							<button type="submit" class="btn btn-success">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="fixed-buttom bg-light"
+		th:insert="fragmentos/pie.html::pie"></footer>
+
+	<script th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script>
+		$(function() {
+			$("#fecha").datepicker({
+				dateFormat : 'dd-mm-yy'
+			});
+		});
+	</script>
+</body>
+
+</html>
