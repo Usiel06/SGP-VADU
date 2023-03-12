@@ -15,8 +15,7 @@ public class Carrito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Double precioTotal;
-
+	
 	@OneToOne
 	@JoinColumn(name = "idProducto")
 	private Producto producto;
@@ -29,14 +28,6 @@ public class Carrito {
 		this.id = id;
 	}
 
-	public Double getPrecioTotal() {
-		return precioTotal;
-	}
-
-	public void setPrecioTotal(Double precioTotal) {
-		this.precioTotal = precioTotal;
-	}
-
 	public Producto getProducto() {
 		return producto;
 	}
@@ -47,7 +38,7 @@ public class Carrito {
 
 	@Override
 	public String toString() {
-		return "Carrito [id=" + id + ", precioTotal=" + precioTotal + ", producto=" + producto + "]";
+		return "Carrito [id=" + id + ", producto=" + producto + "]";
 	}
-
+	
 }

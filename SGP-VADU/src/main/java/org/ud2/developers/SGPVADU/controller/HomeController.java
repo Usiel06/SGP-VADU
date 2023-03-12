@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.ud2.developers.SGPVADU.entity.Carrito;
 import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.service.IntServiceCarrito;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
@@ -19,9 +20,10 @@ public class HomeController {
 	private IntServiceCarrito serviceCarrito;
 	
 	@GetMapping("/agregar")
-	public String agregarCarrito(@RequestParam("id") Integer idProducto) {
+	public String agregarCarrito(@RequestParam("id") Integer idProducto, Carrito carrito) {
 		Producto producto = serviceProductos.buscarPorId(idProducto);
-		serviceCarrito.agregarCarrito(producto);
+		carrito.setProducto(producto);
+		serviceCarrito.agregarCarrito(carrito);
 		return "redirect:/";
 	}
 	

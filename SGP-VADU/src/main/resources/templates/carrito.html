@@ -19,13 +19,13 @@
 		<div class="container py-2">
 			<div class="row d-flex justify-content-center my-4">
 				<div class="col-md-8">
-					<div class="card mb-4" th:each="producto:${productos}">
+					<div class="card mb-4">
 						<div class="card-header py-3 text-white"
 							style="background-color: #c62020;">
 							<h4 class="mb-0" th:text="'Carrito - ' + ${total} + ' items'"></h4>
 						</div>
 						<div class="card-body bg-light">
-							<div class="row">
+							<div class="row" th:each="producto:${productos}">
 								<div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
 									<div class="bg-image hover-overlay hover-zoom ripple rounded"
 										data-mdb-ripple-color="light">
