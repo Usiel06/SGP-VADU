@@ -20,7 +20,7 @@ public class CarritoController {
 	
 	@GetMapping("/index")
     public String mostrarCarrito(Model model) {
-		model.addAttribute("productos", serviceCarrito.obtenerCarrito());
+		model.addAttribute("carritos", serviceCarrito.obtenerCarrito());
 		model.addAttribute("total", serviceCarrito.contarCarrito());
         return "carrito";
     }
