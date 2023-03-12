@@ -27,22 +27,13 @@
 						<div class="card-body bg-light">
 							<div class="row" th:each="carrito:${carritos}">
 								<div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-									<div class="bg-image hover-overlay hover-zoom ripple rounded"
-										data-mdb-ripple-color="light">
-										<img th:src="@{/images/{img}(img=${carrito.producto.imagen})}"
-											class="card-img-top" width="200px" height="225px"> <a
-											href="#!">
-											<div class="mask"
-												style="background-color: rgba(251, 251, 251, 0.2)"></div>
-										</a>
-									</div>
+									<img th:src="@{/images/{img}(img=${carrito.producto.imagen})}"
+										class="card-img-top" width="200px" height="225px">
 								</div>
 								<div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
 									<p>
-									<h3>
-										<strong
-											th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong>
-									</h3>
+										<h4><strong
+											th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong></h4>
 									</p>
 									<p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
 									<button type="button" class="btn btn-danger btn-sm me-1 mb-2"
@@ -51,15 +42,15 @@
 									</button>
 								</div>
 								<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-									<div class="d-flex mb-4">
+									<div class="d-flex mb-4" style="max-width: 300px">
 										<button class="btn btn-primary px-3 me-2"
 											onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
 											<i class="fa-solid fa-minus"></i>
 										</button>
 										<div class="form-outline">
 											<input id="form1" min="0" name="quantity" value="0"
-												type="number" class="form-control" style="height: 150px" />
-											<label class="form-label text-center" for="form1">Cantidad(kg)</label>
+												type="number" class="form-control" style="height: 50px" />
+											<label class="form-label ms-4" for="form1">Cantidad(kg)</label>
 										</div>
 										<button class="btn btn-primary px-3 ms-2"
 											onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
