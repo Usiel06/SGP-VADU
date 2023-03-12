@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.ud2.developers.SGPVADU.entity.Producto;
+import org.ud2.developers.SGPVADU.service.IntServiceCarrito;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 
 @Controller
@@ -12,11 +15,16 @@ public class HomeController {
 	@Autowired
 	private IntServiceProductos serviceProductos;
 	
-    @GetMapping("/carrito")
-    public String mostrarCarrito(Model model) {
-        return "carrito";
-    }
-    
+	@Autowired
+	private IntServiceCarrito serviceCarrito;
+	
+	@GetMapping("/agregar")
+	public String agregarCarrito(@RequestParam("id") Integer idProducto) {
+		Producto producto = serviceProductos.buscarPorId(idProducto);
+		serviceCarrito.agregarCarrito(producto);
+		return "redirect:/";
+	}
+	
 	@GetMapping("/")
 	public String mostrarIndex(Model model) {
 		model.addAttribute("productos", serviceProductos.obtenerEnVenta());
