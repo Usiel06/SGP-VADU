@@ -29,21 +29,16 @@ public class CategoriasController {
 
     @GetMapping("/eliminar")
     public String eliminarCategoria(Categoria categoria, RedirectAttributes model) {
-        serviceCategorias.eliminar(categoria.getId());
+        serviceCategorias.eliminarPorId(categoria.getId());
         model.addFlashAttribute("msg", "Categoría Eliminada");
         return "redirect:/categorias/indexPaginado";
     }
 
     @PostMapping("/agregar")
     public String agregarCategoria(Categoria categoria, RedirectAttributes model) {
-        System.out.println(categoria);
-        if (categoria.getId() == null) {
-            serviceCategorias.guardar(categoria);
-            model.addFlashAttribute("msg", "Categoría Agregada");
-        } else {
-            serviceCategorias.guardar(categoria);
-            model.addFlashAttribute("msg", "Categoría Actualizada");
-        }
+        if (categoria.getId() == null) model.addFlashAttribute("msg", "Categoría Agregada");
+        else model.addFlashAttribute("msg", "Categoría Actualizada");
+        serviceCategorias.guardarCategoria(categoria);
         return "redirect:/categorias/indexPaginado";
     }
 
@@ -59,13 +54,4 @@ public class CategoriasController {
         model.addAttribute("total", serviceCategorias.contarCategorias());
         return "categorias/listaCategorias";
     }
-
-    // @GetMapping("/index")
-    // public String mostrarIndex(Model model) {
-    //     List<Categoria> categorias = serviceCategorias.obtenerCategorias();
-    //     model.addAttribute("categorias", categorias);
-    //     model.addAttribute("total", serviceCategorias.contarCategorias());
-    //     return "categorias/listaCategorias";
-    // }
-
 }

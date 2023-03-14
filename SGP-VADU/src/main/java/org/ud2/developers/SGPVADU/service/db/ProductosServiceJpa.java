@@ -46,12 +46,12 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	}
 
 	@Override
-	public void guardar(Producto producto) {
+	public void guardarProducto(Producto producto) {
 		repoProductos.save(producto);
 	}
 
 	@Override
-	public void eliminar(Integer idProducto) {
+	public void eliminarPorId(Integer idProducto) {
 		repoProductos.deleteById(idProducto);
 	}
 

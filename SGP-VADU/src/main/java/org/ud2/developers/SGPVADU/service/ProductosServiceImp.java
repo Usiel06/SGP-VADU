@@ -102,12 +102,12 @@ public class ProductosServiceImp implements IntServiceProductos {
 	}
 
 	@Override
-	public void guardar(Producto producto) {
+	public void guardarProducto(Producto producto) {
 		productos.add(producto);
 	}
 
 	@Override
-	public void eliminar(Integer idProducto) {
+	public void eliminarPorId(Integer idProducto) {
 		productos.remove(buscarPorId(idProducto));
 	}
 

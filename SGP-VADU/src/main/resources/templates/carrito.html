@@ -39,6 +39,7 @@
 									</p>
 									<p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
 									<a th:href="@{/carrito/eliminar(id=${carrito.id})}"
+										onclick="return alert('El producto se eliminó correctamente del carrito')"
 										class="btn btn-danger btn-sm me-1 mb-2"
 										title="Eliminar item de carrito"> <i
 										class="fa-solid fa-trash fa-lg"></i>

@@ -44,7 +44,7 @@ public class ProductosController {
 
     @GetMapping("/eliminar")
     public String eliminarProducto(Producto producto, RedirectAttributes model) {
-        serviceProductos.eliminar(producto.getId());
+        serviceProductos.eliminarPorId(producto.getId());
         model.addFlashAttribute("msg", "Producto Eliminado");
         return "redirect:/productos/indexPaginado";
     }
@@ -67,13 +67,9 @@ public class ProductosController {
                 producto.setImagen(nombreImagen);
             }
         }
-        if (producto.getId() == null) {
-            serviceProductos.guardar(producto);
-            model.addFlashAttribute("msg", "Producto Agregado");
-        } else {
-            serviceProductos.guardar(producto);
-            model.addFlashAttribute("msg", "Producto Actualizado");
-        }
+        if (producto.getId() == null) model.addFlashAttribute("msg", "Producto Agregado");
+        else model.addFlashAttribute("msg", "Producto Actualizado");
+        serviceProductos.guardarProducto(producto);
         return "redirect:/productos/indexPaginado";
     }
 

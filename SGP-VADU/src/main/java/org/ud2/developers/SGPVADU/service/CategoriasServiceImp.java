@@ -58,12 +58,12 @@ public class CategoriasServiceImp implements IntServiceCategorias {
 	}
 	
 	@Override
-	public void guardar(Categoria categoria) {
+	public void guardarCategoria(Categoria categoria) {
 		categorias.add(categoria);
 	}
 
 	@Override
-	public void eliminar(Integer idCategoria) {
+	public void eliminarPorId(Integer idCategoria) {
 		categorias.remove(buscarPorId(idCategoria));
 	}
 	

@@ -22,7 +22,8 @@ public class CarritoController {
 
 	@GetMapping("/eliminar")
 	public String eliminarCarrito(@RequestParam("id") Integer idCarrito) {
-		serviceProductos.eliminar(idCarrito);
+		System.out.println(idCarrito + "fsbgdjgjkgdjgnj");
+		serviceCarrito.eliminarPorId(idCarrito);
 		return "redirect:/carrito/index";
 	}
 

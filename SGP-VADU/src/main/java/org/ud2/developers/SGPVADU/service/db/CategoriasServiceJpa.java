@@ -34,12 +34,12 @@ public class CategoriasServiceJpa implements IntServiceCategorias {
 	}
 
 	@Override
-	public void guardar(Categoria categoria) {
+	public void guardarCategoria(Categoria categoria) {
 		repoCategorias.save(categoria);
 	}
 
 	@Override
-	public void eliminar(Integer idCategoria) {
+	public void eliminarPorId(Integer idCategoria) {
 		repoCategorias.deleteById(idCategoria);
 	}
 

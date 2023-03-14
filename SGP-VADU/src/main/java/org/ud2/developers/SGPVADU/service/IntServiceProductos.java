@@ -10,8 +10,8 @@ public interface IntServiceProductos {
 	public List<Producto> obtenerEnVenta();
 	public List<Producto> obtenerProductos();
 	public Producto buscarPorId(Integer idProducto);
-	public void guardar(Producto producto);
-	public void eliminar(Integer idProducto);
+	public void guardarProducto(Producto producto);
+	public void eliminarPorId(Integer idProducto);
 	public Integer contarProductos();
 	public Page<Producto> buscarTodas(Pageable page);
 }
