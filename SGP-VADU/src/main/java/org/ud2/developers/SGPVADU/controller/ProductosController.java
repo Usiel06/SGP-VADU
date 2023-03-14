@@ -61,7 +61,7 @@ public class ProductosController {
             return "productos/formProducto";
         }
         if (!multiPart.isEmpty()) {
-            String ruta = "e:/productos/img-productos/";
+            String ruta = "c:/productos/img-productos/";
             String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
             if (nombreImagen != null) {
                 producto.setImagen(nombreImagen);
