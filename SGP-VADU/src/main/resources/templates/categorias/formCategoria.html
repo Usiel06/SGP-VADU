@@ -45,8 +45,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success mt-4">Guardar</button>
+                        <div class="text-center pt-4">
+                            <button type="submit" class="btn btn-success me-3" th:if="${categoria.id==null}">Guardar</button>
+                            <button type="submit" class="btn btn-success me-3" th:unless="${categoria.id==null}">Modificar</button>
+                            <a class="btn text-white" th:href="@{/categorias/indexPaginado}"
+                                style="background-color: #c62020;">Cancelar</a>
                         </div>
                     </form>
                 </div>
@@ -57,5 +60,7 @@
     <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
-    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script></body>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
 </html>

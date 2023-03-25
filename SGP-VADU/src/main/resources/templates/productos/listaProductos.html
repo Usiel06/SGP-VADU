@@ -46,20 +46,21 @@
                                     <td th:text="${producto.categoria.nombre}"></td>
                                     <td th:text="${producto.nombre}"></td>
                                     <td th:text="${producto.fechaIngreso}"></td>
-                                    <td><span class="text-success fw-bold" th:if="${producto.estatus == 1}">En
-                                            venta</span> <span class="text-danger fw-bold"
-                                            th:unless="${producto.estatus == 1}">Descontinuado</span></td>
+                                    <td><span th:if="${producto.estatus==1}"
+                                            class="badge badge-success rounded-pill d-inline fs-6">En
+                                            Venta</span> <span th:unless="${producto.estatus==1}"
+                                            class="badge badge-danger rounded-pill d-inline fs-6">Descontinuado</span>
+                                    </td>
                                     <td th:text="${producto.cantidadIngreso} + ' kg'"></td>
                                     <td class="text-center"><a th:href="@{/productos/buscar(id=${producto.id})}"
-                                            class="btn btn-success btn-sm" role="button" title="Editar el registro"><i
+                                            class="btn btn-success btn-sm" role="button" title="Editar el registro" data-mdb-toggle="tooltip"><i
                                                 class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i></a> <a
                                             th:href="@{/productos/eliminar(id=${producto.id})}"
                                             onclick="return confirm('¿Estas seguro?')" class="btn btn-sm btn-danger"
-                                            role="button" title="Eliminar el registro"
+                                            role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
-                                                aria-hidden="true"></i></a><a
-                                            class="btn btn-primary btn-sm ms-1"
-                                            th:href="@{/productos/detalle(id=${producto.id})}"><i
+                                                aria-hidden="true"></i></a><a class="btn btn-primary btn-sm ms-1 w-55"
+                                            th:href="@{/productos/detalle(id=${producto.id})}" title="Ver detalles del registro" data-mdb-toggle="tooltip"><i
                                                 class="fa-solid fa-eye fa-lg"></i></a></td>
                                 </tr>
                             </tbody>

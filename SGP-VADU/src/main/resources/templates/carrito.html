@@ -22,18 +22,18 @@
                 <div class="col-md-8">
                     <div class="card mb-4">
                         <div class="card-header py-3 text-white" style="background-color: #c62020;">
-                        <h5 class="mb-0" th:text="'Carrito - ' + ${cantidad} + ' items'"></h5>
+                            <h5 class="mb-0" th:text="'Carrito - ' + ${items} + ' item(s)'"></h5>
                         </div>
                         <div class="card-body">
                             <!-- Single item -->
-                            <div class="row">
+                            <div class="row" th:each="dorden:${carrito}">
                                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                     <!-- Image -->
                                     <div class="bg-image hover-overlay hover-zoom ripple rounded"
-                                        data-mdb-ripple-color="light">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                                            class="w-100" alt="Blue Jeans Jacket" /> <a href="#!">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        data-mdb-ripple-color="black">
+                                        <a th:href="@{/productos/detalle(id=${dorden.producto.id})}"><img
+                                                th:src="@{/images/{img}(img=${dorden.producto.imagen})}" class="w-100"
+                                                th:alt="${dorden.nombre}" />
                                         </a>
                                     </div>
                                     <!-- Image -->
@@ -42,53 +42,30 @@
                                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                     <!-- Data -->
                                     <p>
-                                        <strong>Blue denim shirt</strong>
+                                        <strong class="fs-4" th:text="${dorden.nombre}"></strong>
                                     </p>
-                                    <p>Color: blue</p>
-                                    <p>Size: M</p>
-                                    <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
-                                        data-mdb-toggle="tooltip" title="Remove item">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                                        title="Move to the wish list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
+                                    <p class="fs-5" th:text="'Precio: ' + ${dorden.precio}"></p>
+                                    <p class="fs-5" th:text="'Cantidad: ' + ${dorden.cantidad}"></p>
+                                    <a type="button" class="btn btn-primary btn-sm me-1 mb-2"
+                                        th:href="@{/carrito/eliminar(id=${dorden.id})}"
+                                        onclick="return confirm('¿Estas seguro?')" data-mdb-toggle="tooltip"
+                                        title="Remover item" style="background-color: #c62020;">
+                                        <i class="fas fa-trash fa-lg"></i>
+                                    </a>
                                     <!-- Data -->
                                 </div>
 
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                    <!-- Quantity -->
-                                    <div class="d-flex mb-4" style="max-width: 300px">
-                                        <button class="btn btn-primary px-3 me-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-
-                                        <div class="form-outline">
-                                            <input id="form1" min="0" name="quantity" value="1" type="number"
-                                                class="form-control" /> <label class="form-label"
-                                                for="form1">Cantidad (kg)</label>
-                                        </div>
-
-                                        <button class="btn btn-primary px-3 ms-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <!-- Quantity -->
-
                                     <!-- Price -->
                                     <p class="text-start text-md-center">
-                                        <strong>$17.99</strong>
+                                        <strong class="fs-4" th:text="'Total $' + ${dorden.total}"></strong>
                                     </p>
                                     <!-- Price -->
                                 </div>
+                                <hr class="my-4" />
+
                             </div>
                             <!-- Single item -->
-
-                            <hr class="my-4" />
-
                         </div>
                     </div>
                     <div class="card mb-4">
@@ -103,13 +80,13 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-header py-3 text-white" style="background-color: #c62020;">
-                            <h5 class="mb-0">Total</h5>
+                            <h5 class="mb-0">Subtotal</h5>
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                    Productos <span>$53.98</span>
+                                    Subtotal por productos <span th:text="'$' + ${sumaTotal}"></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                     Envío <span>Gratis</span>
@@ -117,110 +94,79 @@
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                     <div>
-                                        <strong>Total a pagar</strong> <strong>
+                                        <strong>Subotal a pagar</strong> <strong>
                                             <p class="mb-0">(incluyendo IVA)</p>
                                         </strong>
-                                    </div> <span><strong>$53.98</strong></span>
+                                    </div> <span><strong th:text="'$' + ${totalIva}"></strong></span>
                                 </li>
                             </ul>
+                            <button type="button" class="btn btn-black btn-lg w-100" data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal">Generar Orden
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-start text-black p-4">
+                                            <h5 class="modal-title text-uppercase mb-5" id="exampleModalLabel">Johnatan
+                                                Miller</h5>
+                                            <h4 class="mb-5" style="color: #35558a;">Thanks for your
+                                                order</h4>
+                                            <p class="mb-0" style="color: #35558a;">Payment summary</p>
+                                            <hr class="mt-2 mb-4"
+                                                style="height: 0; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
 
-                            <button type="button" class="btn btn-primary btn-lg btn-block">
-                                Go to checkout</button>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="fw-bold mb-0">Ether Chair(Qty:1)</p>
+                                                <p class="text-muted mb-0">$1750.00</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="small mb-0">Shipping</p>
+                                                <p class="small mb-0">$175.00</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between pb-1">
+                                                <p class="small">Tax</p>
+                                                <p class="small">$200.00</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="fw-bold">Total</p>
+                                                <p class="fw-bold" style="color: #35558a;">$2125.00</p>
+                                            </div>
+
+                                        </div>
+                                        <!--<div class="modal-footer d-flex justify-content-center border-top-0 py-4">
+                                            <button type="button" class="btn btn-primary btn-lg mb-1"
+                                                style="background-color: #35558a;">
+                                                Track your order
+                                            </button>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--<section class="h-100">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
-                    <div class="card mb-4">
-                        <div class="card-header py-3 text-white" style="background-color: #c62020;">
-                            <h4 class="mb-0" th:text="'Carrito - ' + ${cantidad} + ' items'"></h4>
-                        </div>
-                        <div class="card-body bg-light">
-                            <div class="row" th:each="carrito:${carritos}">
-                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                                    <img th:src="@{/images/{img}(img=${carrito.producto.imagen})}" class="card-img-top"
-                                        width="150px" height="175px">
-                                </div>
-                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                                    <p>
-                                    <h4>
-                                        <strong
-                                            th:text="${carrito.producto.nombre} + ' - ' + ${carrito.producto.categoria.nombre}"></strong>
-                                    </h4>
-                                    </p>
-                                    <p th:text="'Descripción: ' + ${carrito.producto.descripcion}"></p>
-                                    <a th:href="@{/carrito/eliminar(id=${carrito.id})}"
-                                        onclick="return alert('El producto se eliminó correctamente del carrito')"
-                                        class="btn btn-danger btn-sm me-1 mb-2" title="Eliminar item de carrito"> <i
-                                            class="fa-solid fa-trash fa-lg"></i>
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                    <div class="d-flex mb-4" style="max-width: 300px">
-                                        <button class="btn btn-primary px-3 me-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fa-solid fa-minus"></i>
-                                        </button>
-                                        <div class="form-group">
-                                            <input id="form1" min="0" name="cantidad" type="number" class="form-control"
-                                                style="height: 40px;" placeholder="Cantidad(kg)" />
-                                        </div>
-                                        <button class="btn btn-primary px-3 ms-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <p class="text-start text-md-center">
-                                        <strong th:text="'$' + ${carrito.producto.precioKg}"></strong>
-                                    </p>
-                                </div>
-                                <hr class="my-4" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 bg-light text-white">
-                        <div class="card-header py-3" style="background-color: #c62020;">
-                            <h5 class="mb-0">Total</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 bg-light">
-                                    Total por productos <span th:text="'$' + ${total}"></span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center px-0 bg-light">
-                                    Envío <span>Gratis</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3 bg-light">
-                                    <div>
-                                        <strong>Monto total a pagar</strong> <strong>
-                                            <p class="mb-0">(Incluyendo IVA)</p>
-                                        </strong>
-                                    </div> <span><strong th:text="'$' + ${0+25}"></strong></span>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-success btn-lg btn-block">
-                                Realizar compra</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <footer class="sticky-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
+    <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
     <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
 </body>
-
-</html>

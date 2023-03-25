@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" th:href="@{/images/logo.jpeg}">
-    <title>Custom Apparel | Detalles del producto</title>
+    <title>SGP-VADU | Detalles del producto</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
@@ -16,40 +16,70 @@
 <body>
     <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
 
-    <main role="main">
-        <hr>
-        <div class="container">
+    <hr>
+    <div class="container">
+        <div class="card mb-3 bg-light border border-black text-black">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="rounded mx-auto d-block" th:src="@{/images/{img}(img=${producto.imagen})}"
-                        alt="Generic placeholder image" width="290" height="290">
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <h4 class="card-header text-white bg-dark bg-opacity-75">
-                            <strong th:text="${producto.nombre}"></strong>
-                        </h4>
-                        <div class="card-body">
-
-                            <h5 class="card-title">
-                                <strong>Categoría: </strong> <span th:text="${producto.categoria.nombre}"></span>
-                            </h5>
-                            <h5 class="card-title">
-                                <strong>Costo: </strong><span
-                                    th:text="'$' + ${producto.precioKg}"></span>&nbsp;&nbsp;&nbsp; <i
-                                    th:if="${producto.estatus==1}"
-                                    class="fa-solid fa-circle text-success"></i>&nbsp;<span
-                                    th:if="${producto.estatus==1}">En Stock</span> <i th:unless="${producto.estatus==1}"
-                                    class="fa-solid fa-circle text-danger"></i>&nbsp;<span
-                                    th:unless="${producto.estatus==1}">Descontinuado</span>
-                            </h5>
-                            <h5 class="card-text mt-2" th:text="${producto.descripcion}"></h5>
-                        </div>
+                    <div class="bg-image hover-overlay hover-zoom ripple rounded">
+                        <img th:src="@{/images/{img}(img=${producto.imagen})}" th:alt="${producto.nombre}"
+                            class="img-fluid rounded-start" />
                     </div>
+                </div>
+                <div class="col-md-8">
+                    <form method="post" th:action="@{/carrito/agregar}">
+                        <input type="hidden" th:value="${producto.id}" name="idProducto">
+                        <ul class="list-group">
+                            <li class="list-group-item px-3 bg-light border-light" style="height: 3.5rem">
+                                <h2 class="card-title text-black pt-2" th:text="${producto.nombre}"></h2>
+                            </li>
+                            <li class="list-group-item px-3 bg-light border-light" style="height: 7.5rem">
+                                <p class="fs-4 text-black pe-5" style="text-align: justify;"
+                                    th:text="'Información de la categoría: ' + ${producto.categoria.nombre} + ' | ' + ${producto.categoria.descripcion}">
+                                </p>
+                            </li>
+                            <li class="list-group-item px-3 bg-light border-light" style="height: 5.9rem">
+                                <p class="fs-4 text-black" th:text="${producto.descripcion}"></p>
+                            </li>
+                            <li class="list-group-item px-3 bg-light border-light" th:unless="${producto.estatus==1}"
+                                style="height: 4rem"><span class="fs-4 text-black"
+                                    th:text="'$' + ${producto.precioKg} + ' (kg)'" style="font-weight: bold"></span>
+                            </li>
+                            <li class="list-group-item px-3 bg-light border-light" style="height: 4.3rem"><span
+                                    th:if="${producto.estatus==1}"
+                                    class="badge badge-success rounded-pill d-inline fs-4">En
+                                    Venta</span> <span th:unless="${producto.estatus==1}"
+                                    class="badge badge-danger rounded-pill d-inline fs-4">Descontinuado</span></li>
+                            <li class="list-group" th:if="${producto.estatus==1}">
+                                <ul class="list-group list-group-horizontal-sm">
+                                    <li class="list-group-item text-center bg-light border-light"><button
+                                            class="btn btn-black btn-sm fs-6" type="submit"><i
+                                                class="fa-solid fa-cart-shopping fa-lg"></i> Agregar a
+                                            carrito</button></li>
+                                    <li class="list-group-item text-center px-5 mx-4 bg-light border-light">
+                                       <input type="number" id="cantidad" name="cantidad"
+                                            class="form-control w-100" placeholder="Cantidad (kg)"/>
+                                    </li>
+                                    <li class="list-group-item text-center bg-light border-light"><span
+                                            class="fs-4 text-black" th:text="'$' + ${producto.precioKg} + ' (kg)'"
+                                            style="font-weight: bold"></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
 

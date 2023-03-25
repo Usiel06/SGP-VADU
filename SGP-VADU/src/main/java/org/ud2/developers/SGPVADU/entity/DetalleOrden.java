@@ -14,28 +14,15 @@ public class DetalleOrden {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
-	private double cantidad;
-	private double precio;
-	private double total;
+	private Integer cantidad;
+	private Double precio;
+	private Double total;
 
 	@ManyToOne
 	private Orden orden;
 
 	@ManyToOne
 	private Producto producto;
-
-	public DetalleOrden() {
-
-	}
-
-	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.cantidad = cantidad;
-		this.precio = precio;
-		this.total = total;
-	}
 
 	public Integer getId() {
 		return id;
@@ -53,27 +40,27 @@ public class DetalleOrden {
 		this.nombre = nombre;
 	}
 
-	public double getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(double cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 
-	public double getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 

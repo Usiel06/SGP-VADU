@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.ud2.developers.SGPVADU.entity.Categoria;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
+import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 
 @Controller
@@ -20,18 +21,8 @@ public class HomeController {
 	@Autowired
 	private IntServiceCategorias serviceCategorias;
 	
-	/*@GetMapping("/agregar")
-	public String agregarCarrito(@RequestParam("id") Integer idProducto, Carrito carrito) {
-		Producto producto = serviceProductos.buscarPorId(idProducto);
-		carrito.setProducto(producto);
-		serviceCarrito.agregarCarrito(carrito);
-		return "redirect:/";
-	}*/
-	
-	@GetMapping("/carrito")
-	public String carrito() {
-		return "carrito";
-	}
+	@Autowired
+	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
 	
 	@GetMapping("/")
 	public String mostrarIndex(Model model) {
@@ -44,6 +35,7 @@ public class HomeController {
 		}
 		model.addAttribute("categoria", serviceCategorias.buscarPorId(1));
 		model.addAttribute("categorias", categorias);
+		model.addAttribute("items", serviceDetallesOrdenes.contarDetalles());
 		return "home";
 	}
 }
