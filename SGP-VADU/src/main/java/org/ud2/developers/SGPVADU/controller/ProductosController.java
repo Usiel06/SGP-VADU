@@ -2,9 +2,6 @@ package org.ud2.developers.SGPVADU.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +25,7 @@ import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
+import org.ud2.developers.SGPVADU.service.UploadFileService;
 
 @Controller
 @RequestMapping("/productos")
@@ -44,6 +42,9 @@ public class ProductosController {
 
 	@Autowired
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
+
+	@Autowired
+	private UploadFileService upload;
 
 	@GetMapping("/detalle")
 	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
@@ -63,6 +64,13 @@ public class ProductosController {
 
 	@GetMapping("/eliminar")
 	public String eliminarProducto(Producto producto, RedirectAttributes model) {
+		System.out.println(producto);
+		Producto p = new Producto();
+		p = serviceProductos.buscarPorId(producto.getId());
+		//eliminar cuando no sea la imagen por defecto
+		if (!p.getImagen().equals("default.jpg")) {
+			upload.deleteImage(p.getImagen());
+		}
 		serviceProductos.eliminarPorId(producto.getId());
 		model.addFlashAttribute("msg", "Producto Eliminado");
 		return "redirect:/productos/indexPaginado";
@@ -71,6 +79,8 @@ public class ProductosController {
 	@PostMapping("/agregar")
 	public String agregarProducto(Producto producto, BindingResult result, Model model, RedirectAttributes model2,
 			@RequestParam("archivoImagen") MultipartFile multiPart) {
+		Producto p = new Producto();
+		p = serviceProductos.buscarPorId(producto.getId());
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
@@ -78,29 +88,45 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		/*if (!multiPart.isEmpty()) {
-			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
-			if (nombreImagen != null) {
-				producto.setImagen(nombreImagen);
-			}
-		}*/
-		if(!multiPart.isEmpty()) {
-			Path directorioImagenes = Paths.get("src//main//resources//static/images/");
-			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-			
+		/*
+		 * if (!multiPart.isEmpty()) { String nombreImagen =
+		 * Utileria.guardarArchivo(multiPart, ruta); if (nombreImagen != null) {
+		 * producto.setImagen(nombreImagen); } } if(!multiPart.isEmpty()) { Path
+		 * directorioImagenes = Paths.get("src//main//resources//static/images/");
+		 * String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+		 * 
+		 * try { byte[] bytesImg = multiPart.getBytes(); Path rutaCompleta =
+		 * Paths.get(rutaAbsoluta + "//" + multiPart.getOriginalFilename());
+		 * Files.write(rutaCompleta, bytesImg);
+		 * producto.setImagen(multiPart.getOriginalFilename()); } catch (IOException e)
+		 * { e.printStackTrace(); } }
+		 */
+		if (producto.getId() == null) {
+			String nombreImagen = "";
 			try {
-				byte[] bytesImg = multiPart.getBytes();
-				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + multiPart.getOriginalFilename());
-				Files.write(rutaCompleta, bytesImg);
-				producto.setImagen(multiPart.getOriginalFilename());
+				nombreImagen = upload.saveImage(multiPart);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		if (producto.getId() == null)
+			producto.setImagen(nombreImagen);
 			model2.addFlashAttribute("msg", "Producto Agregado");
-		else
+		} else {
+			if (multiPart.isEmpty()) {
+				producto.setImagen(p.getImagen());
+			} else {
+				if (!p.getImagen().equals("img0.png")) {
+					upload.deleteImage(p.getImagen());
+				}
+				String nombreImagen = "";
+				try {
+					nombreImagen = upload.saveImage(multiPart);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				producto.setImagen(nombreImagen);
+			}
 			model2.addFlashAttribute("msg", "Producto Modificado");
+		}
 		serviceProductos.guardarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}
