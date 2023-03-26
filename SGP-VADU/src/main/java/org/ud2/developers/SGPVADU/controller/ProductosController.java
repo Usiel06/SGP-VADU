@@ -31,8 +31,8 @@ import org.ud2.developers.SGPVADU.service.UploadFileService;
 @RequestMapping("/productos")
 public class ProductosController {
 
-	@Value("${SGP-VADU.ruta.imagenes}")
-	private String ruta;
+	/*@Value("${SGP-VADU.ruta.imagenes}")
+	private String ruta;*/
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
