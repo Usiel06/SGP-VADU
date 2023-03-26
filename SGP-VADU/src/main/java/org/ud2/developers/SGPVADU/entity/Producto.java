@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,27 +30,6 @@ public class Producto {
 	@OneToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
-
-	public Producto() {
-
-	}
-
-	public Producto(Integer id, String nombre, String descripcion, Integer estatus, LocalDate fechaIngreso,
-			Double precioKg, Double cantidadIngreso, Integer tempAlmacen, Integer vidaUtil, String imagen,
-			Categoria categoria) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.estatus = estatus;
-		this.fechaIngreso = fechaIngreso;
-		this.precioKg = precioKg;
-		this.cantidadIngreso = cantidadIngreso;
-		this.tempAlmacen = tempAlmacen;
-		this.vidaUtil = vidaUtil;
-		this.imagen = imagen;
-		this.categoria = categoria;
-	}
 
 	public Integer getId() {
 		return id;

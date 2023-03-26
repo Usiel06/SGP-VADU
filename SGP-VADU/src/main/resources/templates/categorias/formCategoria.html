@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -26,22 +27,23 @@
                     <form method="post" th:action="@{/categorias/agregar}" th:object="${categoria}">
                         <div class="row">
                             <div class="col-md-15">
-                                <div class="form-group">
-                                    <label for="nombre"><strong class="text-danger">*</strong> Nombre</label> <input
+                                <div class="form-outline mb-3">
+                                    <input
                                         type="hidden" th:field="*{id}"> <input type="text"
                                         class="form-control mt-2 mb-2 bg-light" th:field="*{nombre}" id="nombre"
                                         name="nombre" th:value="${categoria.nombre}"
-                                        placeholder="Escriba el nombre de la categoria" required="required">
+                                        placeholder="Escriba el nombre de la categoria" required autofocus>
+                                        <label class="form-label" for="nombre"><strong class="text-danger">*</strong> Nombre</label> 
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-15">
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción</label>
+                                <div class="form-outline">
                                     <textarea class="form-control mt-2 bg-light" th:field="*{descripcion}"
-                                        name="descripcion" id="descripcion" rows="2" th:text="${categoria.descripcion}"
+                                        name="descripcion" id="descripcion" rows="4" th:text="${categoria.descripcion}"
                                         placeholder="Escriba la descripción de la categoría"></textarea>
+                                        <label class="form-label" for="descripcion">Descripción</label>
                                 </div>
                             </div>
                         </div>

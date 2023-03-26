@@ -10,12 +10,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
     <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
 
-    <h2 class="text-center text-black">EN VENTA</h2>
+    <h2 class="text-center text-black mt-3">PRODUCTOS EN VENTA</h2>
 
     <hr>
 
@@ -38,7 +39,7 @@
                                 <h5 class="card-text" style="text-align: justify;" th:text="${producto.descripcion}">
                                 </h5>
                                 <h5 class="card-text text-success">
-                                    <small th:text="'$' + ${producto.precioKg}"></small>
+                                    <small th:text="'$ ' + ${producto.precioKg} + ' Kg'"></small>
                                 </h5>
                             </div>
                             <div class="pb-3">

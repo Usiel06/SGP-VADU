@@ -50,18 +50,18 @@
                                     class="badge badge-success rounded-pill d-inline fs-4">En
                                     Venta</span> <span th:unless="${producto.estatus==1}"
                                     class="badge badge-danger rounded-pill d-inline fs-4">Descontinuado</span></li>
-                            <li class="list-group" th:if="${producto.estatus==1}">
+                            <li class="list-group pb-3" th:if="${producto.estatus==1}">
                                 <ul class="list-group list-group-horizontal-sm">
-                                    <li class="list-group-item text-center bg-light border-light"><button
+                                    <li class="list-group-item text-center bg-light border-light">
+                                        <input type="number" id="cantidad" name="cantidad" class="form-control w-100"
+                                            placeholder="Cantidad (kg)" />
+                                    </li>
+                                    <li class="list-group-item text-center mx-5 px-5 mx-4 bg-light border-light"><button
                                             class="btn btn-black btn-sm fs-6" type="submit"><i
                                                 class="fa-solid fa-cart-shopping fa-lg"></i> Agregar a
                                             carrito</button></li>
-                                    <li class="list-group-item text-center px-5 mx-4 bg-light border-light">
-                                       <input type="number" id="cantidad" name="cantidad"
-                                            class="form-control w-100" placeholder="Cantidad (kg)"/>
-                                    </li>
                                     <li class="list-group-item text-center bg-light border-light"><span
-                                            class="fs-4 text-black" th:text="'$' + ${producto.precioKg} + ' (kg)'"
+                                            class="fs-4 text-black" th:text="'$' + ${producto.precioKg} + ' Kg'"
                                             style="font-weight: bold"></span>
                                     </li>
                                 </ul>

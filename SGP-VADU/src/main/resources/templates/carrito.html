@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -39,13 +40,13 @@
                                     <!-- Image -->
                                 </div>
 
-                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 text-black">
                                     <!-- Data -->
                                     <p>
                                         <strong class="fs-4" th:text="${dorden.nombre}"></strong>
                                     </p>
-                                    <p class="fs-5" th:text="'Precio: ' + ${dorden.precio}"></p>
-                                    <p class="fs-5" th:text="'Cantidad: ' + ${dorden.cantidad}"></p>
+                                    <p class="fs-5" th:text="'Precio: $' + ${dorden.precio}"></p>
+                                    <p class="fs-5" th:text="'Cantidad: ' + ${dorden.cantidad} + ' Kg'"></p>
                                     <a type="button" class="btn btn-primary btn-sm me-1 mb-2"
                                         th:href="@{/carrito/eliminar(id=${dorden.id})}"
                                         onclick="return confirm('¿Estas seguro?')" data-mdb-toggle="tooltip"
@@ -57,7 +58,7 @@
 
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                     <!-- Price -->
-                                    <p class="text-start text-md-center">
+                                    <p class="text-start text-md-center text-black">
                                         <strong class="fs-4" th:text="'Total $' + ${dorden.total}"></strong>
                                     </p>
                                     <!-- Price -->
@@ -86,7 +87,7 @@
                             <ul class="list-group list-group-flush">
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                    Subtotal por productos <span th:text="'$' + ${sumaTotal}"></span>
+                                    Subtotal por productos <span th:text="'$' + ${orden.total}"></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                     Envío <span>Gratis</span>
@@ -100,9 +101,10 @@
                                     </div> <span><strong th:text="'$' + ${totalIva}"></strong></span>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-black btn-lg w-100" data-mdb-toggle="modal"
+                            <a th:classappend="${items == 0 ? 'disabled' : ''}" th:href="@{/carrito/orden}"
+                                class="btn btn-black btn-lg w-100" data-mdb-toggle="modal"
                                 data-mdb-target="#exampleModal">Generar Orden
-                            </button>
+                            </a>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -115,39 +117,30 @@
                                         <div class="modal-body text-start text-black p-4">
                                             <h5 class="modal-title text-uppercase mb-5" id="exampleModalLabel">Johnatan
                                                 Miller</h5>
-                                            <h4 class="mb-5" style="color: #35558a;">Thanks for your
-                                                order</h4>
-                                            <p class="mb-0" style="color: #35558a;">Payment summary</p>
+                                            <h4 class="mb-5" style="color: #35558a;">Gracias por ordenar</h4>
+                                            <p class="mb-0" style="color: #35558a;">Resumen de la orden</p>
                                             <hr class="mt-2 mb-4"
                                                 style="height: 0; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
-
-                                            <div class="d-flex justify-content-between">
-                                                <p class="fw-bold mb-0">Ether Chair(Qty:1)</p>
-                                                <p class="text-muted mb-0">$1750.00</p>
+                                            <div class="d-flex justify-content-between" th:each="dorden:${carrito}">
+                                                <p class="fw-bold mb-0"
+                                                    th:text="${dorden.producto.nombre} + ' (Cantidad: ' + ${dorden.cantidad} + ' Kg)'">
+                                                </p>
+                                                <p class="text-muted mb-0" th:text="'$' + ${dorden.total}"></p>
                                             </div>
-
                                             <div class="d-flex justify-content-between">
-                                                <p class="small mb-0">Shipping</p>
-                                                <p class="small mb-0">$175.00</p>
+                                                <p class="small mb-0">Envío</p>
+                                                <p class="small mb-0">Gratis</p>
                                             </div>
-
                                             <div class="d-flex justify-content-between pb-1">
-                                                <p class="small">Tax</p>
-                                                <p class="small">$200.00</p>
+                                                <p class="small">IVA</p>
+                                                <p class="small" th:text="'$' + ${iva}"></p>
                                             </div>
-
                                             <div class="d-flex justify-content-between">
                                                 <p class="fw-bold">Total</p>
-                                                <p class="fw-bold" style="color: #35558a;">$2125.00</p>
+                                                <p class="fw-bold" style="color: #35558a;" th:text="'$' + ${totalIva}">
+                                                </p>
                                             </div>
-
                                         </div>
-                                        <!--<div class="modal-footer d-flex justify-content-center border-top-0 py-4">
-                                            <button type="button" class="btn btn-primary btn-lg mb-1"
-                                                style="background-color: #35558a;">
-                                                Track your order
-                                            </button>
-                                        </div>-->
                                     </div>
                                 </div>
                             </div>

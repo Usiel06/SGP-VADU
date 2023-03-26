@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -32,27 +33,30 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="pb-1" for="nombre"><strong class="text-danger">*</strong>
-                                        Nombre</label> <input type="hidden" th:field="*{id}"> <input type="text"
+                            <div class="col-md-3 mb-2">
+                                <div class="form-outline mb-2">
+                                    <input type="hidden" th:field="*{id}"> <input type="text"
                                         class="form-control bg-light" th:field="*{nombre}" id="nombre" name="nombre"
                                         placeholder="Nombre del producto" required="required" autofocus>
+                                    <label class="form-label" for="nombre"><strong class="text-danger">*</strong>
+                                        Nombre</label>
                                 </div>
                             </div>
                             <div class="col-md-9">
-                                <div class="form-group">
-                                    <label class="pb-1" for="descripcion"><strong class="text-danger">*</strong>
-                                        Descripción</label> <input type="text" class="form-control bg-light"
-                                        th:field="*{descripcion}" id="descripcion" name="descripcion"
-                                        placeholder="Breve descripción del producto" required="required">
+                                <div class="form-outline mb-2">
+                                    <input type="text" class="form-control bg-light" th:field="*{descripcion}"
+                                        id="descripcion" name="descripcion" placeholder="Breve descripción del producto"
+                                        required="required">
+                                    <label class="form-label" for="descripcion"><strong class="text-danger">*</strong>
+                                        Descripción</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3 pt-2">
-                                <div class="form-group">
-                                    <label for="categoria"><strong class="text-danger">*</strong> Categoría</label>
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
+                                    <label class="pb-1" for="categoria"><strong class="text-danger">*</strong>
+                                        Categoría</label>
                                     <select class="form-control bg-light" th:field="*{categoria.id}" name="categoria"
                                         id="categoria">
                                         <option th:each="categoria:${categorias}" th:value="${categoria.id}"
@@ -61,8 +65,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3 pt-2">
-                                <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
                                     <label class="pb-1" for="fecha"><strong class="text-danger">*</strong> Fecha de
                                         Ingreso
                                         (dd/mm/yyyy)</label> <input type="text" class="form-control bg-light"
@@ -70,8 +74,8 @@
                                         placeholder="Fecha de ingreso" required="required" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-3 pt-2">
-                                <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
                                     <label class="pb-1" for="precioKg"><strong class="text-danger">*</strong> Precio
                                         (kg)</label> <input type="text" class="form-control bg-light"
                                         th:field="*{precioKg}" name="precioKg" id="precioKg" placeholder="Precio por kg"
@@ -79,10 +83,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label class="pt-2 pb-2" for="estatus0"><strong class="text-danger">*</strong>
+                                <label class="pb-2" for="estatus0"><strong class="text-danger">*</strong>
                                     Estatus</label><br>
                                 <input class="form-check-input bg-light" th:field="*{estatus}" type="radio"
-                                    name="estatus" id="estatus" value="1" checked="checked" required> <label
+                                    name="estatus" id="estatus" value="1" checked required> <label
                                     class="form-check-label" for="estatus1">En venta</label>
                                 <input class="form-check-input bg-light" th:field="*{estatus}" type="radio"
                                     name="estatus" id="estatus" value="0" required>
@@ -90,27 +94,29 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 pt-2">
-                                <div class="form-group">
-                                    <label class="pb-1" for="cantidadIngreso"><strong class="text-danger">*</strong>
-                                        Cantidad</label> <input type="number" class="form-control bg-light"
-                                        th:field="*{cantidadIngreso}" name="cantidadIngreso" id="cantidadIngreso"
+                            <div class="col-md-4 pt-3">
+                                <div class="form-outline mb-2">
+                                    <input type="number" class="form-control bg-light" th:field="*{cantidadIngreso}"
+                                        name="cantidadIngreso" id="cantidadIngreso"
                                         placeholder="Cantidad de kg a ingresar" required="required">
+                                    <label class="form-label" for="cantidadIngreso"><strong
+                                            class="text-danger">*</strong>
+                                        Cantidad</label>
                                 </div>
                             </div>
-                            <div class="col-md-4 pt-2">
-                                <div class="form-group">
-                                    <label class="pb-1" for="tempAlmacen">Temperatura de
-                                        almacen (grados centígrados)</label> <input type="number"
-                                        class="form-control bg-light" th:field="*{tempAlmacen}" name="tempAlmacen"
-                                        id="tempAlmacen" placeholder="Temperatura de almacen">
+                            <div class="col-md-4 pt-3">
+                                <div class="form-outline mb-2">
+                                    <input type="number" class="form-control bg-light" th:field="*{tempAlmacen}"
+                                        name="tempAlmacen" id="tempAlmacen">
+                                    <label class="form-label" for="tempAlmacen">Temperatura de
+                                        almacen (C°)</label>
                                 </div>
                             </div>
-                            <div class="col-md-4 pt-2">
-                                <div class="form-group">
-                                    <label class="pb-1" for="vidaUtil">Vida util (días)</label> <input type="number"
-                                        class="form-control bg-light" th:field="*{vidaUtil}" name="vidaUtil"
-                                        id="vidaUtil" placeholder="Vida util del producto en días">
+                            <div class="col-md-4 pt-3">
+                                <div class="form-outline">
+                                    <input type="number" class="form-control bg-light" th:field="*{vidaUtil}"
+                                        name="vidaUtil" id="vidaUtil" placeholder="Vida util del producto en días">
+                                    <label class="form-label" for="vidaUtil">Vida util (días)</label>
                                 </div>
                             </div>
                         </div>

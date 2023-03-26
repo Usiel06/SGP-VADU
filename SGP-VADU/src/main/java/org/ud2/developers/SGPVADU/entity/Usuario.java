@@ -1,47 +1,40 @@
 package org.ud2.developers.SGPVADU.entity;
 
+import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Usuarios")
 public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String username;
 	private String email;
-	private String direccion;
-	private String telefono;
-	private String tipo;
 	private String password;
-
+	private Integer estatus;
+	private LocalDate fechaRegistro = LocalDate.now();
 
 	@OneToMany(mappedBy = "usuario")
 	private List<Orden> ordenes;
 
-	public Usuario() {
-	}
-
-	public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono,
-			String tipo, String password) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.username = username;
-		this.email = email;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.tipo = tipo;
-		this.password = password;
-	}
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "UsuarioPerfil", joinColumns = @JoinColumn(name = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idPerfil"))
+	private List<Perfil> perfiles;
 
 	public Integer getId() {
 		return id;
@@ -75,30 +68,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -107,11 +76,49 @@ public class Usuario {
 		this.password = password;
 	}
 
+	public Integer getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(Integer estatus) {
+		this.estatus = estatus;
+	}
+
+	public LocalDate getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDate fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public List<Orden> getOrdenes() {
+		return ordenes;
+	}
+
+	public void setOrdenes(List<Orden> ordenes) {
+		this.ordenes = ordenes;
+	}
+
+	public List<Perfil> getPerfiles() {
+		return perfiles;
+	}
+
+	public void setPerfiles(List<Perfil> perfiles) {
+		this.perfiles = perfiles;
+	}
+
+	public void agregar(Perfil tempPerfil) {
+		if (perfiles == null) {
+			perfiles = new LinkedList<Perfil>();
+		}
+		perfiles.add(tempPerfil);
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", email=" + email
-				+ ", direccion=" + direccion + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password
-				+ "]";
+				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", ordenes="
+				+ ordenes + "]";
 	}
-
 }

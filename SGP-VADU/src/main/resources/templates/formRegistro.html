@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/images/logo.png}">
+    <title>SGP-VADU | Formulario de Registro</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <!-- Section: Design Block -->
+    <section class="text-center pb-5">
+        <!-- Background image -->
+        <div class="bg-image" style="background-image: url('/images/banner.jpg'); height: 300px;"></div>
+        <!-- Background image -->
+
+        <div class="container py-5">
+            <div class="card container shadow-5-strong" style="margin-top: -175px; max-width: 50rem">
+                <div class="card-body py-5 px-md-5 text-black">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-8">
+                            <h2 class="fw-bold mb-5">Formulario de Registro</h2>
+                            <form method="post" th:action="@{/guardar}">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="nombre" name="nombre" class="form-control" required
+                                                autofocus /> <label class="form-label"
+                                                for="form3Example1">Nombre</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="username" name="username" class="form-control"
+                                                required /> <label class="form-label"
+                                                for="form3Example2">Username</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="email" name="email" class="form-control" required /> <label
+                                        class="form-label" for="form3Example3">Email</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        required /> <label class="form-label" for="form3Example4">Password</label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-block text-white mb-4"
+                                    style="background-color: #c62020;">
+                                    Registrarse</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
+</html>

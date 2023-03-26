@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                     <strong>Listado de Productos</strong>
                 </h4>
                 <div class="card-body">
-                    <a class="btn btn-info" th:href="@{/productos/nuevo}" title="Agregar producto nuevo"
+                    <a class="btn btn-primary" th:href="@{/productos/nuevo}" title="Agregar producto nuevo"
                         role="button"><i class="fas fa-file fa-lg"></i> Nuevo</a>
                     <hr>
                     <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
@@ -59,7 +60,7 @@
                                             onclick="return confirm('¿Estas seguro?')" class="btn btn-sm btn-danger"
                                             role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
-                                                aria-hidden="true"></i></a><a class="btn btn-primary btn-sm ms-1 w-55"
+                                                aria-hidden="true"></i></a><a class="btn btn-black btn-sm ms-1 w-55"
                                             th:href="@{/productos/detalle(id=${producto.id})}" title="Ver detalles del registro" data-mdb-toggle="tooltip"><i
                                                 class="fa-solid fa-eye fa-lg"></i></a></td>
                                 </tr>
@@ -76,7 +77,6 @@
                                     <a th:href="@{/productos/indexPaginado(page=${productos.number - 1})}"
                                         class="page-link">Anterior</a>
                                 </li>
-
                                 <li class="page-item" th:classappend="${i eq productos.number + 1} ? 'active'"
                                     th:each="i : ${#numbers.sequence( 1, productos.totalPages, 1)}">
                                     <a class="page-link"
