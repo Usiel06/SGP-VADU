@@ -15,6 +15,6 @@ public class WebConfig implements WebMvcConfigurer {
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**").addResourceLocations("file:c:/productos/img-productos/"); // Windows
+		registry.addResourceHandler("/images/**").addResourceLocations("file:/images/"); // Windows
 	}
 }
