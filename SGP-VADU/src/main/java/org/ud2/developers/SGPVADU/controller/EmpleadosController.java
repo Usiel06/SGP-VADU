@@ -57,7 +57,7 @@ public class EmpleadosController {
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Empleado empleado, BindingResult result, Model model, RedirectAttributes model2) {
 		Usuario usuario = new Usuario();
-		Empleado e = serviceEmpleados.buscarPorId(empleado.getId());
+		Empleado e = serviceEmpleados.findByNombre(empleado.getNombre());
 		if (empleado.getId() == null)
 			model2.addFlashAttribute("msg", "Empleado Agregado");
 		else
