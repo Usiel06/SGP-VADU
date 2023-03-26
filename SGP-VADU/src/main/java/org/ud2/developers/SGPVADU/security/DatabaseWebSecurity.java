@@ -30,7 +30,7 @@ public class DatabaseWebSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests()
 				// Los recursos estáticos no requieren autenticación
-				.requestMatchers("/css/**", "/images/**", "/mdb5/**", "/logos/**").permitAll()
+				.requestMatchers("/css/**", "/images/**", "/mdb5/**").permitAll()
 				// Las vistas públicas no requieren autenticación
 				.requestMatchers("/", "/signup", "/guardar", "/acerca", "/productos/detalle/**").permitAll()
 				// asignar permisos a URL'S por roles
@@ -48,10 +48,5 @@ public class DatabaseWebSecurity {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	/*
-	 * @Bean UserDetailsManager users(DataSource dataSource) {
-	 * JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource); return
-	 * users; }
-	 */
 
 }

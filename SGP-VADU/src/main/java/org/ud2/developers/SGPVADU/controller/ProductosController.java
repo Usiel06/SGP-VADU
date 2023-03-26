@@ -1,11 +1,11 @@
 package org.ud2.developers.SGPVADU.controller;
 
 import java.beans.PropertyEditorSupport;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -25,13 +25,14 @@ import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 import org.ud2.developers.SGPVADU.service.UploadFileService;
+import org.ud2.developers.SGPVADU.util.Utileria;
 
 @Controller
 @RequestMapping("/productos")
 public class ProductosController {
 
-	/*@Value("${SGP-VADU.ruta.imagenes}")
-	private String ruta;*/
+	@Value("${SGP-VADU.ruta.imagenes}")
+	private String ruta;
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
@@ -100,7 +101,7 @@ public class ProductosController {
 		 * producto.setImagen(multiPart.getOriginalFilename()); } catch (IOException e)
 		 * { e.printStackTrace(); } }
 		 */
-		if (producto.getId() == null) {
+		/*if (producto.getId() == null) {
 			String nombreImagen = "";
 			try {
 				nombreImagen = upload.saveImage(multiPart);
@@ -123,9 +124,15 @@ public class ProductosController {
 					e.printStackTrace();
 				}
 				producto.setImagen(nombreImagen);
+			}*/
+		if (!multiPart.isEmpty()) {
+			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
+			if (nombreImagen != null) {
+				producto.setImagen(nombreImagen);
 			}
-			model2.addFlashAttribute("msg", "Producto Modificado");
 		}
+		if (producto.getId() == null) model2.addFlashAttribute("msg", "Producto Agregado");
+		else model2.addFlashAttribute("msg", "Producto Modificado");
 		serviceProductos.guardarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}
