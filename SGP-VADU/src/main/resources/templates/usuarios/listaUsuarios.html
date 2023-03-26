@@ -2,10 +2,9 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="icon" th:href="@{/images/logo.png}">
     <title>SGP-VADU | Listado de Usuarios</title>
     <link rel="stylesheet"
@@ -19,7 +18,7 @@
 
     <main role="main">
         <hr>
-        <div class="container">
+        <div class="container mb-5">
 
             <div class="card border border-black">
                 <h4 class="card-header text-white" style="background-color: #c62020;"><strong>Listado de
@@ -98,13 +97,8 @@
     </main>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
     <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>

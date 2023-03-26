@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.DetalleOrden;
 import org.ud2.developers.SGPVADU.entity.Orden;
 import org.ud2.developers.SGPVADU.entity.Producto;
+import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
@@ -54,8 +55,8 @@ public class CarritoController {
 		// Usuario
 		// Usuario usuario =
 		// serviceUsuarios.buscarPorId(Integer.parseInt(session.getAttribute("idUsuario").toString()));
-
-		orden.setUsuario(serviceUsuarios.buscarPorUsername(auth.getName()));
+		Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
+		orden.setUsuario(usuario);
 		serviceOrdenes.guardarOrden(orden);
 
 		// Guardar detalles
@@ -103,12 +104,12 @@ public class CarritoController {
 		detalleOrden.setNombre(producto.getNombre());
 		detalleOrden.setTotal(producto.getPrecioKg() * cantidad);
 		detalleOrden.setProducto(producto);
-		boolean ingresado = serviceDetallesOrdenes.obtenerDetalles().stream()
+		boolean ingresado = detalles.stream()
 				.anyMatch(p -> p.getProducto().getId() == idProducto);
 		if (!ingresado) {
 			detalles.add(detalleOrden);
-		} else {
-			for (DetalleOrden dorden : serviceDetallesOrdenes.obtenerDetalles()) {
+		} /*else {
+			for (DetalleOrden dorden : detalles) {
 				if (dorden.getProducto().getId().compareTo(idProducto) == 0) {
 					detalleOrden.setId(dorden.getId());
 					detalleOrden.setCantidad(cantidad + dorden.getCantidad());
@@ -116,18 +117,20 @@ public class CarritoController {
 					detalles.add(detalleOrden);
 				}
 			}
-		}
+		}*/
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 		orden.setTotal(sumaTotal);
 		return "redirect:/carrito/";
 	}
 
 	@GetMapping("/")
-	public String carrito(Model model) {
-		DecimalFormat df = new DecimalFormat("#.00");
+	public String carrito(Model model, org.springframework.security.core.Authentication auth) {
+		Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
+		DecimalFormat df = new DecimalFormat("0.0");
 		model.addAttribute("carrito", detalles);
 		model.addAttribute("items", detalles.size());
 		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("iva", df.format(orden.getTotal() * .16));
 		model.addAttribute("totalIva", df.format(orden.getTotal() * .16 + orden.getTotal()));
 		return "carrito";

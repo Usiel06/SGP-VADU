@@ -11,6 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -52,11 +53,11 @@
                                     class="badge badge-danger rounded-pill d-inline fs-4">Descontinuado</span></li>
                             <li class="list-group pb-2" th:if="${producto.estatus==1}">
                                 <ul class="list-group list-group-horizontal-sm">
-                                    <li class="list-group-item text-center bg-light border-light">
+                                    <li class="list-group-item text-center bg-light border-light" sec:authorize="!hasAnyAuthority('Empleado')">
                                         <input type="number" id="cantidad" name="cantidad" value="1"
                                             class="form-control w-100" /><label class="text-black">Cantidad Kg</label>
                                     </li>
-                                    <li class="list-group-item text-center mx-5 px-5 mx-4 bg-light border-light"><button
+                                    <li class="list-group-item text-center mx-5 px-5 mx-4 bg-light border-light" sec:authorize="!hasAnyAuthority('Empleado')"><button
                                             class="btn btn-black btn-sm fs-6" type="submit"><i
                                                 class="fa-solid fa-cart-shopping fa-lg"></i> Agregar a
                                             carrito</button></li>

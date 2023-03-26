@@ -18,7 +18,7 @@
 
     <main role="main">
         <hr>
-        <div class="container pb-3 text-black">
+        <div class="container pb-5 mb-2 text-black">
             <div class="card border border-black">
                 <h4 class="card-header text-white" style="background-color: #c62020;">
                     <strong>Datos del empleado</strong>
@@ -34,24 +34,27 @@
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <div class="form-outline mb-2">
-                                    <input type="hidden" th:field="*{id}"> <input type="text"
+                                    <input type="hidden" th:field="*{id}"> <input th:if="${empleado.id!=null}" type="text"
                                         class="form-control bg-light" th:field="*{nombre}" id="nombre"
-                                        name="nombre" placeholder="Nombre del empleado" required="required" autofocus>
+                                        name="nombre" placeholder="Nombre del empleado" required readonly>
+                                        <input th:unless="${empleado.id!=null}" type="text"
+                                        class="form-control bg-light" th:field="*{nombre}" id="nombre"
+                                        name="nombre" placeholder="Nombre del empleado" required autofocus>
                                     <label class="form-label" for="nombre"><strong class="text-danger">*</strong>
                                         Nombre</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-outline mb-2">
+                                <div class="form-outline mb-3">
                                     <input type="text" class="form-control bg-light" th:field="*{telefono}"
                                         id="telefono" name="telefono" placeholder="Teléfono de contacto del empleado"
-                                        required="required">
+                                        required autofocus>
                                     <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Teléfono</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-outline mb-2">
+                                <div class="form-outline mb-3">
                                     <input type="text" class="form-control bg-light" th:field="*{fechaContratacion}"
                                         name="fechaContratacion" id="fechaContratacion" placeholder="Fecha de contratación"
                                         required="required" readonly>
@@ -63,25 +66,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-outline mb-2">
-                                    <input type="text" class="form-control bg-light" th:field="*{username}"
+                                    <input class="form-control bg-light" th:field="*{username}"
                                         id="username" name="username" placeholder="Username del empleado" required>
                                     <label class="form-label" for="username"><strong class="text-danger">*</strong>
                                         Username</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-outline mb-2">
+                                <div class="form-outline mb-3">
                                     <input type="email" class="form-control bg-light" th:field="*{email}"
                                         id="email" name="email" placeholder="Email del empleado" required="required">
                                     <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Email</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-outline mb-2">
-                                    <input type="password" class="form-control bg-light" th:field="*{password}"
+                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light" th:field="*{password}"
+                                        id="password" name="password" placeholder="Password del empleado" required readonly>
+                                        <input th:unless="${empleado.id!=null}" type="password" class="form-control bg-light" th:field="*{password}"
                                         id="password" name="password" placeholder="Password del empleado" required>
                                     <label class="form-label" for="password"><strong class="text-danger">*</strong>
                                         Password</label>
@@ -101,8 +106,16 @@
             </div>
         </div>
     </main>
-
-    <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
     <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>

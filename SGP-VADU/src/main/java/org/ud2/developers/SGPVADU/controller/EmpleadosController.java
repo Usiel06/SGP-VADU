@@ -46,8 +46,10 @@ public class EmpleadosController {
 	}
 
 	@GetMapping("/eliminar")
-	public String eliminarEmpleado(Empleado empleado, RedirectAttributes model) {
-		serviceEmpleados.eliminar(empleado.getId());
+	public String eliminarEmpleado(@RequestParam("id") int idEmpleado, RedirectAttributes model) {
+		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
+		serviceEmpleados.eliminar(idEmpleado);
+		serviceUsuarios.eliminar(empleado.getUsuario().getId());
 		model.addFlashAttribute("msg", "Empleado Eliminado");
 		return "redirect:/empleados/indexPaginado";
 	}
@@ -55,6 +57,12 @@ public class EmpleadosController {
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Empleado empleado, BindingResult result, Model model, RedirectAttributes model2) {
 		Usuario usuario = new Usuario();
+		Empleado e = serviceEmpleados.buscarPorId(empleado.getId());
+		if (empleado.getId() == null)
+			model2.addFlashAttribute("msg", "Empleado Agregado");
+		else
+			usuario.setId(e.getUsuario().getId());
+			model2.addFlashAttribute("msg", "Empleado Modificado");
 		usuario.setNombre(empleado.getNombre());
 		usuario.setUsername(empleado.getUsername());
 		usuario.setEmail(empleado.getEmail());
@@ -64,6 +72,7 @@ public class EmpleadosController {
 		perfil.setId(2);
 		usuario.agregar(perfil);
 		serviceUsuarios.agregar(usuario);
+		empleado.setPassword(passwordEncoder.encode(empleado.getPassword()));
 		empleado.setUsuario(usuario);
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
@@ -71,10 +80,6 @@ public class EmpleadosController {
 			}
 			return "empleados/formEmpleado";
 		}
-		if (empleado.getId() == null)
-			model2.addFlashAttribute("msg", "Empleado Agregado");
-		else
-			model2.addFlashAttribute("msg", "Empleado Modificado");
 		serviceEmpleados.agregar(empleado);
 		return "redirect:/empleados/indexPaginado";
 	}
