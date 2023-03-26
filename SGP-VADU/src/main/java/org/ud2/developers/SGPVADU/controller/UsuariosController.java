@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
@@ -17,6 +18,13 @@ public class UsuariosController {
 
 	@Autowired
 	public IntServiceUsuarios serviceUsuarios;
+
+	@GetMapping("/eliminar")
+	public String eliminarProducto(Usuario usuario, RedirectAttributes model) {
+		serviceUsuarios.eliminar(usuario.getId());
+		model.addFlashAttribute("msg", "Usuario Eliminado");
+		return "redirect:/usuarios/indexPaginado";
+	}
 
 	@GetMapping(value = "/indexPaginado")
 	public String mostrarIndexPaginado(Model model, Pageable page) {

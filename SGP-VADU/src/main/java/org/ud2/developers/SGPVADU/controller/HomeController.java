@@ -14,7 +14,6 @@ import org.ud2.developers.SGPVADU.entity.Categoria;
 import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
-import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
 
@@ -24,25 +23,32 @@ import jakarta.servlet.http.HttpServletRequest;
 public class HomeController {
 
 	@Autowired
-	private IntServiceUsuarios serviceUsuarios;
-	
+	private IntServiceCategorias serviceCategorias;
+
 	@Autowired
 	private IntServiceProductos serviceProductos;
 
 	@Autowired
-	private IntServiceCategorias serviceCategorias;
-
-	@Autowired
-	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
+	private IntServiceUsuarios serviceUsuarios;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping("/acerca")
 	public String acerca() {
 		return "acerca";
 	}
-	
+
+	/*
+	 * @GetMapping("/user") public String
+	 * mostrarUsuario(org.springframework.security.core.Authentication auth) {
+	 * List<Orden> ordenes =
+	 * repoOrdenes.findByUsuario(serviceUsuarios.buscarPorId(1));
+	 * System.out.println(ordenes); String userName = auth.getName();
+	 * System.out.println(auth.getAuthorities() + "nzfdjbgbbshg");
+	 * System.out.println(userName); return "redirect:/"; }
+	 */
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -54,14 +60,14 @@ public class HomeController {
 	public String guardarUsuario(Usuario usuario) {
 		usuario.setEstatus(1);
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		//usuario.setPassword("{noop}" + usuario.getPassword());
+		// usuario.setPassword("{noop}" + usuario.getPassword());
 		Perfil perfil = new Perfil();
-		perfil.setId(1);
+		perfil.setId(2);
 		usuario.agregar(perfil);
 		serviceUsuarios.agregar(usuario);
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/signup")
 	public String mostrarFormRegistro() {
 		return "formRegistro";
@@ -83,7 +89,6 @@ public class HomeController {
 		}
 		model.addAttribute("categoria", serviceCategorias.buscarPorId(1));
 		model.addAttribute("categorias", categorias);
-		model.addAttribute("items", serviceDetallesOrdenes.contarDetalles());
 		return "home";
 	}
 }

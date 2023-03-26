@@ -10,6 +10,7 @@ public interface IntServiceUsuarios {
 	public List<Usuario> obtenerUsuarios();
 	public void agregar(Usuario usuario);
 	public Usuario buscarPorId(Integer idUsuario);
+	public Usuario buscarPorUsername(String username);
 	public void eliminar(Integer idUsuario);
 	public int numeroUsuarios();
 	Page<Usuario> buscarTodas(Pageable page);

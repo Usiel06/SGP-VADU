@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.context.annotation.Primary;
 import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.repository.ProductosRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 
-@Primary
 @Service
 public class ProductosServiceJpa implements IntServiceProductos {
 

@@ -48,7 +48,7 @@
                                     <p class="fs-5" th:text="'Precio: $' + ${dorden.precio}"></p>
                                     <p class="fs-5" th:text="'Cantidad: ' + ${dorden.cantidad} + ' Kg'"></p>
                                     <a type="button" class="btn btn-primary btn-sm me-1 mb-2"
-                                        th:href="@{/carrito/eliminar(id=${dorden.id})}"
+                                        th:href="@{/carrito/eliminar(id=${dorden.producto.id})}"
                                         onclick="return confirm('¿Estas seguro?')" data-mdb-toggle="tooltip"
                                         title="Remover item" style="background-color: #c62020;">
                                         <i class="fas fa-trash fa-lg"></i>
@@ -69,14 +69,14 @@
                             <!-- Single item -->
                         </div>
                     </div>
-                    <div class="card mb-4">
+                    <!--<div class="card mb-4">
                         <div class="card-body">
                             <p>
                                 <strong>Entrega de envío prevista</strong>
                             </p>
                             <p class="mb-0">12.10.2020 - 14.10.2020</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4">
@@ -101,9 +101,8 @@
                                     </div> <span><strong th:text="'$' + ${totalIva}"></strong></span>
                                 </li>
                             </ul>
-                            <a th:classappend="${items == 0 ? 'disabled' : ''}" th:href="@{/carrito/orden}"
-                                class="btn btn-black btn-lg w-100" data-mdb-toggle="modal"
-                                data-mdb-target="#exampleModal">Generar Orden
+                            <a th:classappend="${items == 0 ? 'disabled' : ''}" class="btn btn-black btn-lg w-100"
+                                data-mdb-toggle="modal" data-mdb-target="#exampleModal">Generar Orden
                             </a>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -115,9 +114,8 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-start text-black p-4">
-                                            <h5 class="modal-title text-uppercase mb-5" id="exampleModalLabel">Johnatan
+                                            <h5 class="modal-title text-uppercase mb-2" id="exampleModalLabel">Johnatan
                                                 Miller</h5>
-                                            <h4 class="mb-5" style="color: #35558a;">Gracias por ordenar</h4>
                                             <p class="mb-0" style="color: #35558a;">Resumen de la orden</p>
                                             <hr class="mt-2 mb-4"
                                                 style="height: 0; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
@@ -140,6 +138,12 @@
                                                 <p class="fw-bold" style="color: #35558a;" th:text="'$' + ${totalIva}">
                                                 </p>
                                             </div>
+                                            <div class="modal-footer d-flex justify-content-center border-top-0 py-4">
+                                                <a th:href="@{/carrito/orden}" class="btn btn-primary btn-lg mb-1"
+                                                    style="background-color: #35558a;">
+                                                    Confirmar orden
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,8 +154,6 @@
             </div>
         </div>
     </section>
-    <br>
-    <br>
     <br>
     <br>
     <br>

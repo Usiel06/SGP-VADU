@@ -25,6 +25,7 @@
                 <h4 class="card-header text-white" style="background-color: #c62020;"><strong>Listado de
                         Usuarios</strong></h4>
                 <div class="card-body">
+                    <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
                     <div class="table-responsive">
                         <table class="table table-hover bg-light">
                             <thead class="table-secondary">
@@ -47,18 +48,19 @@
                                         <p th:each="perfil:${usuario.perfiles}" th:text="${perfil.perfil}"></p>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" onclick="return confirm('¿Estas seguro?')"
-                                            class="btn btn-sm text-white" role="button" title="Eliminar el registro"
-                                            data-mdb-toggle="tooltip" style="background-color: #c62020;"><i
-                                                class="fas fa-trash" aria-hidden="true"></i></a>
+                                        <a th:href="@{/usuarios/eliminar(id=${usuario.id})}"
+                                            onclick="return confirm('¿Estas seguro?')" class="btn btn-sm text-white"
+                                            role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
+                                            style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
+                                                aria-hidden="true"></i></a>
                                         <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')"
                                             class="btn btn-black btn-sm" role="button"
                                             title="Bloquear el acceso al sistema para este usuario"
-                                            data-mdb-toggle="tooltip"><i class="fas fa-lock" aria-hidden="true"></i></a>
+                                            data-mdb-toggle="tooltip"><i class="fas fa-lock fa-lg" aria-hidden="true"></i></a>
                                         <a href="#" onclick="return confirm('¿Desea desbloquear el usuario?')"
                                             class="btn btn-success btn-sm" role="button"
                                             title="Permitir el acceso al sistema a este usuario"
-                                            data-mdb-toggle="tooltip"><i class="fas fa-unlock"
+                                            data-mdb-toggle="tooltip"><i class="fas fa-unlock fa-lg"
                                                 aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

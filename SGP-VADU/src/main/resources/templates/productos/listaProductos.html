@@ -54,14 +54,16 @@
                                     </td>
                                     <td th:text="${producto.cantidadIngreso} + ' kg'"></td>
                                     <td class="text-center"><a th:href="@{/productos/buscar(id=${producto.id})}"
-                                            class="btn btn-success btn-sm" role="button" title="Editar el registro" data-mdb-toggle="tooltip"><i
-                                                class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i></a> <a
+                                            class="btn btn-success btn-sm" role="button" title="Editar el registro"
+                                            data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"
+                                                aria-hidden="true"></i></a> <a
                                             th:href="@{/productos/eliminar(id=${producto.id})}"
                                             onclick="return confirm('¿Estas seguro?')" class="btn btn-sm btn-danger"
                                             role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
                                                 aria-hidden="true"></i></a><a class="btn btn-black btn-sm ms-1 w-55"
-                                            th:href="@{/productos/detalle(id=${producto.id})}" title="Ver detalles del registro" data-mdb-toggle="tooltip"><i
+                                            th:href="@{/productos/detalle(id=${producto.id})}"
+                                            title="Ver detalles del registro" data-mdb-toggle="tooltip"><i
                                                 class="fa-solid fa-eye fa-lg"></i></a></td>
                                 </tr>
                             </tbody>

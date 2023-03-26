@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.ud2.developers.SGPVADU.entity.DetalleOrden;
 import org.ud2.developers.SGPVADU.repository.DetallesOrdenesRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 
-@Primary
 @Service
 public class DetallesOrdenesServiceJpa implements IntServiceDetallesOrdenes {
 

@@ -30,19 +30,6 @@ public class Orden {
 
 	private List<DetalleOrden> detalle;
 
-	public Orden() {
-
-	}
-
-	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
-		super();
-		this.id = id;
-		this.numero = numero;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibida = fechaRecibida;
-		this.total = total;
-	}
-
 	public Integer getId() {
 		return id;
 	}

@@ -6,13 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.ud2.developers.SGPVADU.entity.Categoria;
 import org.ud2.developers.SGPVADU.repository.CategoriasRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 
-@Primary
 @Service
 public class CategoriasServiceJpa implements IntServiceCategorias {
 	

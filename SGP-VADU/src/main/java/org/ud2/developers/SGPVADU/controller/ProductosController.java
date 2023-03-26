@@ -38,7 +38,7 @@ public class ProductosController {
 
 	@Autowired
 	private IntServiceCategorias serviceCategorias;
-	
+
 	@Autowired
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
 

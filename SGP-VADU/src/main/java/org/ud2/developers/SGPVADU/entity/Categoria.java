@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Categorias")
 public class Categoria {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.repository.UsuariosRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
 
-@Primary
 @Service
 public class UsuariosServiceJpa implements IntServiceUsuarios {
 
@@ -38,6 +36,11 @@ public class UsuariosServiceJpa implements IntServiceUsuarios {
 		return null;
 	}
 
+	@Override
+	public Usuario buscarPorUsername(String username) {
+		return repoUsuarios.findByUsername(username);
+	}
+	
 	@Override
 	public void eliminar(Integer idUsuario) {
 		repoUsuarios.deleteById(idUsuario);
