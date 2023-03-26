@@ -1,6 +1,10 @@
 package org.ud2.developers.SGPVADU.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +28,6 @@ import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
-import org.ud2.developers.SGPVADU.util.Utileria;
 
 @Controller
 @RequestMapping("/productos")
@@ -75,10 +78,23 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		if (!multiPart.isEmpty()) {
+		/*if (!multiPart.isEmpty()) {
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null) {
 				producto.setImagen(nombreImagen);
+			}
+		}*/
+		if(!multiPart.isEmpty()) {
+			Path directorioImagenes = Paths.get("src//main//resources//static/images/");
+			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+			
+			try {
+				byte[] bytesImg = multiPart.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + multiPart.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+				producto.setImagen(multiPart.getOriginalFilename());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		if (producto.getId() == null)
