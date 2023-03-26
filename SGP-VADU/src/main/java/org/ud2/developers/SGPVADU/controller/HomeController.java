@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.ud2.developers.SGPVADU.entity.Categoria;
@@ -35,6 +34,11 @@ public class HomeController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@GetMapping("/contactus")
+	public String contactanos() {
+		return "contactus";
+	}
+	
 	@GetMapping("/acerca")
 	public String acerca() {
 		return "acerca";
@@ -75,10 +79,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/login")
-	public String mostrarFormLogin(BindingResult result) {
-		if (result.hasErrors()) {
-			return "formLogin";
-		}
+	public String mostrarFormLogin() {
 		return "formLogin";
 	}
 
