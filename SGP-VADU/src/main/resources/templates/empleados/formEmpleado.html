@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.png}">
+    <title>SGP-VADU | Registro de Empleados</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <main role="main">
+        <hr>
+        <div class="container pb-3 text-black">
+            <div class="card border border-black">
+                <h4 class="card-header text-white" style="background-color: #c62020;">
+                    <strong>Datos del empleado</strong>
+                </h4>
+                <div class="card-body">
+                    <form method="post" th:action="@{/empleados/agregar}" th:object="${empleado}">
+                        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role='alert'>
+                            Por favor corrija los siguientes errores:
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="form-outline mb-2">
+                                    <input type="hidden" th:field="*{id}"> <input type="text"
+                                        class="form-control bg-light" th:field="*{nombre}" id="nombre"
+                                        name="nombre" placeholder="Nombre del empleado" required="required" autofocus>
+                                    <label class="form-label" for="nombre"><strong class="text-danger">*</strong>
+                                        Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-outline mb-2">
+                                    <input type="text" class="form-control bg-light" th:field="*{telefono}"
+                                        id="telefono" name="telefono" placeholder="Teléfono de contacto del empleado"
+                                        required="required">
+                                    <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
+                                        Teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-outline mb-2">
+                                    <input type="text" class="form-control bg-light" th:field="*{fechaContratacion}"
+                                        name="fechaContratacion" id="fechaContratacion" placeholder="Fecha de contratación"
+                                        required="required" readonly>
+                                    <label class="form-label" for="fechaContratacion"><strong class="text-danger">*</strong>
+                                        Fecha de
+                                        Contratación
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="form-outline mb-2">
+                                    <input type="text" class="form-control bg-light" th:field="*{username}"
+                                        id="username" name="username" placeholder="Username del empleado" required>
+                                    <label class="form-label" for="username"><strong class="text-danger">*</strong>
+                                        Username</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-outline mb-2">
+                                    <input type="email" class="form-control bg-light" th:field="*{email}"
+                                        id="email" name="email" placeholder="Email del empleado" required="required">
+                                    <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
+                                        Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-outline mb-2">
+                                    <input type="password" class="form-control bg-light" th:field="*{password}"
+                                        id="password" name="password" placeholder="Password del empleado" required>
+                                    <label class="form-label" for="password"><strong class="text-danger">*</strong>
+                                        Password</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-3">
+                            <button type="submit" class="btn btn-success me-3"
+                                th:if="${empleado.id==null}">Guardar</button>
+                            <button type="submit" class="btn btn-success me-3"
+                                th:unless="${empleado.id==null}">Modificar</button>
+                            <a class="btn text-white" th:href="@{/empleados/indexPaginado}"
+                                style="background-color: #c62020;">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed-bottom" th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+    <script>
+        $(function () {
+            $("#fecha").datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -113,11 +113,12 @@ public class Usuario {
 		}
 		perfiles.add(tempPerfil);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", email=" + email
 				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", ordenes="
-				+ ordenes + "]";
+				+ ordenes + ", perfiles=" + perfiles + "]";
 	}
+
 }

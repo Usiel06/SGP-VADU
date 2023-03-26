@@ -30,6 +30,9 @@
                         <a class="nav-link text-white" th:href="@{/usuarios/indexPaginado}"><b>Usuarios</b></a>
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
+                        <a class="nav-link text-white" th:href="@{/empleados/indexPaginado}"><b>Empleados</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
                         <a class="nav-link text-white" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
                     </li>
                 </ul>

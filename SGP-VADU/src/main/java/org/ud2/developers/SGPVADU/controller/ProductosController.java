@@ -43,7 +43,7 @@ public class ProductosController {
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
 
 	@GetMapping("/detalle")
-	public String consultarDetalleVacante(@RequestParam("id") int idProducto, Model model) {
+	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
 		Producto producto = serviceProductos.buscarPorId(idProducto);
 		model.addAttribute("producto", producto);
 		model.addAttribute("items", serviceDetallesOrdenes.contarDetalles());
@@ -84,7 +84,7 @@ public class ProductosController {
 		if (producto.getId() == null)
 			model2.addFlashAttribute("msg", "Producto Agregado");
 		else
-			model2.addFlashAttribute("msg", "Producto Actualizado");
+			model2.addFlashAttribute("msg", "Producto Modificado");
 		serviceProductos.guardarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}

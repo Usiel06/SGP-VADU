@@ -37,7 +37,7 @@ public class CategoriasController {
     @PostMapping("/agregar")
     public String agregarCategoria(Categoria categoria, RedirectAttributes model) {
         if (categoria.getId() == null) model.addFlashAttribute("msg", "Categoría Agregada");
-        else model.addFlashAttribute("msg", "Categoría Actualizada");
+        else model.addFlashAttribute("msg", "Categoría Modificada");
         serviceCategorias.guardarCategoria(categoria);
         return "redirect:/categorias/indexPaginado";
     }

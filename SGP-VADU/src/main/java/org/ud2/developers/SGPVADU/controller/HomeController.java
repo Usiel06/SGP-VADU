@@ -62,7 +62,7 @@ public class HomeController {
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		// usuario.setPassword("{noop}" + usuario.getPassword());
 		Perfil perfil = new Perfil();
-		perfil.setId(2);
+		perfil.setId(3);
 		usuario.agregar(perfil);
 		serviceUsuarios.agregar(usuario);
 		return "redirect:/";

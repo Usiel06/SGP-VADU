@@ -98,7 +98,6 @@ public class CarritoController {
 		DetalleOrden detalleOrden = new DetalleOrden();
 		Producto producto = serviceProductos.buscarPorId(idProducto);
 		double sumaTotal = 0;
-		;
 		detalleOrden.setCantidad(cantidad);
 		detalleOrden.setPrecio(producto.getPrecioKg());
 		detalleOrden.setNombre(producto.getNombre());
