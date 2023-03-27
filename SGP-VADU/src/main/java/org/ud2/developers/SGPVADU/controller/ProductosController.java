@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -21,17 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Producto;
+import org.ud2.developers.SGPVADU.service.ImageService;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
-import org.ud2.developers.SGPVADU.util.Utileria;
 
 @Controller
 @RequestMapping("/productos")
 public class ProductosController {
-
-	@Value("${SGP-VADU.ruta.imagenes}")
-	private String ruta;
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
@@ -41,6 +37,9 @@ public class ProductosController {
 
 	@Autowired
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
+	
+    @Autowired
+    private ImageService imageService;
 
 	@GetMapping("/detalle")
 	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
@@ -68,7 +67,7 @@ public class ProductosController {
 
 	@PostMapping("/agregar")
 	public String agregarProducto(Producto producto, BindingResult result, Model model, RedirectAttributes model2,
-			@RequestParam("archivoImagen") MultipartFile multiPart) {
+			@RequestParam("archivoImagen") MultipartFile file) {
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
@@ -76,10 +75,10 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		if (!multiPart.isEmpty()) {
-			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
-			if (nombreImagen != null) {
-				producto.setImagen(nombreImagen);
+		if (!file.isEmpty()) {
+			String fileName = imageService.uploadImage(file);
+			if (fileName != null) {
+				producto.setImagen(fileName);
 			}
 		}
 		if (producto.getId() == null) model2.addFlashAttribute("msg", "Producto Agregado");
