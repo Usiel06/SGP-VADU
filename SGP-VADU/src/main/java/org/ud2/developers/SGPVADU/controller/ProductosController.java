@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Producto;
-import org.ud2.developers.SGPVADU.service.ImageService;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
+import org.ud2.developers.SGPVADU.util.Utileria;
 
 @Controller
 @RequestMapping("/productos")
@@ -39,7 +39,7 @@ public class ProductosController {
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
 	
     @Autowired
-    private ImageService imageService;
+    private Utileria util;
 
 	@GetMapping("/detalle")
 	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
@@ -76,7 +76,7 @@ public class ProductosController {
 			return "productos/formProducto";
 		}
 		if (!file.isEmpty()) {
-			String fileName = imageService.uploadImage(file);
+			String fileName = util.uploadImage(file);
 			if (fileName != null) {
 				producto.setImagen(fileName);
 			}

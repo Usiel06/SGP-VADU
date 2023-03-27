@@ -20,7 +20,6 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link text-white" th:href="@{/}"><b>Home</b></a></li>
-                    <li class="nav-item"><a class="nav-link text-white" th:href="@{/contactus}"><b>Contáctanos</b></a></li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a
                             class="nav-link text-white" th:href="@{/productos/indexPaginado}"><b>Productos</b></a></li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a
@@ -34,6 +33,8 @@
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
                         <a class="nav-link text-white" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" th:href="@{/contacto}"><b>Contáctanos</b></a>
                     </li>
                 </ul>
                 <!-- Left links -->
