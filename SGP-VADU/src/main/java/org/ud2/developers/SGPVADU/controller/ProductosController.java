@@ -67,7 +67,7 @@ public class ProductosController {
 
 	@PostMapping("/agregar")
 	public String agregarProducto(Producto producto, BindingResult result, Model model, RedirectAttributes model2,
-			@RequestParam("archivoImagen") MultipartFile file) {
+			@RequestParam("archivoImagen") MultipartFile file) {		
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
@@ -81,8 +81,13 @@ public class ProductosController {
 				producto.setImagen(fileName);
 			}
 		}
-		if (producto.getId() == null) model2.addFlashAttribute("msg", "Producto Agregado");
-		else model2.addFlashAttribute("msg", "Producto Modificado");
+		if (producto.getId() == null) {
+			model2.addFlashAttribute("msg", "Producto Agregado");
+		} else {
+			Producto p = serviceProductos.buscarPorId(producto.getId());
+			producto.setImagen(p.getImagen());
+			model2.addFlashAttribute("msg", "Producto Modificado");
+		}
 		serviceProductos.guardarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}
