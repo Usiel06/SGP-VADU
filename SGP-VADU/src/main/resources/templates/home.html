@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.png}">
+    <title>SGP-VADU | Sistema de Gestión de Procesos</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <h2 class="text-center text-black mt-3">PRODUCTOS EN VENTA</h2>
+
+    <hr>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+            <div class="col pb-3 text-black" th:each="producto:${productos}">
+                <div class="card bg-light h-100">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="bg-image hover-overlay hover-zoom ripple rounded">
+                                <a th:href="@{/productos/detalle(id=${producto.id})}">
+                                    <img th:src="@{/images/{img}(img=${producto.imagen})}"
+                                        class="img-fluid rounded-start" th:alt="${producto.nombre}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h3 class="card-title" th:text="${producto.nombre}"></h3>
+                                <h5 class="card-text" style="text-align: justify;" th:text="${producto.descripcion}">
+                                </h5>
+                                <h5 class="card-text text-success">
+                                    <small th:text="'$ ' + ${producto.precioKg} + ' Kg'"></small>
+                                </h5>
+                            </div>
+                            <div class="pb-3">
+                                <a class="my-cart-b ms-4 me-3 btn btn-black btn-sm"
+                                    th:href="@{/productos/detalle(id=${producto.id})}"><i
+                                        class="fa-solid fa-eye fa-lg"></i> Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
+</html>
