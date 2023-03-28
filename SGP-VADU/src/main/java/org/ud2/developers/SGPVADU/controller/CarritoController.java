@@ -73,22 +73,25 @@ public class CarritoController {
 	}
 
 	@GetMapping("/eliminar")
-	public String eliminarCarrito(@RequestParam("id") Integer idDetalle, Model model) {
-		// lista nueva de prodcutos
+	public String eliminarCarrito(DetalleOrden detalleOrd, RedirectAttributes model) {
 		List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
-
+		double sumaTotal = 0;
 		for (DetalleOrden detalleOrden : detalles) {
-			if (detalleOrden.getProducto().getId() != idDetalle) {
+			if (detalleOrden.getProducto().getId() != detalleOrd.getId()) {
 				ordenesNueva.add(detalleOrden);
 			}
 		}
-
-		// poner la nueva lista con los productos restantes
-		detalles = ordenesNueva;
-
-		double sumaTotal = 0;
-		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
-
+		if (detalleOrd.getId() != null) {
+			detalles = ordenesNueva;
+			sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+			model.addFlashAttribute("msg", "El item se eliminó correctamente del carrito.");
+		} else {
+			if (!ordenesNueva.isEmpty()) {
+				detalles.clear();
+				sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+				model.addFlashAttribute("msg", "Se eliminaron correctamente todos los items del carrito.");
+			}
+		}
 		orden.setTotal(sumaTotal);
 		return "redirect:/carrito/";
 	}
@@ -104,20 +107,16 @@ public class CarritoController {
 		detalleOrden.setNombre(producto.getNombre());
 		detalleOrden.setTotal(producto.getPrecioKg() * cantidad);
 		detalleOrden.setProducto(producto);
-		boolean ingresado = detalles.stream()
-				.anyMatch(p -> p.getProducto().getId() == idProducto);
+		boolean ingresado = detalles.stream().anyMatch(p -> p.getProducto().getId() == idProducto);
 		if (!ingresado) {
 			detalles.add(detalleOrden);
-		} /*else {
-			for (DetalleOrden dorden : detalles) {
-				if (dorden.getProducto().getId().compareTo(idProducto) == 0) {
-					detalleOrden.setId(dorden.getId());
-					detalleOrden.setCantidad(cantidad + dorden.getCantidad());
-					detalleOrden.setTotal(producto.getPrecioKg() * (cantidad + dorden.getCantidad()));
-					detalles.add(detalleOrden);
-				}
-			}
-		}*/
+		} /*
+			 * else { for (DetalleOrden dorden : detalles) { if
+			 * (dorden.getProducto().getId().compareTo(idProducto) == 0) {
+			 * detalleOrden.setId(dorden.getId()); detalleOrden.setCantidad(cantidad +
+			 * dorden.getCantidad()); detalleOrden.setTotal(producto.getPrecioKg() *
+			 * (cantidad + dorden.getCantidad())); detalles.add(detalleOrden); } } }
+			 */
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 		orden.setTotal(sumaTotal);
 		return "redirect:/carrito/";
