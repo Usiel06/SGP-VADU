@@ -10,7 +10,6 @@ public interface IntServiceEmpleados {
 	public List<Empleado> obtenerEmpleados();
 	public void agregar(Empleado empleado);
 	public Empleado buscarPorId(Integer idEmpleado);
-	public Empleado findByNombre(String nombre);
 	public void eliminar(Integer idEmpleado);
 	public int numeroEmpleados();
 	Page<Empleado> buscarTodas(Pageable page);

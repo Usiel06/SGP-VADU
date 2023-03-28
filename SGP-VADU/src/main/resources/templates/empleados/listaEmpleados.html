@@ -37,18 +37,16 @@
                                     <th scope="col">Teléfono</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Fecha Contratación</th>
-                                    <th scope="col">Id Usuario</th>
                                     <th scope="col" class="text-center">Operaciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="empleado:${empleados}">
                                     <th class="text-center" th:text="${empleado.id}" scope="row"></th>
-                                    <td th:text="${empleado.nombre}"></td>
+                                    <td th:text="${empleado.usuario.nombre}"></td>
                                     <td th:text="${empleado.telefono}"></td>
-                                    <td th:text="${empleado.email}"></td>
-                                    <td th:text="${empleado.fechaContratacion}"></td>
-                                    <td th:text="${empleado.usuario.id}"></td>
+                                    <td th:text="${empleado.usuario.email}"></td>
+                                    <td th:text="${empleado.usuario.fechaRegistro}"></td>
                                     <td class="text-center"><a th:href="@{/empleados/buscar(id=${empleado.id})}"
                                             class="btn btn-success btn-sm" role="button" title="Editar el registro"
                                             data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"

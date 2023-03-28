@@ -32,6 +32,30 @@
                             </ul>
                         </div>
                         <div class="row">
+                        <input type="hidden" th:field="*{id}">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                <label class="pb-1" for="telefono"><strong class="text-danger">*</strong>
+                                        Teléfono</label>
+                                    <input type="text" class="form-control bg-light" th:field="*{telefono}"
+                                        id="telefono" name="telefono" placeholder="Teléfono de contacto del empleado"
+                                        required autofocus>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="pb-1" for="usuario"><strong class="text-danger">*</strong>
+                                        Usuario</label>
+                                    <select class="form-control bg-light" th:field="*{usuario.id}" name="usuario"
+                                        id="usuario">
+                                        <option th:each="usuario:${usuarios}" th:value="${usuario.id}"
+                                            th:text="${usuario.nombre}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row">
                             <div class="col-md-4 mb-2">
                                 <div class="form-outline mb-2">
                                     <input type="hidden" th:field="*{id}"> <input th:if="${empleado.id!=null}" type="text"
@@ -92,7 +116,7 @@
                                         Password</label>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="text-center pt-3">
                             <button type="submit" class="btn btn-success me-3"
                                 th:if="${empleado.id==null}">Guardar</button>
@@ -106,6 +130,7 @@
             </div>
         </div>
     </main>
+    <br>
     <br>
     <br>
     <br>

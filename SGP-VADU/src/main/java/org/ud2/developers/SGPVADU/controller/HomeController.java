@@ -34,7 +34,7 @@ public class HomeController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@GetMapping("/contacto")
+	@GetMapping("/contactanos")
 	public String contactanos() {
 		return "contacto";
 	}

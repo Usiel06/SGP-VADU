@@ -36,10 +36,6 @@ public class EmpleadosServiceJpa implements IntServiceEmpleados {
 		return null;
 	}
 	
-	public Empleado findByNombre(String nombre) {
-		return repoEmpleados.findByNombre(nombre);
-	}
-
 	@Override
 	public void eliminar(Integer idEmpleado) {
 		repoEmpleados.deleteById(idEmpleado);

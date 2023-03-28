@@ -1,0 +1,39 @@
+package org.ud2.developers.SGPVADU.service.db;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.ud2.developers.SGPVADU.entity.Contacto;
+import org.ud2.developers.SGPVADU.repository.ContactosRepository;
+import org.ud2.developers.SGPVADU.service.IntServiceContactos;
+
+@Service
+public class ContactosServiceJpa implements IntServiceContactos {
+
+	@Autowired
+	private ContactosRepository repoContactos;
+	
+	@Override
+	public List<Contacto> obtenerContactos() {
+		return repoContactos.findAll();
+	}
+
+	@Override
+	public void guardarContacto(Contacto contacto) {
+		repoContactos.save(contacto);
+	}
+
+	@Override
+	public Integer contarContactos() {
+		return (int) repoContactos.count();
+	}
+
+	@Override
+	public Page<Contacto> buscarTodas(Pageable page) {
+		return repoContactos.findAll(page);
+	}
+
+}

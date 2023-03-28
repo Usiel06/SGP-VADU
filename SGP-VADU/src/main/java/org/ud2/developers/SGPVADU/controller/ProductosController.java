@@ -68,7 +68,6 @@ public class ProductosController {
 	@PostMapping("/agregar")
 	public String agregarProducto(Producto producto, BindingResult result, Model model, RedirectAttributes model2,
 			@RequestParam("archivoImagen") MultipartFile file) {
-		System.out.println(producto);
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
