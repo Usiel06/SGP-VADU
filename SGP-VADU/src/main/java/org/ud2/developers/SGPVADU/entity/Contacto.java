@@ -19,6 +19,7 @@ public class Contacto {
 	private Date fecha = new Date();
 	private String asunto;
 	private String mensaje;
+	private Integer estatus = 0;
 
 	public Integer getId() {
 		return id;
@@ -68,10 +69,18 @@ public class Contacto {
 		this.mensaje = mensaje;
 	}
 
+	public Integer getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(Integer estatus) {
+		this.estatus = estatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Contacto [id=" + id + ", nombre=" + nombre + ", email=" + email + ", fecha=" + fecha + ", asunto="
-				+ asunto + ", mensaje=" + mensaje + "]";
+				+ asunto + ", mensaje=" + mensaje + ", estatus=" + estatus + "]";
 	}
 
 }

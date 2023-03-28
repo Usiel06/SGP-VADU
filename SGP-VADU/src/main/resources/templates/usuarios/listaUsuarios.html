@@ -21,15 +21,16 @@
         <div class="container mb-5">
 
             <div class="card border border-black">
-                <h4 class="card-header text-white" style="background-color: #c62020;"><strong>Listado de
-                        Usuarios</strong></h4>
+                <h4 class="card-header text-white" style="background-color: #c62020;">
+                    <strong>Listado de Usuarios</strong>
+                </h4>
                 <div class="card-body">
                     <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
                     <div class="table-responsive">
                         <table class="table table-hover bg-light">
                             <thead class="table-secondary">
                                 <tr>
-                                	<th scope="col" class="text-center">Id</th>
+                                    <th scope="col" class="text-center">Id</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
@@ -40,7 +41,7 @@
                             </thead>
                             <tbody class="text-black">
                                 <tr th:each="usuario:${usuarios}">
-                                	<th class="text-center" th:text="${usuario.id}" scope="row"></th>
+                                    <th class="text-center" th:text="${usuario.id}" scope="row"></th>
                                     <td th:text="${usuario.nombre}"></td>
                                     <td th:text="${usuario.username}"></td>
                                     <td th:text="${usuario.email}"></td>
@@ -48,22 +49,24 @@
                                     <td>
                                         <p th:each="perfil:${usuario.perfiles}" th:text="${perfil.perfil}"></p>
                                     </td>
-                                    <td class="text-center">
-                                        <a th:href="@{/usuarios/eliminar(id=${usuario.id})}"
+                                    <td class="text-center"><a th:href="@{/usuarios/eliminar(id=${usuario.id})}"
                                             onclick="return confirm('¿Estas seguro?')" class="btn btn-sm text-white"
                                             role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
-                                                aria-hidden="true"></i></a>
-                                        <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')"
-                                            class="btn btn-black btn-sm" role="button"
+                                                aria-hidden="true"></i></a> <a
+                                            th:classappend="${usuario.estatus == 0 ? 'disabled' : ''}"
+                                            onclick="return confirm('¿Está seguro de quererle bloquear el acceso a éste usuario?')"
+                                            class="btn btn-black btn-sm"
+                                            th:href="@{/usuarios/bloquear(id=${usuario.id})}" role="button"
                                             title="Bloquear el acceso al sistema para este usuario"
-                                            data-mdb-toggle="tooltip"><i class="fas fa-lock fa-lg" aria-hidden="true"></i></a>
-                                        <a href="#" onclick="return confirm('¿Desea desbloquear el usuario?')"
-                                            class="btn btn-success btn-sm" role="button"
+                                            data-mdb-toggle="tooltip"><i class="fas fa-lock fa-lg"
+                                                aria-hidden="true"></i></a><br> <a
+                                            th:classappend="${usuario.estatus == 1 ? 'disabled' : ''}"
+                                            class="btn btn-sm mt-2 btn-success"
+                                            th:href="@{/usuarios/desbloquear(id=${usuario.id})}" role="button"
                                             title="Permitir el acceso al sistema a este usuario"
                                             data-mdb-toggle="tooltip"><i class="fas fa-unlock fa-lg"
-                                                aria-hidden="true"></i></a>
-                                    </td>
+                                                aria-hidden="true"></i></a></td>
                                 </tr>
                             </tbody>
                             <tfoot class="text-black">

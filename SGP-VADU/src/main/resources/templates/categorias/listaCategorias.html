@@ -45,13 +45,14 @@
                                     <td th:text="${categoria.nombre}"></td>
                                     <td th:text="${categoria.descripcion}"></td>
                                     <td class="text-center"><a th:href="@{/categorias/buscar(id=${categoria.id})}"
-                                            class="btn btn-success btn-sm" role="button" title="Editar registro" data-mdb-toggle="tooltip"><i
-                                                class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i></a><br><br><a
+                                            class="btn btn-success btn-sm" role="button" title="Editar registro"
+                                            data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"
+                                                aria-hidden="true"></i></a><br><a
                                             th:href="@{/categorias/eliminar(id=${categoria.id})}"
-                                            onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm"
-                                            role="button" title="Eliminar registro" data-mdb-toggle="tooltip"
-                                            style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
-                                                aria-hidden="true"></i></a></td>
+                                            onclick="return confirm('¿Estas seguro?')"
+                                            class="btn btn-danger btn-sm mt-2" role="button" title="Eliminar registro"
+                                            data-mdb-toggle="tooltip" style="background-color: #c62020;"><i
+                                                class="fas fa-trash fa-lg" aria-hidden="true"></i></a></td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -89,5 +90,7 @@
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
-    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script></body>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
 </html>

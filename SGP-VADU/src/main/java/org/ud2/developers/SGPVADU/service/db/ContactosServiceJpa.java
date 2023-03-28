@@ -1,6 +1,7 @@
 package org.ud2.developers.SGPVADU.service.db;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,15 @@ public class ContactosServiceJpa implements IntServiceContactos {
 		repoContactos.save(contacto);
 	}
 
+	@Override
+	public Contacto buscarPorId(Integer idContacto) {
+		Optional<Contacto> optional = repoContactos.findById(idContacto);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+	}
+	
 	@Override
 	public Integer contarContactos() {
 		return (int) repoContactos.count();
