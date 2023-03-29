@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.ud2.developers.SGPVADU.entity.Categoria;
+import org.ud2.developers.SGPVADU.entity.Cliente;
 import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
+import org.ud2.developers.SGPVADU.service.IntServiceClientes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
 
@@ -30,6 +32,9 @@ public class HomeController {
 
 	@Autowired
 	private IntServiceUsuarios serviceUsuarios;
+	
+	@Autowired
+	private IntServiceClientes serviceClientes;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -63,12 +68,22 @@ public class HomeController {
 
 	@PostMapping("/guardar")
 	public String guardarUsuario(Usuario usuario) {
-		usuario.setEstatus(1);
+		Cliente cliente = new Cliente();
+		cliente.setNombre(usuario.getNombre());
+		cliente.setApellidoPaterno(usuario.getApellidoPaterno());
+		cliente.setApellidoMaterno(usuario.getApellidoMaterno());
+		cliente.setUsername(usuario.getUsername());
+		cliente.setEmail(usuario.getEmail());
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		cliente.setPassword(usuario.getPassword());
+		cliente.setFechaRegistro(usuario.getFechaRegistro());
+		usuario.setEstatus(1);
 		Perfil perfil = new Perfil();
 		perfil.setId(3);
 		usuario.agregar(perfil);
+		cliente.setUsuario(usuario);
 		serviceUsuarios.agregar(usuario);
+		serviceClientes.agregar(cliente);
 		return "redirect:/";
 	}
 

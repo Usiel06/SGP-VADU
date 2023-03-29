@@ -8,9 +8,9 @@ import org.ud2.developers.SGPVADU.entity.Categoria;
 
 public interface IntServiceCategorias {
     public List<Categoria> obtenerCategorias();
-    public Categoria buscarPorId(Integer idCategoria);
 	public void guardarCategoria(Categoria categoria);
+    public Categoria buscarPorId(Integer idCategoria);
 	public void eliminarPorId(Integer idCategoria);
-	public int contarCategorias();
+	public Integer contarCategorias();
 	public Page<Categoria> buscarTodas(Pageable page);
 }

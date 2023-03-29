@@ -55,9 +55,7 @@ public class EmpleadosController {
 
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Empleado empleado, RedirectAttributes model) {
-		System.out.println(empleado);
 		if (empleado.getId() == null) {
-			System.out.println("putito");
 			Usuario usuario = new Usuario();
 			usuario.setNombre(empleado.getNombre());
 			usuario.setApellidoPaterno(empleado.getApellidoPaterno());
@@ -74,7 +72,6 @@ public class EmpleadosController {
 			empleado.setUsuario(usuario);
 			model.addFlashAttribute("msg", "Empleado Agregado");
 		} else {
-			System.out.println(empleado.getUsuario().getId() + "samfdghslmgnkafsgdjn");
 			Usuario usuario = serviceUsuarios.buscarPorId(empleado.getUsuario().getId());
 			usuario.setUsername(empleado.getUsername());
 			usuario.setEmail(empleado.getEmail());
@@ -86,7 +83,7 @@ public class EmpleadosController {
 	}
 
 	@GetMapping("/nuevo")
-	public String mostrarFormEmpleado(Empleado empleado, Model model) {
+	public String mostrarFormEmpleado(Empleado empleado) {
 		return "empleados/formEmpleado";
 	}
 

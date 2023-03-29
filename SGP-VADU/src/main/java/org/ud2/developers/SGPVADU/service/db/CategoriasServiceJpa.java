@@ -42,7 +42,7 @@ public class CategoriasServiceJpa implements IntServiceCategorias {
 	}
 
 	@Override
-	public int contarCategorias() {
+	public Integer contarCategorias() {
 		return (int) repoCategorias.count();
 	}
 

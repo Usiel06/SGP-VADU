@@ -26,6 +26,10 @@
 						<a class="nav-link text-white"
 						th:href="@{/empleados/indexPaginado}"><b>Empleados</b></a>
 					</li>
+					<li class="nav-item" sec:authorize="hasAnyAuthority('Gerente', 'Empleado')">
+						<a class="nav-link text-white"
+						th:href="@{/clientes/indexPaginado}"><b>Clientes</b></a>
+					</li>
 					<li class="nav-item"
 						sec:authorize="hasAnyAuthority('Gerente', 'Empleado')"><a
 						class="nav-link text-white" th:href="@{/productos/indexPaginado}"><b>Productos</b></a></li>
