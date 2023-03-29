@@ -32,11 +32,15 @@ public class DatabaseWebSecurity {
 				// Los recursos estáticos no requieren autenticación
 				.requestMatchers("/static/**", "/css/**", "/images/**", "/mdb5/**").permitAll()
 				// Las vistas públicas no requieren autenticación
-				.requestMatchers("/", "/signup", "/guardar", "/acerca", "/contactanos", "/productos/detalle/**").permitAll()
+				.requestMatchers("/", "/signup", "/contactos/agregar", "/guardar", "/acerca", "/contactanos", "/productos/detalle/**").permitAll()
 				// asignar permisos a URL'S por roles
-				.requestMatchers("/usuarios/**").hasAnyAuthority("Gerente").requestMatchers("/categorias/**")
-				.hasAnyAuthority("Gerente", "Empleado").requestMatchers("/productos/**")
-				.hasAnyAuthority("Gerente", "Empleado")
+				.requestMatchers("/categorias/**").hasAnyAuthority("Gerente", "Empleado")
+				.requestMatchers("/clientes/**").hasAnyAuthority("Gerente", "Empleado")
+				.requestMatchers("/contactos/**").hasAnyAuthority("Gerente")
+				.requestMatchers("/empleados/**").hasAnyAuthority("Gerente")
+				.requestMatchers("/perfiles/**").hasAnyAuthority("Gerente")
+				.requestMatchers("/productos/**").hasAnyAuthority("Gerente", "Empleado")
+				.requestMatchers("/usuarios/**").hasAnyAuthority("Gerente")
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				.anyRequest().authenticated()
 				// El formulario de Login no requiere autenticacion
