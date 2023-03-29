@@ -46,6 +46,11 @@ public class CarritoController {
 	// Datos de la orden
 	Orden orden = new Orden();
 
+	@GetMapping("/contar")
+	public Integer contarItems() {
+		return detalles.size();
+	}
+	
 	@GetMapping("/orden")
 	public String mostrarOrden(Model model, org.springframework.security.core.Authentication auth) {
 		Date fechaCreacion = new Date();

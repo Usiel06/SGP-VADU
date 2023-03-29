@@ -20,8 +20,10 @@ import jakarta.persistence.Table;
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	public Integer id;
 	private String nombre;
+	private String apellidoPaterno;
+	private String apellidoMaterno;
 	private String username;
 	private String email;
 	private String password;
@@ -49,6 +51,22 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getApellidoPaterno() {
+		return apellidoPaterno;
+	}
+
+	public void setApellidoPaterno(String apellidoPaterno) {
+		this.apellidoPaterno = apellidoPaterno;
+	}
+
+	public String getApellidoMaterno() {
+		return apellidoMaterno;
+	}
+
+	public void setApellidoMaterno(String apellidoMaterno) {
+		this.apellidoMaterno = apellidoMaterno;
 	}
 
 	public String getUsername() {
@@ -116,9 +134,10 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", email=" + email
-				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", ordenes="
-				+ ordenes + ", perfiles=" + perfiles + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
+				+ ", apellidoMaterno=" + apellidoMaterno + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", ordenes=" + ordenes
+				+ ", perfiles=" + perfiles + "]";
 	}
 
 }

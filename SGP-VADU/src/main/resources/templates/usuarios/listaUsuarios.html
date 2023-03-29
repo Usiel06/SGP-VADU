@@ -32,8 +32,10 @@
                                 <tr>
                                     <th scope="col" class="text-center">Id</th>
                                     <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido Paterno</th>
+                                    <th scope="col">Apellido Materno</th>
                                     <th scope="col">Username</th>
-                                    <th scope="col">Email</th>
+                                    <th scope="col">E-mail</th>
                                     <th scope="col">Estatus</th>
                                     <th scope="col">Perfil(es)</th>
                                     <th class="text-center" scope="col">Operaciones</th>
@@ -43,6 +45,8 @@
                                 <tr th:each="usuario:${usuarios}">
                                     <th class="text-center" th:text="${usuario.id}" scope="row"></th>
                                     <td th:text="${usuario.nombre}"></td>
+                                    <td th:text="${usuario.apellidoPaterno}"></td>
+                                    <td th:text="${usuario.apellidoMaterno}"></td>
                                     <td th:text="${usuario.username}"></td>
                                     <td th:text="${usuario.email}"></td>
                                     <td th:text="${usuario.estatus}"></td>

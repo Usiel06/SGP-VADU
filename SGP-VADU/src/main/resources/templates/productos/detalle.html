@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" th:href="@{/images/logo.jpeg}">
+    <link rel="icon" th:href="@{/images/logo.png}">
     <title>SGP-VADU | Detalles del producto</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
@@ -27,52 +27,54 @@
                             class="img-fluid rounded-start" />
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 text-black">
                     <form method="post" th:action="@{/carrito/agregar}">
                         <input type="hidden" th:value="${producto.id}" name="idProducto">
-                        <ul class="list-group">
-                            <li class="list-group-item px-3 bg-light border-light" style="height: 3.5rem">
-                                <h2 class="card-title text-black pt-2" th:text="${producto.nombre}"></h2>
-                            </li>
-                            <li class="list-group-item px-3 bg-light border-light" style="height: 7.5rem">
-                                <p class="fs-4 text-black pe-5" style="text-align: justify;"
-                                    th:text="'Información de la categoría: ' + ${producto.categoria.nombre} + ' | ' + ${producto.categoria.descripcion}">
+                        <div class="container px-4">
+                            <div class="pt-4 fs-2"><strong th:text="${producto.nombre}"></strong></div>
+                            <div class="py-2 fs-4">
+                                <p th:text="${producto.descripcion}"></p>
+                            </div>
+                            <div>
+                                <p class="pb-4 fs-4" style="text-align: justify;"
+                                    th:text="${producto.categoria.nombre} + ' | ' + ${producto.categoria.descripcion}">
                                 </p>
-                            </li>
-                            <li class="list-group-item px-3 bg-light border-light" style="height: 5.9rem">
-                                <p class="fs-4 text-black" th:text="${producto.descripcion}"></p>
-                            </li>
-                            <li class="list-group-item px-3 bg-light border-light" th:unless="${producto.estatus==1}"
-                                style="height: 4rem"><span class="fs-4 text-black"
-                                    th:text="'$' + ${producto.precioKg} + ' (kg)'" style="font-weight: bold"></span>
-                            </li>
-                            <li class="list-group-item px-3 bg-light border-light" style="height: 4.3rem"><span
-                                    th:if="${producto.estatus==1}"
-                                    class="badge badge-success rounded-pill d-inline fs-4">En
-                                    Venta</span> <span th:unless="${producto.estatus==1}"
-                                    class="badge badge-danger rounded-pill d-inline fs-4">Descontinuado</span></li>
-                            <li class="list-group pb-2" th:if="${producto.estatus==1}">
-                                <ul class="list-group list-group-horizontal-sm">
-                                    <li class="list-group-item text-center bg-light border-light" sec:authorize="!hasAnyAuthority('Empleado')">
-                                        <input type="number" id="cantidad" name="cantidad" value="1"
-                                            class="form-control w-100" /><label class="text-black">Cantidad Kg</label>
-                                    </li>
-                                    <li class="list-group-item text-center mx-5 px-5 mx-4 bg-light border-light" sec:authorize="!hasAnyAuthority('Empleado')"><button
-                                            class="btn btn-black btn-sm fs-6" type="submit"><i
-                                                class="fa-solid fa-cart-shopping fa-lg"></i> Agregar a
-                                            carrito</button></li>
-                                    <li class="list-group-item text-center bg-light border-light"><span
-                                            class="fs-5 text-black" th:text="'$' + ${producto.precioKg} + ' Kg'"
+                            </div>
+                            <div style="height: 4rem">
+                                <span sec:authorize="isAuthenticated() and !hasAnyAuthority('Cliente')"
+                                    class="fs-4 text-black pe-4" th:text="'$' + ${producto.precioKg} + ' Kg'"
+                                    style="font-weight: bold"></span>
+                                <span th:if="${producto.estatus==1}"
+                                    class="badge badge-success rounded-pill d-inline fs-4">En Venta</span>
+                                <span th:unless="${producto.estatus==1}"
+                                    class="badge badge-danger rounded-pill d-inline fs-4">Descontinuado</span>
+                            </div>
+                            <div class="container text-center pb-4"
+                                sec:authorize="isAuthenticated() and hasAnyAuthority('Cliente')">
+                                <div class="row">
+                                    <div class="col-sm-4 pt-2">
+                                        <input class="form-control" type="number" id="cantidad" name="cantidad"
+                                            value="1" min="1" th:max="${producto.cantidadIngreso}" />
+                                        <label class="text-black">Cantidad Kg</label>
+                                    </div>
+                                    <div class="col-sm-4 pt-2">
+                                        <button class="btn btn-black btn-sm fs-6" type="submit">
+                                            <i class="fa-solid fa-cart-shopping fa-lg"></i> Agregar a carrito
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-4 pt-2">
+                                        <span class="fs-5 text-black" th:text="'$' + ${producto.precioKg} + ' Kg'"
                                             style="font-weight: bold"></span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <br>
     <br>
     <br>
     <br>

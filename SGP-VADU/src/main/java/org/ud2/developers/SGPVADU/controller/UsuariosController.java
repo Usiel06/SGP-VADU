@@ -39,7 +39,7 @@ public class UsuariosController {
 	}
 	
 	@GetMapping("/eliminar")
-	public String eliminarProducto(Usuario usuario, RedirectAttributes model) {
+	public String eliminarUsuario(Usuario usuario, RedirectAttributes model) {
 		serviceUsuarios.eliminar(usuario.getId());
 		model.addFlashAttribute("msg", "Usuario Eliminado");
 		return "redirect:/usuarios/indexPaginado";

@@ -25,7 +25,7 @@
                 </h4>
                 <div class="card-body">
                     <a class="btn btn-primary" th:href="@{/empleados/nuevo}" title="Registrar nuevo empleado"
-                        role="button"><i class="fas fa-file fa-lg"></i> Nuevo</a>
+                        role="button"><i class="fas fa-person fa-lg"></i> Nuevo</a>
                     <hr>
                     <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
                     <div class="table-responsive">
@@ -33,9 +33,11 @@
                             <thead class="table-secondary">
                                 <tr>
                                     <th scope="col" class="text-center">Id</th>
-                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Nombre(s)</th>
+                                    <th scope="col">Apellido Paterno</th>
+                                    <th scope="col">Apellido Materno</th>
                                     <th scope="col">Teléfono</th>
-                                    <th scope="col">Email</th>
+                                    <th scope="col">E-mail</th>
                                     <th scope="col">Fecha Contratación</th>
                                     <th scope="col" class="text-center">Operaciones</th>
                                 </tr>
@@ -43,10 +45,12 @@
                             <tbody>
                                 <tr th:each="empleado:${empleados}">
                                     <th class="text-center" th:text="${empleado.id}" scope="row"></th>
-                                    <td th:text="${empleado.usuario.nombre}"></td>
+                                    <td th:text="${empleado.nombre}"></td>
+                                    <td th:text="${empleado.apellidoPaterno}"></td>
+                                    <td th:text="${empleado.apellidoMaterno}"></td>
                                     <td th:text="${empleado.telefono}"></td>
-                                    <td th:text="${empleado.usuario.email}"></td>
-                                    <td th:text="${empleado.usuario.fechaRegistro}"></td>
+                                    <td th:text="${empleado.email}"></td>
+                                    <td th:text="${empleado.fechaRegistro}"></td>
                                     <td class="text-center"><a th:href="@{/empleados/buscar(id=${empleado.id})}"
                                             class="btn btn-success btn-sm" role="button" title="Editar el registro"
                                             data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"

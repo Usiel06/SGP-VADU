@@ -32,91 +32,94 @@
                             </ul>
                         </div>
                         <div class="row">
-                        <input type="hidden" th:field="*{id}">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                <label class="pb-1" for="telefono"><strong class="text-danger">*</strong>
-                                        Teléfono</label>
-                                    <input type="text" class="form-control bg-light" th:field="*{telefono}"
-                                        id="telefono" name="telefono" placeholder="Teléfono de contacto del empleado"
-                                        required autofocus>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="pb-1" for="usuario"><strong class="text-danger">*</strong>
-                                        Usuario</label>
-                                    <select class="form-control bg-light" th:field="*{usuario.id}" name="usuario"
-                                        id="usuario">
-                                        <option th:each="usuario:${usuarios}" th:value="${usuario.id}"
-                                            th:text="${usuario.nombre}">
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!--<div class="row">
-                            <div class="col-md-4 mb-2">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{usuario.id}">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-outline mb-2">
-                                    <input type="hidden" th:field="*{id}"> <input th:if="${empleado.id!=null}" type="text"
-                                        class="form-control bg-light" th:field="*{nombre}" id="nombre"
-                                        name="nombre" placeholder="Nombre del empleado" required readonly>
-                                        <input th:unless="${empleado.id!=null}" type="text"
-                                        class="form-control bg-light" th:field="*{nombre}" id="nombre"
-                                        name="nombre" placeholder="Nombre del empleado" required autofocus>
-                                    <label class="form-label" for="nombre"><strong class="text-danger">*</strong>
-                                        Nombre</label>
+                                    <input type="hidden" th:field="*{id}"> <input th:if="${empleado.id!=null}"
+                                        type="text" class="form-control bg-light" th:field="*{nombre}" id="nombre"
+                                        name="nombre" placeholder="Nombre del empleado" required readonly> <input
+                                        th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{nombre}" id="nombre" name="nombre" placeholder="Nombre del empleado"
+                                        required autofocus> <label class="form-label" for="nombre"><strong
+                                            class="text-danger">*</strong> Nombre(s)</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-outline mb-3">
-                                    <input type="text" class="form-control bg-light" th:field="*{telefono}"
-                                        id="telefono" name="telefono" placeholder="Teléfono de contacto del empleado"
-                                        required autofocus>
-                                    <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
-                                        Teléfono</label>
+                            <div class="col-md-3">
+                                <div class="form-outline mb-2">
+                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{apellidoPaterno}" id="apellidoPaterno" name="apellidoPaterno"
+                                        placeholder="Apellido Paterno del empleado" required readonly>
+                                    <input th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{apellidoPaterno}" id="apellidoPaterno" name="apellidoPaterno"
+                                        placeholder="Apellido Paterno del empleado" required><label class="form-label"
+                                        for="apellidoPaterno"><strong class="text-danger">*</strong> Apellido
+                                        Paterno</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-outline mb-3">
-                                    <input type="text" class="form-control bg-light" th:field="*{fechaContratacion}"
-                                        name="fechaContratacion" id="fechaContratacion" placeholder="Fecha de contratación"
-                                        required="required" readonly>
-                                    <label class="form-label" for="fechaContratacion"><strong class="text-danger">*</strong>
-                                        Fecha de
-                                        Contratación
-                                    </label>
+                            <div class="col-md-3">
+                                <div class="form-outline mb-2">
+                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{apellidoMaterno}" id="apellidoMaterno" name="apellidoMaterno"
+                                        placeholder="Apellido Materno del empleado" required readonly>
+                                    <input th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{apellidoMaterno}" id="apellidoMaterno" name="apellidoMaterno"
+                                        placeholder="Apellido Materno del empleado" required><label class="form-label"
+                                        for="apellidoMaterno"><strong class="text-danger">*</strong> Apellido
+                                        Materno</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <div class="form-outline mb-2">
+                                    <input th:if="${empleado.id!=null}" class="form-control bg-light"
+                                        th:field="*{username}" id="username" name="username"
+                                        placeholder="Username del empleado" required autofocus>
+                                    <input th:unless="${empleado.id!=null}" class="form-control bg-light"
+                                        th:field="*{username}" id="username" name="username"
+                                        placeholder="Username del empleado" required><label class="form-label"
+                                        for="username"><strong class="text-danger">*</strong> Username</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3 mb-2">
-                                <div class="form-outline mb-2">
-                                    <input class="form-control bg-light" th:field="*{username}"
-                                        id="username" name="username" placeholder="Username del empleado" required>
-                                    <label class="form-label" for="username"><strong class="text-danger">*</strong>
-                                        Username</label>
+                            <div class="col-md-3">
+                                <div class="form-outline mb-3">
+                                    <input type="text" class="form-control bg-light" th:field="*{telefono}"
+                                        id="telefono" name="telefono" placeholder="Teléfono del empleado" required>
+                                    <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
+                                        Teléfono</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-outline mb-3">
-                                    <input type="email" class="form-control bg-light" th:field="*{email}"
-                                        id="email" name="email" placeholder="Email del empleado" required="required">
-                                    <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
+                                    <input type="email" class="form-control bg-light" th:field="*{email}" id="email"
+                                        name="email" placeholder="Email del empleado" required> <label
+                                        class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Email</label>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-outline mb-2">
-                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light" th:field="*{password}"
-                                        id="password" name="password" placeholder="Password del empleado" required readonly>
-                                        <input th:unless="${empleado.id!=null}" type="password" class="form-control bg-light" th:field="*{password}"
-                                        id="password" name="password" placeholder="Password del empleado" required>
-                                    <label class="form-label" for="password"><strong class="text-danger">*</strong>
+                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{password}" id="password" name="password"
+                                        placeholder="Password del empleado" required readonly>
+                                    <input th:unless="${empleado.id!=null}" type="password"
+                                        class="form-control bg-light" th:field="*{password}" id="password"
+                                        name="password" placeholder="Password del empleado" required> <label
+                                        class="form-label" for="password"><strong class="text-danger">*</strong>
                                         Password</label>
                                 </div>
                             </div>
-                        </div>-->
+                            <div class="col-md-3">
+                                <div class="form-outline mb-3">
+                                    <input type="text" class="form-control bg-light" th:field="*{fechaRegistro}"
+                                        name="fechaRegistro" id="fechaRegistro" placeholder="Fecha de contratación"
+                                        required readonly> <label class="form-label" for="fechaRegistro"><strong
+                                            class="text-danger">*</strong>
+                                        Fecha de Contratación </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-center pt-3">
                             <button type="submit" class="btn btn-success me-3"
                                 th:if="${empleado.id==null}">Guardar</button>
@@ -138,8 +141,7 @@
     <br>
     <br>
     <br>
-    <br>
-	
+
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>

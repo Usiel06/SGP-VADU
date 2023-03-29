@@ -1,6 +1,5 @@
 package org.ud2.developers.SGPVADU.service.db;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +19,7 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	
 	@Override
 	public List<Producto> obtenerEnVenta() {
-		List<Producto> productosEnVenta = new LinkedList<>();
-		for(Producto producto : repoProductos.findAll()) {
-			if(producto.getEstatus() == 1) {
-				productosEnVenta.add(producto);
-			}
-		}
-		return productosEnVenta;
+		return repoProductos.findByEstatus(1);
 	}
 
 	@Override

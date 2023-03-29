@@ -65,7 +65,6 @@ public class HomeController {
 	public String guardarUsuario(Usuario usuario) {
 		usuario.setEstatus(1);
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		// usuario.setPassword("{noop}" + usuario.getPassword());
 		Perfil perfil = new Perfil();
 		perfil.setId(3);
 		usuario.agregar(perfil);

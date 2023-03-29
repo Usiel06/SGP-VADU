@@ -29,42 +29,52 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">
                             <h2 class="fw-bold mb-5">Formulario de Registro</h2>
-                            <!--<h4 class="mb-5">Forma parte de nosotros</h4>-->
                             <form method="post" th:action="@{/guardar}">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="nombre" name="nombre" class="form-control" required
-                                                autofocus /> <label class="form-label"
-                                                for="form3Example1">Nombre</label>
-                                        </div>
+										    <input type="text" class="form-control" id="validationCustom01" name="nombre" autofocus required />
+										    <label for="validationCustom01" class="form-label" name="nombre"><strong class="text-danger">*</strong> Nombre(s)</label>
+									    </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="username" name="username" class="form-control"
-                                                required /> <label class="form-label"
-                                                for="form3Example2">Username</label>
-                                        </div>
+										    <input type="text" class="form-control" id="validationCustom02" name="apellidoPaterno" required />
+										    <label for="validationCustom02" class="form-label" name="apellidoPaterno"><strong class="text-danger">*</strong> Apellido Paterno</label>
+									    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+										    <input type="text" class="form-control" id="validationCustom03" name="apellidoMaterno" required />
+										    <label for="validationCustom03" class="form-label" name="apellidoMaterno"><strong class="text-danger">*</strong> Apellido Materno</label>
+									    </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+									      	<input type="text" class="form-control" id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required />
+									      	<label for="validationCustomUsername" class="form-label"><strong class="text-danger">*</strong> Username</label>
+									    </div>
                                     </div>
                                 </div>
 
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="email" name="email" class="form-control" required /> <label
-                                        class="form-label" for="form3Example3">Email</label>
-                                </div>
+                                <!-- Email input -->                                
+                                <div class="input-group form-outline mb-4">
+                                	<span class="input-group-text" id="inputGroupPrepend">@</span>
+								    <input type="email" class="form-control" id="validationCustom04" name="email" required />
+								    <label for="validationCustom04" class="form-label"><strong class="text-danger">*</strong> E-mail</label>
+							    </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        required /> <label class="form-label" for="form3Example4">Password</label>
-                                </div>
+								    <input type="password" class="form-control" id="validationCustom05" name="password" required />
+								    <label for="validationCustom05" class="form-label"><strong class="text-danger">*</strong> Password</label>
+							    </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-block text-white mb-4"
-                                    style="background-color: #c62020;">
-                                    Registrarme</button>
+                                <button type="submit" class="btn btn-block text-white mb-2" style="background-color: #c62020;">Registrarme</button>
                             </form>
                         </div>
                     </div>

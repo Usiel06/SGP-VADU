@@ -1,17 +1,13 @@
 <meta charset="UTF-8">
 <footer class="text-center text-white pt-4" th:fragment="pie">
-    <!-- Grid container -->
     <div class="p-2" style="background-color: #0b0b0b">
-        <!-- Section: Social media -->
         <section>
-            <!-- WhatsApp -->
             <a class="btn btn-outline-light btn-floating m-1" role="button" data-mdb-toggle="modal"
                 data-mdb-target="#whatsapp"><i class="fab fa-whatsapp"></i>
             </a>
-            <!-- Modal -->
             <div class="modal fade" id="whatsapp" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header border-bottom-0">
                             <button type="button" class="btn-close" data-mdb-dismiss="modal"
@@ -27,8 +23,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Github -->
             <a class="btn btn-outline-light btn-floating m-1" th:href="@{https://github.com/Usiel06/SGP-VADU.git}"
                 role="button"><i class="fab fa-github"></i></a>
         </section>
