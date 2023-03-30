@@ -85,3 +85,44 @@ body {
 	height: 100px;
 	padding: 5px;
 }
+
+/* social */
+.social-body {
+	position: fixed;
+	top: 50%;
+	left: 0;
+	margin-top: -50px;
+	z-index: 999;
+}
+
+.social-body ul li {
+	display: block;
+}
+
+.social-body ul li a {
+	font-size: 20px;
+	color: #fff;
+	background: #42bc7f;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.social-body ul li a:hover {
+	width: 50px;
+}
+
+ul, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}

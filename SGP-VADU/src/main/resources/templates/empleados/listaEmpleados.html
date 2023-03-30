@@ -27,15 +27,17 @@
                     <a class="btn btn-primary" th:href="@{/empleados/nuevo}" title="Registrar nuevo empleado"
                         role="button"><i class="fas fa-person fa-lg"></i> Nuevo</a>
                     <hr>
-                    <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
+                    <div class="alert alert-success" role="alert" th:if="${msg!=null}">
+                        <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-light">
                             <thead class="table-secondary">
                                 <tr>
                                     <th scope="col" class="text-center">Id</th>
-                                    <th scope="col">Nombre(s)</th>
-                                    <th scope="col">Apellido Paterno</th>
-                                    <th scope="col">Apellido Materno</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Ap. Paterno</th>
+                                    <th scope="col">Ap. Materno</th>
                                     <th scope="col">Teléfono</th>
                                     <th scope="col">E-mail</th>
                                     <th scope="col">Fecha Contratación</th>
@@ -56,15 +58,16 @@
                                             data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"
                                                 aria-hidden="true"></i></a> <a
                                             th:href="@{/empleados/eliminar(id=${empleado.id})}"
-                                            onclick="return confirm('¿Estas seguro?')" class="btn btn-sm btn-danger"
-                                            role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
+                                            onclick="return confirm('¿Estas seguro?')"
+                                            class="btn btn-sm btn-danger mt-2" role="button"
+                                            title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
                                                 aria-hidden="true"></i></a></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8" th:text="'Total Registros: ' + ${total}"></td>
+                                    <td colspan="8" th:text="'Cantidad Total de Empleados: ' + ${total}"></td>
                                 </tr>
                             </tfoot>
                         </table>

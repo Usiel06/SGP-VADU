@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.ud2.developers.SGPVADU.entity.Cliente;
+import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.repository.ClientesRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceClientes;
 
@@ -34,6 +35,12 @@ public class ClientesServiceJpa implements IntServiceClientes {
 			return optional.get();
 		}
 		return null;
+	}
+	
+
+	@Override
+	public Cliente buscarPorUsuario(Usuario usuario) {
+		return repoClientes.findByUsuario(usuario);
 	}
 
 	@Override

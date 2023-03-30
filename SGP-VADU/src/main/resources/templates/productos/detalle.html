@@ -31,19 +31,21 @@
                     <form method="post" th:action="@{/carrito/agregar}">
                         <input type="hidden" th:value="${producto.id}" name="idProducto">
                         <div class="container px-4">
-                            <div class="pt-4 fs-2"><strong th:text="${producto.nombre}"></strong></div>
+                            <div class="alert alert-primary mt-4" role="alert" sec:authorize="isAnonymous()"><i
+                                    class="fa-solid fa-circle-info"></i> ¿Te interesa esté producto?
+                                <strong>Regístrate</strong> para adquirirlo ¡YA!</div>
+                            <div class="pt-3 fs-2"><strong th:text="${producto.nombre}"></strong></div>
                             <div class="py-2 fs-4">
                                 <p th:text="${producto.descripcion}"></p>
                             </div>
-                            <div>
-                                <p class="pb-4 fs-4" style="text-align: justify;"
-                                    th:text="${producto.categoria.nombre} + ' | ' + ${producto.categoria.descripcion}">
+                            <div class="fs-4">
+                                <p class="pb-4" style="text-align: justify;"
+                                    th:text="'Categoría: ' + ${producto.categoria.nombre} + ' | ' + ${producto.categoria.descripcion}">
                                 </p>
                             </div>
                             <div style="height: 4rem">
-                                <span sec:authorize="isAuthenticated() and !hasAnyAuthority('Cliente')"
-                                    class="fs-4 text-black pe-4" th:text="'$' + ${producto.precioKg} + ' Kg'"
-                                    style="font-weight: bold"></span>
+                                <span sec:authorize="!hasAnyAuthority('Cliente')" class="fs-4 text-black pe-4"
+                                    th:text="'$' + ${producto.precioKg} + ' Kg'" style="font-weight: bold"></span>
                                 <span th:if="${producto.estatus==1}"
                                     class="badge badge-success rounded-pill d-inline fs-4">En Venta</span>
                                 <span th:unless="${producto.estatus==1}"
@@ -74,10 +76,7 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
 
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 

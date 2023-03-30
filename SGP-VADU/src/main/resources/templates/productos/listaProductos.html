@@ -25,9 +25,11 @@
                 </h4>
                 <div class="card-body">
                     <a class="btn btn-primary" th:href="@{/productos/nuevo}" title="Agregar producto nuevo"
-                        role="button"><i class="fas fa-file fa-lg"></i> Nuevo</a>
+                        role="button"><i class="fas fa-drumstick-bite fa-lg"></i> Nuevo</a>
                     <hr>
-                    <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
+                    <div class="alert alert-success" role="alert" th:if="${msg!=null}">
+                        <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-light">
                             <thead class="table-secondary">
@@ -56,12 +58,13 @@
                                     <td class="text-center"><a th:href="@{/productos/buscar(id=${producto.id})}"
                                             class="btn btn-success btn-sm" role="button" title="Editar el registro"
                                             data-mdb-toggle="tooltip"><i class="fas fa-pencil-alt fa-lg"
-                                                aria-hidden="true"></i></a> <a
+                                                aria-hidden="true"></i></a><a
                                             th:href="@{/productos/eliminar(id=${producto.id})}"
-                                            onclick="return confirm('¿Estas seguro?')" class="btn btn-sm btn-danger"
-                                            role="button" title="Eliminar el registro" data-mdb-toggle="tooltip"
+                                            onclick="return confirm('¿Estas seguro?')"
+                                            class="btn btn-sm text-white mx-1" role="button"
+                                            title="Eliminar el registro" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;"><i class="fas fa-trash fa-lg"
-                                                aria-hidden="true"></i></a><a class="btn btn-black btn-sm ms-1 w-55"
+                                                aria-hidden="true"></i></a><a class="btn btn-black btn-sm"
                                             th:href="@{/productos/detalle(id=${producto.id})}"
                                             title="Ver detalles del registro" data-mdb-toggle="tooltip"><i
                                                 class="fa-solid fa-eye fa-lg"></i></a></td>
@@ -69,7 +72,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8" th:text="'Total Registros: ' + ${total}"></td>
+                                    <td colspan="8" th:text="'Cantidad Total de Productos: ' + ${total}"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -97,7 +100,8 @@
             </div>
         </div>
     </main>
-    
+    <br><br><br><br>
+
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>

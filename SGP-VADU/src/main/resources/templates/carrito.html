@@ -37,7 +37,12 @@
                             </ul>
                         </div>
                         <div class="card-body">
-                            <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
+                            <div class="alert alert-success" role="alert" th:if="${msg!=null}">
+                                <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
+                            </div>
+                            <div class="alert alert-danger" role="alert" th:if="${msg2!=null}">
+                                <i class="fa-solid fa-triangle-exclamation"></i> <strong th:text="${msg2}"></strong>
+                            </div>
                             <hr>
                             <div class="row" th:each="dorden:${carrito}">
                                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
@@ -96,8 +101,11 @@
                                     </div> <span><strong th:text="'$' + ${totalIva}"></strong></span>
                                 </li>
                             </ul>
-                            <a th:classappend="${items == 0 ? 'disabled' : ''}" class="btn btn-black btn-lg w-100"
-                                data-mdb-toggle="modal" data-mdb-target="#exampleModal">Generar Orden </a>
+                            <a th:if="${cliente.calle==null}" th:classappend="${items == 0 ? 'disabled' : ''}"
+                                class="btn btn-black btn-lg w-100" data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal">Generar Orden </a> <a th:unless="${cliente.calle==null}"
+                                th:classappend="${items == 0 ? 'disabled' : ''}" class="btn btn-black btn-lg w-100"
+                                data-mdb-toggle="modal" data-mdb-target="#exampleModal2">Generar Orden </a>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -107,11 +115,105 @@
                                             <button type="button" class="btn-close" data-mdb-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        <form method="post" th:action="@{/carrito/confirmar}">
+                                            <div class="modal-body text-start text-black p-4">
+                                                <h5 class="modal-title mb-4 text-center fs-5" id="exampleModalLabel">
+                                                    Complete la siguiente
+                                                    información para proceder con su orden</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="hidden" name="id" th:field="*{cliente.id}">
+                                                            <input type="text" class="form-control bg-light" id="calle"
+                                                                name="calle" required> <label class="form-label"
+                                                                for="calle"><strong class="text-danger">*</strong>
+                                                                Calle</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light"
+                                                                id="municipio" name="municipio" required> <label
+                                                                class="form-label" for="municipio"><strong
+                                                                    class="text-danger">*</strong> Municipio</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light"
+                                                                id="colonia" name="colonia" required> <label
+                                                                class="form-label" for="colonia"><strong
+                                                                    class="text-danger">*</strong> Colonia</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light" id="ciudad"
+                                                                name="ciudad" required> <label class="form-label"
+                                                                for="ciudad"><strong class="text-danger">*</strong>
+                                                                Ciudad</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light" id="estado"
+                                                                name="estado" required> <label class="form-label"
+                                                                for="estado"><strong class="text-danger">*</strong>
+                                                                Estado</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light" id="cp"
+                                                                name="cp" required> <label class="form-label"
+                                                                for="cp"><strong class="text-danger">*</strong>
+                                                                Código Postal</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-outline">
+                                                            <input type="text" class="form-control bg-light" id="telefono"
+                                                                name="telefono" required> <label class="form-label"
+                                                                for="telefono"><strong class="text-danger">*</strong>
+                                                                Número Telefónico</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center border-top-0">
+                                                    <button type="submit" class="btn btn-primary btn-lg mb-1"
+                                                        style="background-color: #35558a;">Enviar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
                                         <div class="modal-body text-start text-black p-4">
-                                            <h5 class="modal-title text-uppercase mb-2" id="exampleModalLabel"
-                                                th:text="${usuario.nombre}"></h5>
-                                            <h6 class="modal-title text-uppercase mb-2" id="exampleModalLabel"
-                                                th:text="${usuario.email}"></h6>
+                                            <h5 class="modal-title text-uppercase mb-2" id="exampleModalLabel">
+                                                ¡Hola <strong th:text="${cliente.username}"></strong>!
+                                            </h5>
+                                            <h6 class="modal-title mb-4" id="exampleModalLabel">La
+                                                siguiente información corresponde a tu orden:</h6>
+                                            <p class="mb-2" style="color: #35558a;">Dirección de
+                                                Envío</p>
+                                            <h6 class="modal-title mb-2" id="exampleModalLabel"
+                                                th:text="${cliente.calle} + ', ' + ${cliente.colonia} + ' - ' + 'Código postal ' + ${cliente.cp} + ' - Estado De ' + ${cliente.estado} + ' - ' + ${cliente.municipio}">
+                                            </h6>
                                             <p class="mb-0" style="color: #35558a;">Resúmen de la
                                                 orden</p>
                                             <hr class="mt-2 mb-4"

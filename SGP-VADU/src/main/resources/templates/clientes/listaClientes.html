@@ -24,16 +24,20 @@
                     <strong>Listado de Clientes</strong>
                 </h4>
                 <div class="card-body">
+                    <a class="btn btn-primary" th:href="@{/clientes/nuevo}" title="Registrar nuevo empleado"
+                        role="button"><i class="fas fa-person fa-lg"></i> Nuevo</a>
                     <hr>
-                    <div class="alert alert-success" role="alert" th:if="${msg!=null}" th:text="${msg}"></div>
+                    <div class="alert alert-success" role="alert" th:if="${msg!=null}">
+                        <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-light">
                             <thead class="table-secondary">
                                 <tr>
                                     <th scope="col" class="text-center">Id</th>
-                                    <th scope="col">Nombre(s)</th>
-                                    <th scope="col">Apellido Paterno</th>
-                                    <th scope="col">Apellido Materno</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Ap. Paterno</th>
+                                    <th scope="col">Ap. Materno</th>
                                     <th scope="col">Teléfono</th>
                                     <th scope="col">E-mail</th>
                                     <th scope="col">Fecha Registro</th>
@@ -62,7 +66,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8" th:text="'Total Registros: ' + ${total}"></td>
+                                    <td colspan="8" th:text="'Cantidad Total de Clientes: ' + ${total}"></td>
                                 </tr>
                             </tfoot>
                         </table>

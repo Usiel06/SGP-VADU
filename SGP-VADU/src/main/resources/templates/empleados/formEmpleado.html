@@ -34,43 +34,52 @@
                         <div class="row">
                             <input type="hidden" th:field="*{id}">
                             <input type="hidden" th:field="*{usuario.id}">
-                            <div class="col-md-3 mb-2">
-                                <div class="form-outline mb-2">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input type="hidden" th:field="*{id}"> <input th:if="${empleado.id!=null}"
                                         type="text" class="form-control bg-light" th:field="*{nombre}" id="nombre"
-                                        name="nombre" placeholder="Nombre del empleado" required readonly> <input
-                                        th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        name="nombre" placeholder="Nombre del empleado" required readonly
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
+                                    <input th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{nombre}" id="nombre" name="nombre" placeholder="Nombre del empleado"
-                                        required autofocus> <label class="form-label" for="nombre"><strong
-                                            class="text-danger">*</strong> Nombre(s)</label>
+                                        required autofocus
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
+                                    <label class="form-label" for="nombre"><strong class="text-danger">*</strong>
+                                        Nombre(s)</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-outline mb-2">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{apellidoPaterno}" id="apellidoPaterno" name="apellidoPaterno"
-                                        placeholder="Apellido Paterno del empleado" required readonly>
+                                        placeholder="Apellido Paterno del empleado" required readonly
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
                                     <input th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{apellidoPaterno}" id="apellidoPaterno" name="apellidoPaterno"
-                                        placeholder="Apellido Paterno del empleado" required><label class="form-label"
-                                        for="apellidoPaterno"><strong class="text-danger">*</strong> Apellido
+                                        placeholder="Apellido Paterno del empleado" required
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" /><label
+                                        class="form-label" for="apellidoPaterno"><strong class="text-danger">*</strong>
+                                        Apellido
                                         Paterno</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-outline mb-2">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{apellidoMaterno}" id="apellidoMaterno" name="apellidoMaterno"
-                                        placeholder="Apellido Materno del empleado" required readonly>
+                                        placeholder="Apellido Materno del empleado" required readonly
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
                                     <input th:unless="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{apellidoMaterno}" id="apellidoMaterno" name="apellidoMaterno"
-                                        placeholder="Apellido Materno del empleado" required><label class="form-label"
-                                        for="apellidoMaterno"><strong class="text-danger">*</strong> Apellido
+                                        placeholder="Apellido Materno del empleado" required
+                                        pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" /><label
+                                        class="form-label" for="apellidoMaterno"><strong class="text-danger">*</strong>
+                                        Apellido
                                         Materno</label>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="form-outline mb-2">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input th:if="${empleado.id!=null}" class="form-control bg-light"
                                         th:field="*{username}" id="username" name="username"
                                         placeholder="Username del empleado" required autofocus>
@@ -82,24 +91,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-outline mb-3">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input type="text" class="form-control bg-light" th:field="*{telefono}"
-                                        id="telefono" name="telefono" placeholder="Teléfono del empleado" required>
+                                        id="telefono" name="telefono" placeholder="Teléfono del empleado" required
+                                        pattern="[0-9]*">
                                     <label class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Teléfono</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-outline mb-3">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input type="email" class="form-control bg-light" th:field="*{email}" id="email"
                                         name="email" placeholder="Email del empleado" required> <label
                                         class="form-label" for="telefono"><strong class="text-danger">*</strong>
                                         Email</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-outline mb-2">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-outline">
                                     <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
                                         th:field="*{password}" id="password" name="password"
                                         placeholder="Password del empleado" required readonly>
@@ -133,14 +143,7 @@
             </div>
         </div>
     </main>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
 
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 

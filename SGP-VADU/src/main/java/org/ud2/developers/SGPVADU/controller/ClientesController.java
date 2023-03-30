@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Cliente;
+import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceClientes;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
@@ -24,13 +26,16 @@ import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
 @Controller
 @RequestMapping("/clientes")
 public class ClientesController {
-	
+
 	@Autowired
 	private IntServiceClientes serviceClientes;
 
 	@Autowired
 	public IntServiceUsuarios serviceUsuarios;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/buscar")
 	public String modificarEmpleado(@RequestParam("id") int idCliente, Model model) {
 		Cliente cliente = serviceClientes.buscarPorId(idCliente);
@@ -50,7 +55,7 @@ public class ClientesController {
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Cliente cliente, RedirectAttributes model) {
 		System.out.println(cliente);
-		/*if (cliente.getId() == null) {
+		if (cliente.getId() == null) {
 			Usuario usuario = new Usuario();
 			usuario.setNombre(cliente.getNombre());
 			usuario.setApellidoPaterno(cliente.getApellidoPaterno());
@@ -65,19 +70,20 @@ public class ClientesController {
 			serviceUsuarios.agregar(usuario);
 			cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
 			cliente.setUsuario(usuario);
-			model.addFlashAttribute("msg", "Empleado Agregado");
+			model.addFlashAttribute("msg", "Cliente Agregado");
 		} else {
 			Usuario usuario = serviceUsuarios.buscarPorId(cliente.getUsuario().getId());
 			usuario.setUsername(cliente.getUsername());
 			usuario.setEmail(cliente.getEmail());
 			serviceUsuarios.agregar(usuario);
 			model.addFlashAttribute("msg", "Cliente Modificado");
-		}*/
-		Usuario usuario = serviceUsuarios.buscarPorId(cliente.getUsuario().getId());
-		usuario.setUsername(cliente.getUsername());
-		usuario.setEmail(cliente.getEmail());
-		serviceUsuarios.agregar(usuario);
-		model.addFlashAttribute("msg", "Cliente Modificado");
+		}
+		/*
+		 * Usuario usuario = serviceUsuarios.buscarPorId(cliente.getUsuario().getId());
+		 * usuario.setUsername(cliente.getUsername());
+		 * usuario.setEmail(cliente.getEmail()); serviceUsuarios.agregar(usuario);
+		 * model.addFlashAttribute("msg", "Cliente Modificado");
+		 */
 		serviceClientes.agregar(cliente);
 		return "redirect:/clientes/indexPaginado";
 	}

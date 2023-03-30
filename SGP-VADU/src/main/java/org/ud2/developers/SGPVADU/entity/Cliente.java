@@ -29,7 +29,7 @@ public class Cliente {
 	private String ciudad;
 	private String estado;
 	private String cp;
-	private LocalDate fechaRegistro;
+	private LocalDate fechaRegistro = LocalDate.now();
 
 	@OneToOne
 	@JoinColumn(name = "idUsuario")

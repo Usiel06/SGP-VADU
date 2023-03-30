@@ -16,6 +16,8 @@ import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceClientes;
+import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
+import org.ud2.developers.SGPVADU.service.IntServiceOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 import org.ud2.developers.SGPVADU.service.IntServiceUsuarios;
 
@@ -37,28 +39,40 @@ public class HomeController {
 	private IntServiceClientes serviceClientes;
 
 	@Autowired
+	private IntServiceOrdenes serviceOrdenes;
+	
+	@Autowired
+	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private CarritoController carritoCtrl;
+	
 	@GetMapping("/contactanos")
-	public String contactanos() {
+	public String contactanos(Model model) {
+		model.addAttribute("items", carritoCtrl.contarItems());
 		return "contacto";
 	}
 	
 	@GetMapping("/acerca")
-	public String acerca() {
+	public String acerca(Model model) {
+		model.addAttribute("items", carritoCtrl.contarItems());
 		return "acerca";
 	}
 
-	/*
-	 * @GetMapping("/user") public String
-	 * mostrarUsuario(org.springframework.security.core.Authentication auth) {
-	 * List<Orden> ordenes =
-	 * repoOrdenes.findByUsuario(serviceUsuarios.buscarPorId(1));
-	 * System.out.println(ordenes); String userName = auth.getName();
-	 * System.out.println(auth.getAuthorities() + "nzfdjbgbbshg");
-	 * System.out.println(userName); return "redirect:/"; }
-	 */
-
+	@GetMapping("/historialOrdenes")
+	public String mostrarHistorialOrdenes(Model model, org.springframework.security.core.Authentication auth) {
+		Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
+		Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
+		model.addAttribute("detalles", serviceDetallesOrdenes.obtenerDetalles());
+		model.addAttribute("ordenes", serviceOrdenes.buscarPorUsuario(usuario));
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("items", carritoCtrl.contarItems());
+		return "historialOrdenes";
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -108,6 +122,7 @@ public class HomeController {
 		}
 		model.addAttribute("categoria", serviceCategorias.buscarPorId(1));
 		model.addAttribute("categorias", categorias);
+		model.addAttribute("items", carritoCtrl.contarItems());
 		return "home";
 	}
 }

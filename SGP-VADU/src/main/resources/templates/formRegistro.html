@@ -17,6 +17,8 @@
 <body>
     <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
 
+    <div th:insert="~{fragmentos/social.html::social}"></div>
+
     <!-- Section: Design Block -->
     <section class="text-center pb-5">
         <!-- Background image -->
@@ -34,13 +36,13 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-										    <input type="text" class="form-control" id="validationCustom01" name="nombre" autofocus required />
+										    <input type="text" class="form-control" id="validationCustom01" name="nombre" autofocus required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"/>
 										    <label for="validationCustom01" class="form-label" name="nombre"><strong class="text-danger">*</strong> Nombre(s)</label>
 									    </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-										    <input type="text" class="form-control" id="validationCustom02" name="apellidoPaterno" required />
+										    <input type="text" class="form-control" id="validationCustom02" name="apellidoPaterno" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"/>
 										    <label for="validationCustom02" class="form-label" name="apellidoPaterno"><strong class="text-danger">*</strong> Apellido Paterno</label>
 									    </div>
                                     </div>
@@ -48,13 +50,13 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-										    <input type="text" class="form-control" id="validationCustom03" name="apellidoMaterno" required />
+										    <input type="text" class="form-control" id="validationCustom03" name="apellidoMaterno" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"/>
 										    <label for="validationCustom03" class="form-label" name="apellidoMaterno"><strong class="text-danger">*</strong> Apellido Materno</label>
 									    </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-									      	<input type="text" class="form-control" id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required />
+									      	<input type="text" class="form-control" id="validationCustom04" name="username" required />
 									      	<label for="validationCustomUsername" class="form-label"><strong class="text-danger">*</strong> Username</label>
 									    </div>
                                     </div>
@@ -63,13 +65,13 @@
                                 <!-- Email input -->                                
                                 <div class="input-group form-outline mb-4">
                                 	<span class="input-group-text" id="inputGroupPrepend">@</span>
-								    <input type="email" class="form-control" id="validationCustom04" name="email" required />
+								    <input type="email" class="form-control" id="validationCustom05" name="email" required />
 								    <label for="validationCustom04" class="form-label"><strong class="text-danger">*</strong> E-mail</label>
 							    </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-								    <input type="password" class="form-control" id="validationCustom05" name="password" required />
+								    <input type="password" class="form-control" id="validationCustom06" name="password"  required/>
 								    <label for="validationCustom05" class="form-label"><strong class="text-danger">*</strong> Password</label>
 							    </div>
 

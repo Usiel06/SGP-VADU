@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
-import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
 import org.ud2.developers.SGPVADU.util.Utileria;
 
@@ -36,7 +35,7 @@ public class ProductosController {
 	private IntServiceCategorias serviceCategorias;
 
 	@Autowired
-	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
+	private CarritoController carritoCtrl;
 	
     @Autowired
     private Utileria util;
@@ -45,7 +44,7 @@ public class ProductosController {
 	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
 		Producto producto = serviceProductos.buscarPorId(idProducto);
 		model.addAttribute("producto", producto);
-		model.addAttribute("items", serviceDetallesOrdenes.contarDetalles());
+		model.addAttribute("items", carritoCtrl.contarItems());
 		return "productos/detalle";
 	}
 

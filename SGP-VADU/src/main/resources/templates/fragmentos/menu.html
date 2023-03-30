@@ -73,6 +73,7 @@
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdownMenuAvatar">
 						<li><a class="dropdown-item" sec:authentication="name"></a></li>
+						<li><a class="dropdown-item" sec:authorize="hasAnyAuthority('Cliente')" th:href="@{/historialOrdenes}">Historial de ordenes</a></li>
 						<li><a class="dropdown-item" th:href="@{/logout}">Cerrar
 								Sesión</a></li>
 					</ul>
