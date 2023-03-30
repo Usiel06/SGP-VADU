@@ -45,9 +45,9 @@
 					<li class="nav-item" sec:authorize="hasAnyAuthority('Gerente')">
 						<a class="nav-link text-white" th:href="@{/perfiles/index}"><b>Perfiles</b></a>
 					</li>
-					<li class="nav-item"><a class="nav-link text-white"
+					<li class="nav-item" sec:authorize="hasAnyAuthority('Cliente')"><a class="nav-link text-white"
 						th:href="@{/acerca}"><b>Acerca</b></a>
-					<li class="nav-item"><a class="nav-link text-white"
+					<li class="nav-item" sec:authorize="hasAnyAuthority('Cliente')"><a class="nav-link text-white"
 						th:href="@{/contactanos}"><b>Contáctanos</b></a></li>
 				</ul>
 			</div>
