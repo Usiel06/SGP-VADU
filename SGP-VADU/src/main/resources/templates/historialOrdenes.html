@@ -24,6 +24,9 @@
 			<div
 				class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-lg-8 col-xl-6">
+				<div class="alert alert-primary mt-4" role="alert" th:if="${detalles.isEmpty()}"><i
+                                    class="fa-solid fa-circle-info"></i> Aún no existen órdenes para mostrar
+                                <strong>¡Ordena Ahora!</strong>, para visualizar el historial.</div>
 					<div class="card border-top border-bottom border-3 mb-4"
 						style="border-color: #c62020 !important;" th:each="orden:${ordenes}">
 						<div class="card-body p-5 text-black">

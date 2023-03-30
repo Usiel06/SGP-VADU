@@ -81,12 +81,13 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                            <label for="estatus0"><strong class="text-danger">*</strong>
+                                <label for="estatus0"><strong class="text-danger">*</strong>
                                     Estatus</label><br>
                                 <div class="btn-group">
-                                    <input type="radio" class="btn-check" name="estatus" id="option1" value="1" autocomplete="off"
-                                        checked /> <label class="btn btn-secondary" for="option1">En Venta</label> <input
-                                        type="radio" class="btn-check" th:field="*{estatus}" name="estatus" id="option2" value="0" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="estatus" id="option1" value="1"
+                                        autocomplete="off" checked /> <label class="btn btn-secondary" for="option1">En
+                                        Venta</label> <input type="radio" class="btn-check" th:field="*{estatus}"
+                                        name="estatus" id="option2" value="0" autocomplete="off" />
                                     <label class="btn btn-secondary" for="option2">Descontinuado</label>
                                 </div>
                             </div>
@@ -120,8 +121,8 @@
                         <div class="row">
                             <div class="text-center pt-3">
                                 <div class="form-group">
-                                    <label for="archivoImagen">Imagen</label> <input type="file" class="form-control bg-light"
-                                        name="archivoImagen" id="archivoImagen">
+                                    <label for="archivoImagen">Imagen</label> <input type="file"
+                                        class="form-control bg-light" name="archivoImagen" id="archivoImagen">
                                 </div>
                             </div>
                         </div>
@@ -147,7 +148,7 @@
         </div>
     </main>
     <br><br><br><br>
-    
+
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>

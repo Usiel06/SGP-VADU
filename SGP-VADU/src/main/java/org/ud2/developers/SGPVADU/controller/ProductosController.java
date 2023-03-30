@@ -58,7 +58,6 @@ public class ProductosController {
 
 	@GetMapping("/eliminar")
 	public String eliminarProducto(Producto producto, RedirectAttributes model) {
-		System.out.println(producto);
 		serviceProductos.eliminarPorId(producto.getId());
 		model.addFlashAttribute("msg", "La información del producto ha sido eliminada correctamente.");
 		return "redirect:/productos/indexPaginado";
@@ -76,23 +75,17 @@ public class ProductosController {
 		}
 		if (producto.getId() == null) {
 			if (!file.isEmpty()) {
-				System.out.println("Holi");
 				String fileName = util.uploadImage(file);
 				if (fileName != null) {
-					System.out.println(fileName);
 					producto.setImagen(fileName);
-					System.out.println(producto.getImagen());
 				}
 			}
 			model2.addFlashAttribute("msg", "La información del producto ha sido agregada correctamente.");
 		} else {
 			if (!file.isEmpty()) {
-				System.out.println("Holi");
 				String fileName = util.uploadImage(file);
 				if (fileName != null) {
-					System.out.println(fileName);
 					producto.setImagen(fileName);
-					System.out.println(producto.getImagen());
 					model2.addFlashAttribute("msg", "La información del producto ha sido modificada correctamente.");
 				}
 			} else {

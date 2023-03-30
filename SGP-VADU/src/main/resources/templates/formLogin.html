@@ -20,6 +20,9 @@
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
+                                <div class="alert alert-danger" role="alert" th:if="${param.error!=null}">
+                        <i class="fa-solid fa-circle-xmark"></i> <strong>Nombre de usuario o contraseña incorrectos</strong>
+                    </div>
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
                         <div class="col-lg-6">
