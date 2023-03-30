@@ -1,14 +1,13 @@
 <meta charset="UTF-8">
 <div class="social-body text-center" th:fragment="social" sec:authorize="isAuthenticated() and hasAnyAuthority('Cliente') or isAnonymous()">
 	<ul>
-		<li class="whatsapp"><a class="bg-success" role="button"
-			data-mdb-toggle="modal" data-mdb-target="#whatsapp" target="_blank"><i
+		<li class="whatsapp"><a class="bg-success" th:href="@{https://api.whatsapp.com/send?phone=5617112033&text=Hola,%20buen%20d%C3%ADa.%20Estoy%20interesado%20en%20sus%20productos.}" target="_blank"><i
 				class="fa fa-whatsapp"></i></a></li>
 		<li class="github"><a class="bg-black"
 			th:href="@{https://github.com/Usiel06/SGP-VADU.git}" target="_blank"><i
 				class="fa fa-github"></i></a>
 	</ul>
-	<div class="modal fade" id="whatsapp" tabindex="-1"
+	<!--<div class="modal fade" id="whatsapp" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -25,5 +24,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 </div>
