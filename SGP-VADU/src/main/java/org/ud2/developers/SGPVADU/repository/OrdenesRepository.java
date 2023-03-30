@@ -7,5 +7,5 @@ import org.ud2.developers.SGPVADU.entity.Orden;
 import org.ud2.developers.SGPVADU.entity.Usuario;
 
 public interface OrdenesRepository extends JpaRepository<Orden, Integer> {
-	List<Orden> findByUsuario (Usuario usuario);
+	public List<Orden> findByUsuario(Usuario usuario);
 }

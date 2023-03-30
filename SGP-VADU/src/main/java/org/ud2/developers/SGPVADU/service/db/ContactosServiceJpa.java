@@ -16,29 +16,29 @@ public class ContactosServiceJpa implements IntServiceContactos {
 
 	@Autowired
 	private ContactosRepository repoContactos;
-	
+
 	@Override
 	public List<Contacto> obtenerContactos() {
 		return repoContactos.findAll();
 	}
 
 	@Override
-	public void guardarContacto(Contacto contacto) {
+	public void agregarContacto(Contacto contacto) {
 		repoContactos.save(contacto);
 	}
 
 	@Override
 	public Contacto buscarPorId(Integer idContacto) {
 		Optional<Contacto> optional = repoContactos.findById(idContacto);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			return optional.get();
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Integer contarContactos() {
-		return (int) repoContactos.count();
+		return repoContactos.cantidadContactos();
 	}
 
 	@Override

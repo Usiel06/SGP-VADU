@@ -8,10 +8,16 @@ import org.ud2.developers.SGPVADU.entity.Producto;
 
 public interface IntServiceProductos {
 	public List<Producto> obtenerEnVenta();
+
 	public List<Producto> obtenerProductos();
+
+	public void agregarProducto(Producto producto);
+
 	public Producto buscarPorId(Integer idProducto);
-	public void guardarProducto(Producto producto);
+
 	public void eliminarPorId(Integer idProducto);
+
 	public Integer contarProductos();
+
 	public Page<Producto> buscarTodas(Pageable page);
 }

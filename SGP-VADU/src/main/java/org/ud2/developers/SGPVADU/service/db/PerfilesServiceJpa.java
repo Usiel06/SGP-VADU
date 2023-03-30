@@ -13,7 +13,7 @@ public class PerfilesServiceJpa implements IntServicePerfiles {
 
 	@Autowired
 	private PerfilesRepository repoPerfiles;
-	
+
 	@Override
 	public List<Perfil> obtenerPerfiles() {
 		return repoPerfiles.findAll();

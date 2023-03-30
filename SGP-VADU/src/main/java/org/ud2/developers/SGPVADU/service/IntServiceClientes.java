@@ -9,10 +9,16 @@ import org.ud2.developers.SGPVADU.entity.Usuario;
 
 public interface IntServiceClientes {
 	public List<Cliente> obtenerClientes();
-	public void agregar(Cliente cliente);
+
+	public void agregarCliente(Cliente cliente);
+
 	public Cliente buscarPorId(Integer idCliente);
+
 	public Cliente buscarPorUsuario(Usuario usuario);
-	public void eliminar(Integer idCliente);
-	public Integer numeroClientes();
-	Page<Cliente> buscarTodas(Pageable page);
+
+	public void eliminarPorId(Integer idCliente);
+
+	public Integer contarClientes();
+
+	public Page<Cliente> buscarTodas(Pageable page);
 }

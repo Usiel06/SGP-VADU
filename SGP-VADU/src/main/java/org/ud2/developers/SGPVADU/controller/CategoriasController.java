@@ -17,41 +17,43 @@ import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 @RequestMapping("/categorias")
 public class CategoriasController {
 
-    @Autowired
-    private IntServiceCategorias serviceCategorias;
+	@Autowired
+	private IntServiceCategorias serviceCategorias;
 
-    @GetMapping("/buscar")
-    public String modificarCategoria(@RequestParam("id") int idCategoria, Model model) {
-        Categoria categoria = serviceCategorias.buscarPorId(idCategoria);
-        model.addAttribute("categoria", categoria);
-        return "categorias/formCategoria";
-    }
+	@GetMapping("/buscar")
+	public String modificarCategoria(@RequestParam("id") int idCategoria, Model model) {
+		Categoria categoria = serviceCategorias.buscarPorId(idCategoria);
+		model.addAttribute("categoria", categoria);
+		return "categorias/formCategoria";
+	}
 
-    @GetMapping("/eliminar")
-    public String eliminarCategoria(Categoria categoria, RedirectAttributes model) {
-        serviceCategorias.eliminarPorId(categoria.getId());
-        model.addFlashAttribute("msg", "Categoría Eliminada");
-        return "redirect:/categorias/indexPaginado";
-    }
+	@GetMapping("/eliminar")
+	public String eliminarCategoria(Categoria categoria, RedirectAttributes model) {
+		serviceCategorias.eliminarPorId(categoria.getId());
+		model.addFlashAttribute("msg", "La información de la categoría ha sido eliminada correctamente.");
+		return "redirect:/categorias/indexPaginado";
+	}
 
-    @PostMapping("/agregar")
-    public String agregarCategoria(Categoria categoria, RedirectAttributes model) {
-        if (categoria.getId() == null) model.addFlashAttribute("msg", "Categoría Agregada");
-        else model.addFlashAttribute("msg", "Categoría Modificada");
-        serviceCategorias.guardarCategoria(categoria);
-        return "redirect:/categorias/indexPaginado";
-    }
+	@PostMapping("/agregar")
+	public String agregarCategoria(Categoria categoria, RedirectAttributes model) {
+		if (categoria.getId() == null)
+			model.addFlashAttribute("msg", "La información de la categoría ha sido agregada correctamente.");
+		else
+			model.addFlashAttribute("msg", "La información de la categoría ha sido modificada correctamente.");
+		serviceCategorias.agregarCategoria(categoria);
+		return "redirect:/categorias/indexPaginado";
+	}
 
-    @GetMapping("/nueva")
-    public String mostrarFormCategoria(Categoria categoria) {
-        return "categorias/formCategoria";
-    }
+	@GetMapping("/nueva")
+	public String mostrarFormCategoria(Categoria categoria) {
+		return "categorias/formCategoria";
+	}
 
-    @GetMapping(value = "/indexPaginado")
-    public String mostrarIndexPaginado(Model model, Pageable page) {
-        Page<Categoria> categorias = serviceCategorias.buscarTodas(page);
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("total", serviceCategorias.contarCategorias());
-        return "categorias/listaCategorias";
-    }
+	@GetMapping(value = "/indexPaginado")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<Categoria> categorias = serviceCategorias.buscarTodas(page);
+		model.addAttribute("categorias", categorias);
+		model.addAttribute("total", serviceCategorias.contarCategorias());
+		return "categorias/listaCategorias";
+	}
 }

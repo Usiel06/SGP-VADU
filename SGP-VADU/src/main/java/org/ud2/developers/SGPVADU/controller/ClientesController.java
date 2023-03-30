@@ -35,7 +35,7 @@ public class ClientesController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping("/buscar")
 	public String modificarEmpleado(@RequestParam("id") int idCliente, Model model) {
 		Cliente cliente = serviceClientes.buscarPorId(idCliente);
@@ -46,15 +46,14 @@ public class ClientesController {
 	@GetMapping("/eliminar")
 	public String eliminarCliente(@RequestParam("id") int idCliente, RedirectAttributes model) {
 		Cliente cliente = serviceClientes.buscarPorId(idCliente);
-		serviceClientes.eliminar(idCliente);
-		serviceUsuarios.eliminar(cliente.getUsuario().getId());
-		model.addFlashAttribute("msg", "Cliente Eliminado");
+		serviceClientes.eliminarPorId(idCliente);
+		serviceUsuarios.eliminarPorId(cliente.getUsuario().getId());
+		model.addFlashAttribute("msg", "La información del cliente ha sido agregada correctamente.");
 		return "redirect:/clientes/indexPaginado";
 	}
 
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Cliente cliente, RedirectAttributes model) {
-		System.out.println(cliente);
 		if (cliente.getId() == null) {
 			Usuario usuario = new Usuario();
 			usuario.setNombre(cliente.getNombre());
@@ -67,24 +66,18 @@ public class ClientesController {
 			Perfil perfil = new Perfil();
 			perfil.setId(3);
 			usuario.agregar(perfil);
-			serviceUsuarios.agregar(usuario);
+			serviceUsuarios.agregarUsuario(usuario);
 			cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
 			cliente.setUsuario(usuario);
-			model.addFlashAttribute("msg", "Cliente Agregado");
+			model.addFlashAttribute("msg", "La información del cliente ha sido agregada correctamente.");
 		} else {
 			Usuario usuario = serviceUsuarios.buscarPorId(cliente.getUsuario().getId());
 			usuario.setUsername(cliente.getUsername());
 			usuario.setEmail(cliente.getEmail());
-			serviceUsuarios.agregar(usuario);
-			model.addFlashAttribute("msg", "Cliente Modificado");
+			serviceUsuarios.agregarUsuario(usuario);
+			model.addFlashAttribute("msg", "La información del cliente ha sido modificada correctamente.");
 		}
-		/*
-		 * Usuario usuario = serviceUsuarios.buscarPorId(cliente.getUsuario().getId());
-		 * usuario.setUsername(cliente.getUsername());
-		 * usuario.setEmail(cliente.getEmail()); serviceUsuarios.agregar(usuario);
-		 * model.addFlashAttribute("msg", "Cliente Modificado");
-		 */
-		serviceClientes.agregar(cliente);
+		serviceClientes.agregarCliente(cliente);
 		return "redirect:/clientes/indexPaginado";
 	}
 
@@ -97,7 +90,7 @@ public class ClientesController {
 	public String mostrarIndexPaginado(Model model, Pageable page) {
 		Page<Cliente> clientes = serviceClientes.buscarTodas(page);
 		model.addAttribute("clientes", clientes);
-		model.addAttribute("total", serviceClientes.numeroClientes());
+		model.addAttribute("total", serviceClientes.contarClientes());
 		return "clientes/listaClientes";
 	}
 

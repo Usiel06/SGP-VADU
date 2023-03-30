@@ -39,7 +39,7 @@ public class CarritoController {
 
 	@Autowired
 	private IntServiceUsuarios serviceUsuarios;
-	
+
 	@Autowired
 	private IntServiceClientes serviceClientes;
 
@@ -59,16 +59,17 @@ public class CarritoController {
 		c.setCiudad(cliente.getCiudad());
 		c.setEstado(cliente.getEstado());
 		c.setCp(cliente.getCp());
-		serviceClientes.agregar(c);
-		model.addFlashAttribute("msg", "La infromación de dirección se guardó correctamente, ya está listo para ordenar.");
+		serviceClientes.agregarCliente(c);
+		model.addFlashAttribute("msg",
+				"La infromación de dirección se guardó correctamente, ya está listo para ordenar.");
 		return "redirect:/carrito/";
 	}
-	
+
 	@GetMapping()
 	public Integer contarItems() {
 		return detalles.size();
 	}
-	
+
 	@GetMapping("/orden")
 	public String mostrarOrden(RedirectAttributes model, org.springframework.security.core.Authentication auth) {
 		Date fechaCreacion = new Date();
@@ -78,24 +79,24 @@ public class CarritoController {
 		// Usuario
 		Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
 		orden.setUsuario(usuario);
-		serviceOrdenes.guardarOrden(orden);
+		serviceOrdenes.agregarOrden(orden);
 
 		// Guardar detalles
 		for (DetalleOrden dt : detalles) {
 			dt.setOrden(orden);
 			Producto producto = dt.getProducto();
-			producto.setCantidadIngreso(producto.getCantidadIngreso()-dt.getCantidad());
-			if(producto.getCantidadIngreso() == 0) {
+			producto.setCantidadIngreso(producto.getCantidadIngreso() - dt.getCantidad());
+			if (producto.getCantidadIngreso() == 0) {
 				producto.setEstatus(0);
 			}
-			serviceProductos.guardarProducto(producto);
-			serviceDetallesOrdenes.guardarDetalle(dt);
+			serviceProductos.agregarProducto(producto);
+			serviceDetallesOrdenes.agregarDetalle(dt);
 		}
 
 		// Limpiar lista y orden
 		orden = new Orden();
 		detalles.clear();
-		
+
 		model.addFlashAttribute("msg", "La orden se realizó correctamente.");
 		return "redirect:/carrito/";
 	}
@@ -143,13 +144,13 @@ public class CarritoController {
 		} else {
 			model.addFlashAttribute("msg2", "No puede agregar más de una vez el mismo producto al carrito.");
 		}
-			/*
-			 * else { for (DetalleOrden dorden : detalles) { if
-			 * (dorden.getProducto().getId().compareTo(idProducto) == 0) {
-			 * detalleOrden.setId(dorden.getId()); detalleOrden.setCantidad(cantidad +
-			 * dorden.getCantidad()); detalleOrden.setTotal(producto.getPrecioKg() *
-			 * (cantidad + dorden.getCantidad())); detalles.add(detalleOrden); } } }
-			 */
+		/*
+		 * else { for (DetalleOrden dorden : detalles) { if
+		 * (dorden.getProducto().getId().compareTo(idProducto) == 0) {
+		 * detalleOrden.setId(dorden.getId()); detalleOrden.setCantidad(cantidad +
+		 * dorden.getCantidad()); detalleOrden.setTotal(producto.getPrecioKg() *
+		 * (cantidad + dorden.getCantidad())); detalles.add(detalleOrden); } } }
+		 */
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 		orden.setTotal(Double.parseDouble(df.format(sumaTotal)));
 		return "redirect:/carrito/";

@@ -8,8 +8,12 @@ import org.ud2.developers.SGPVADU.entity.Contacto;
 
 public interface IntServiceContactos {
 	public List<Contacto> obtenerContactos();
-	public void guardarContacto(Contacto contacto);
+
+	public void agregarContacto(Contacto contacto);
+
 	public Contacto buscarPorId(Integer idContacto);
+
 	public Integer contarContactos();
+
 	public Page<Contacto> buscarTodas(Pageable page);
 }

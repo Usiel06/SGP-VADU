@@ -24,24 +24,24 @@ public class UsuariosController {
 	public String desbloquearUsuario(@RequestParam("id") int idUsuario, RedirectAttributes model) {
 		Usuario usuario = serviceUsuarios.buscarPorId(idUsuario);
 		usuario.setEstatus(1);
-		serviceUsuarios.agregar(usuario);
+		serviceUsuarios.agregarUsuario(usuario);
 		model.addFlashAttribute("msg", "El usuario se ha desbloqueado correctamente.");
 		return "redirect:/usuarios/indexPaginado";
 	}
-	
+
 	@GetMapping("/bloquear")
 	public String bloquearUsuario(@RequestParam("id") int idUsuario, RedirectAttributes model) {
 		Usuario usuario = serviceUsuarios.buscarPorId(idUsuario);
 		usuario.setEstatus(0);
-		serviceUsuarios.agregar(usuario);
+		serviceUsuarios.agregarUsuario(usuario);
 		model.addFlashAttribute("msg", "El usuario se ha bloqueado correctamente.");
 		return "redirect:/usuarios/indexPaginado";
 	}
-	
+
 	@GetMapping("/eliminar")
 	public String eliminarUsuario(Usuario usuario, RedirectAttributes model) {
-		serviceUsuarios.eliminar(usuario.getId());
-		model.addFlashAttribute("msg", "Usuario Eliminado");
+		serviceUsuarios.eliminarPorId(usuario.getId());
+		model.addFlashAttribute("msg", "La información del usuario ha sido eliminada correctamente.");
 		return "redirect:/usuarios/indexPaginado";
 	}
 
@@ -54,7 +54,7 @@ public class UsuariosController {
 		model.addAttribute("perfil", p);
 		Page<Usuario> usuarios = serviceUsuarios.buscarTodas(page);
 		model.addAttribute("usuarios", usuarios);
-		model.addAttribute("total", serviceUsuarios.numeroUsuarios());
+		model.addAttribute("total", serviceUsuarios.contarUsuarios());
 		return "usuarios/listaUsuarios";
 	}
 }

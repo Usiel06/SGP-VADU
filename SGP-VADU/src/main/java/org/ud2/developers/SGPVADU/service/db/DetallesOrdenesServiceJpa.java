@@ -21,27 +21,17 @@ public class DetallesOrdenesServiceJpa implements IntServiceDetallesOrdenes {
 	}
 
 	@Override
-	public DetalleOrden buscarPorId(Integer idDetalleOrden) {
-		Optional<DetalleOrden> optional = repoDetallesOrdenes.findById(idDetalleOrden);
-		if(optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
-	}
-
-	@Override
-	public void guardarDetalle(DetalleOrden detalleOrden) {
+	public void agregarDetalle(DetalleOrden detalleOrden) {
 		repoDetallesOrdenes.save(detalleOrden);
 	}
 
 	@Override
-	public void eliminarPorId(Integer idDetalleOrden) {
-		repoDetallesOrdenes.deleteById(idDetalleOrden);
+	public DetalleOrden buscarPorId(Integer idDetalleOrden) {
+		Optional<DetalleOrden> optional = repoDetallesOrdenes.findById(idDetalleOrden);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
-
-	@Override
-	public int contarDetalles() {
-		return (int) repoDetallesOrdenes.count();
-	}
-
+	
 }

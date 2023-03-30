@@ -34,28 +34,28 @@ public class HomeController {
 
 	@Autowired
 	private IntServiceUsuarios serviceUsuarios;
-	
+
 	@Autowired
 	private IntServiceClientes serviceClientes;
 
 	@Autowired
 	private IntServiceOrdenes serviceOrdenes;
-	
+
 	@Autowired
 	private IntServiceDetallesOrdenes serviceDetallesOrdenes;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private CarritoController carritoCtrl;
-	
+
 	@GetMapping("/contactanos")
 	public String contactanos(Model model) {
 		model.addAttribute("items", carritoCtrl.contarItems());
 		return "contacto";
 	}
-	
+
 	@GetMapping("/acerca")
 	public String acerca(Model model) {
 		model.addAttribute("items", carritoCtrl.contarItems());
@@ -72,7 +72,7 @@ public class HomeController {
 		model.addAttribute("items", carritoCtrl.contarItems());
 		return "historialOrdenes";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -96,8 +96,8 @@ public class HomeController {
 		perfil.setId(3);
 		usuario.agregar(perfil);
 		cliente.setUsuario(usuario);
-		serviceUsuarios.agregar(usuario);
-		serviceClientes.agregar(cliente);
+		serviceUsuarios.agregarUsuario(usuario);
+		serviceClientes.agregarCliente(cliente);
 		return "redirect:/";
 	}
 

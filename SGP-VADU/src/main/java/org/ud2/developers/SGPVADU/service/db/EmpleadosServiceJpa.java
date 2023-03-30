@@ -13,17 +13,17 @@ import org.ud2.developers.SGPVADU.service.IntServiceEmpleados;
 
 @Service
 public class EmpleadosServiceJpa implements IntServiceEmpleados {
-	
+
 	@Autowired
 	private EmpleadosRepository repoEmpleados;
-	
+
 	@Override
 	public List<Empleado> obtenerEmpleados() {
 		return repoEmpleados.findAll();
 	}
 
 	@Override
-	public void agregar(Empleado empleado) {
+	public void agregarEmpleado(Empleado empleado) {
 		repoEmpleados.save(empleado);
 	}
 
@@ -35,15 +35,15 @@ public class EmpleadosServiceJpa implements IntServiceEmpleados {
 		}
 		return null;
 	}
-	
+
 	@Override
-	public void eliminar(Integer idEmpleado) {
+	public void eliminarPorId(Integer idEmpleado) {
 		repoEmpleados.deleteById(idEmpleado);
 	}
 
 	@Override
-	public int numeroEmpleados() {
-		return (int) repoEmpleados.count();
+	public Integer contarEmpleados() {
+		return repoEmpleados.cantidadEmpleados();
 	}
 
 	@Override

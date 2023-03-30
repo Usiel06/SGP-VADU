@@ -24,7 +24,7 @@ public class ClientesServiceJpa implements IntServiceClientes {
 	}
 
 	@Override
-	public void agregar(Cliente cliente) {
+	public void agregarCliente(Cliente cliente) {
 		repoClientes.save(cliente);
 	}
 
@@ -36,7 +36,6 @@ public class ClientesServiceJpa implements IntServiceClientes {
 		}
 		return null;
 	}
-	
 
 	@Override
 	public Cliente buscarPorUsuario(Usuario usuario) {
@@ -44,13 +43,13 @@ public class ClientesServiceJpa implements IntServiceClientes {
 	}
 
 	@Override
-	public void eliminar(Integer idCliente) {
+	public void eliminarPorId(Integer idCliente) {
 		repoClientes.deleteById(idCliente);
 	}
 
 	@Override
-	public Integer numeroClientes() {
-		return (int) repoClientes.count();
+	public Integer contarClientes() {
+		return repoClientes.cantidadClientes();
 	}
 
 	@Override

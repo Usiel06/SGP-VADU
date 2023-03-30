@@ -16,35 +16,35 @@ import org.ud2.developers.SGPVADU.service.IntServiceContactos;
 @Controller
 @RequestMapping("/contactos")
 public class ContactosController {
-	
+
 	@Autowired
 	private IntServiceContactos serviceContactos;
-	
+
 	@GetMapping("/noLeido")
-	public String cambiarNoLeido(@RequestParam("id") int idContacto, RedirectAttributes model) {
+	public String cambiarNoLeido(@RequestParam("id") Integer idContacto, RedirectAttributes model) {
 		Contacto contacto = serviceContactos.buscarPorId(idContacto);
 		contacto.setEstatus(0);
-		serviceContactos.guardarContacto(contacto);
-		model.addFlashAttribute("msg", "El estado del mensaje se cambió a No Leído.");
+		serviceContactos.agregarContacto(contacto);
+		model.addFlashAttribute("msg", "El estado del mensaje se cambió a 'No Leído'.");
 		return "redirect:/contactos/indexPaginado";
 	}
-	
+
 	@GetMapping("/leido")
 	public String cambiarLeido(@RequestParam("id") int idContacto, RedirectAttributes model) {
 		Contacto contacto = serviceContactos.buscarPorId(idContacto);
 		contacto.setEstatus(1);
-		serviceContactos.guardarContacto(contacto);
-		model.addFlashAttribute("msg", "El estado del mensaje se cambió a Leído.");
+		serviceContactos.agregarContacto(contacto);
+		model.addFlashAttribute("msg", "El estado del mensaje se cambió a 'Leído'.");
 		return "redirect:/contactos/indexPaginado";
 	}
-	
+
 	@PostMapping("/agregar")
 	public String agregarEmpleado(Contacto contacto, RedirectAttributes model) {
 		model.addFlashAttribute("msg", "Gracias por tu comentario, será tomado en cuenta.");
-        serviceContactos.guardarContacto(contacto);
-        return "redirect:/contactanos";
+		serviceContactos.agregarContacto(contacto);
+		return "redirect:/contactanos";
 	}
-	
+
 	@GetMapping(value = "/indexPaginado")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
 		Page<Contacto> contactos = serviceContactos.buscarTodas(page);
@@ -52,5 +52,5 @@ public class ContactosController {
 		model.addAttribute("total", serviceContactos.contarContactos());
 		return "contactos/listaContactos";
 	}
-	
+
 }

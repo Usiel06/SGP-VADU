@@ -8,9 +8,14 @@ import org.ud2.developers.SGPVADU.entity.Empleado;
 
 public interface IntServiceEmpleados {
 	public List<Empleado> obtenerEmpleados();
-	public void agregar(Empleado empleado);
+
+	public void agregarEmpleado(Empleado empleado);
+
 	public Empleado buscarPorId(Integer idEmpleado);
-	public void eliminar(Integer idEmpleado);
-	public int numeroEmpleados();
-	Page<Empleado> buscarTodas(Pageable page);
+
+	public void eliminarPorId(Integer idEmpleado);
+
+	public Integer contarEmpleados();
+
+	public Page<Empleado> buscarTodas(Pageable page);
 }

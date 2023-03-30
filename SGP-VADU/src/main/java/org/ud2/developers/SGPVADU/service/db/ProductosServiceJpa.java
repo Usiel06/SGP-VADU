@@ -16,7 +16,7 @@ public class ProductosServiceJpa implements IntServiceProductos {
 
 	@Autowired
 	private ProductosRepository repoProductos;
-	
+
 	@Override
 	public List<Producto> obtenerEnVenta() {
 		return repoProductos.findByEstatus(1);
@@ -28,17 +28,17 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	}
 
 	@Override
-	public Producto buscarPorId(Integer idProducto) {
-		Optional<Producto> optional = repoProductos.findById(idProducto);
-		if(optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public void agregarProducto(Producto producto) {
+		repoProductos.save(producto);
 	}
 
 	@Override
-	public void guardarProducto(Producto producto) {
-		repoProductos.save(producto);
+	public Producto buscarPorId(Integer idProducto) {
+		Optional<Producto> optional = repoProductos.findById(idProducto);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ProductosServiceJpa implements IntServiceProductos {
 
 	@Override
 	public Integer contarProductos() {
-		return (int) repoProductos.count();
+		return repoProductos.cantidadProductos();
 	}
 
 	@Override

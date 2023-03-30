@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.ud2.developers.SGPVADU.entity.Orden;
 import org.ud2.developers.SGPVADU.entity.Usuario;
@@ -23,11 +25,29 @@ public class OrdenesServiceJpa implements IntServiceOrdenes {
 	}
 
 	@Override
-	public void guardarOrden(Orden orden) {
+	public void agregarOrden(Orden orden) {
 		repoOrdenes.save(orden);
 	}
 
-	// 0000010
+	@Override
+	public List<Orden> buscarPorUsuario(Usuario usuario) {
+		return repoOrdenes.findByUsuario(usuario);
+	}
+
+	@Override
+	public Orden buscarPorId(Integer idOrden) {
+		Optional<Orden> optional = repoOrdenes.findById(idOrden);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+	}
+
+	@Override
+	public Page<Orden> buscarTodas(Pageable page) {
+		return repoOrdenes.findAll(page);
+	}
+
 	public String generarNumeroOrden() {
 		int numero = 0;
 		String numeroConcatenado = "";
@@ -45,7 +65,7 @@ public class OrdenesServiceJpa implements IntServiceOrdenes {
 			numero++;
 		}
 
-		if (numero < 10) { // 0000001000
+		if (numero < 10) {
 			numeroConcatenado = "000000000" + String.valueOf(numero);
 		} else if (numero < 100) {
 			numeroConcatenado = "00000000" + String.valueOf(numero);
@@ -58,13 +78,4 @@ public class OrdenesServiceJpa implements IntServiceOrdenes {
 		return numeroConcatenado;
 	}
 
-	@Override
-	public List<Orden> buscarPorUsuario(Usuario usuario) {
-		return repoOrdenes.findByUsuario(usuario);
-	}
-
-	@Override
-	public Optional<Orden> buscarPorId(Integer idOrden) {
-		return repoOrdenes.findById(idOrden);
-	}
 }

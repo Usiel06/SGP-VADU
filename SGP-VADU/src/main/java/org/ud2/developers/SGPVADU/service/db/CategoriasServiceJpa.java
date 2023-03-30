@@ -13,27 +13,27 @@ import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 
 @Service
 public class CategoriasServiceJpa implements IntServiceCategorias {
-	
+
 	@Autowired
 	private CategoriasRepository repoCategorias;
-	
+
 	@Override
 	public List<Categoria> obtenerCategorias() {
 		return repoCategorias.findAll();
 	}
 
 	@Override
-	public Categoria buscarPorId(Integer idCategoria) {
-		Optional<Categoria> optional = repoCategorias.findById(idCategoria);
-		if(optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public void agregarCategoria(Categoria categoria) {
+		repoCategorias.save(categoria);
 	}
 
 	@Override
-	public void guardarCategoria(Categoria categoria) {
-		repoCategorias.save(categoria);
+	public Categoria buscarPorId(Integer idCategoria) {
+		Optional<Categoria> optional = repoCategorias.findById(idCategoria);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CategoriasServiceJpa implements IntServiceCategorias {
 
 	@Override
 	public Integer contarCategorias() {
-		return (int) repoCategorias.count();
+		return repoCategorias.cantidadCategorias();
 	}
 
 	@Override

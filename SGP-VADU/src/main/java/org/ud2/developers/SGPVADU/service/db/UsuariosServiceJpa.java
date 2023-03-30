@@ -23,7 +23,7 @@ public class UsuariosServiceJpa implements IntServiceUsuarios {
 	}
 
 	@Override
-	public void agregar(Usuario usuario) {
+	public void agregarUsuario(Usuario usuario) {
 		repoUsuarios.save(usuario);
 	}
 
@@ -40,15 +40,15 @@ public class UsuariosServiceJpa implements IntServiceUsuarios {
 	public Usuario buscarPorUsername(String username) {
 		return repoUsuarios.findByUsername(username);
 	}
-	
+
 	@Override
-	public void eliminar(Integer idUsuario) {
+	public void eliminarPorId(Integer idUsuario) {
 		repoUsuarios.deleteById(idUsuario);
 	}
 
 	@Override
-	public int numeroUsuarios() {
-		return (int) repoUsuarios.count();
+	public Integer contarUsuarios() {
+		return repoUsuarios.cantidadUsuarios();
 	}
 
 	@Override

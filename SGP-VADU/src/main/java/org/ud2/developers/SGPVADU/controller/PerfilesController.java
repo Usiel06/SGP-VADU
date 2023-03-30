@@ -10,7 +10,7 @@ import org.ud2.developers.SGPVADU.service.IntServicePerfiles;
 @Controller
 @RequestMapping("/perfiles")
 public class PerfilesController {
-	
+
 	@Autowired
 	private IntServicePerfiles servicePerfiles;
 

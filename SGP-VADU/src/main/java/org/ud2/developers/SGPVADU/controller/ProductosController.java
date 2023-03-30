@@ -36,9 +36,9 @@ public class ProductosController {
 
 	@Autowired
 	private CarritoController carritoCtrl;
-	
-    @Autowired
-    private Utileria util;
+
+	@Autowired
+	private Utileria util;
 
 	@GetMapping("/detalle")
 	public String consultarDetalleProducto(@RequestParam("id") int idProducto, Model model) {
@@ -60,7 +60,7 @@ public class ProductosController {
 	public String eliminarProducto(Producto producto, RedirectAttributes model) {
 		System.out.println(producto);
 		serviceProductos.eliminarPorId(producto.getId());
-		model.addFlashAttribute("msg", "Producto Eliminado");
+		model.addFlashAttribute("msg", "La información del producto ha sido eliminada correctamente.");
 		return "redirect:/productos/indexPaginado";
 	}
 
@@ -74,7 +74,7 @@ public class ProductosController {
 			model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 			return "productos/formProducto";
 		}
-		if(producto.getId() == null) {
+		if (producto.getId() == null) {
 			if (!file.isEmpty()) {
 				System.out.println("Holi");
 				String fileName = util.uploadImage(file);
@@ -84,7 +84,7 @@ public class ProductosController {
 					System.out.println(producto.getImagen());
 				}
 			}
-			model2.addFlashAttribute("msg", "Producto Agregado");
+			model2.addFlashAttribute("msg", "La información del producto ha sido agregada correctamente.");
 		} else {
 			if (!file.isEmpty()) {
 				System.out.println("Holi");
@@ -93,14 +93,14 @@ public class ProductosController {
 					System.out.println(fileName);
 					producto.setImagen(fileName);
 					System.out.println(producto.getImagen());
-					model2.addFlashAttribute("msg", "Producto Modificado");
+					model2.addFlashAttribute("msg", "La información del producto ha sido modificada correctamente.");
 				}
 			} else {
 				Producto p = serviceProductos.buscarPorId(producto.getId());
 				producto.setImagen(p.getImagen());
 			}
 		}
-		serviceProductos.guardarProducto(producto);
+		serviceProductos.agregarProducto(producto);
 		return "redirect:/productos/indexPaginado";
 	}
 

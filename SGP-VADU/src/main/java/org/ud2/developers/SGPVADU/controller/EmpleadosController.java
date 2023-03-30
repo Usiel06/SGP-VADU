@@ -35,11 +35,10 @@ public class EmpleadosController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping("/buscar")
 	public String modificarEmpleado(@RequestParam("id") int idEmpleado, Model model) {
 		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
-		System.out.println(empleado);
 		model.addAttribute("empleado", empleado);
 		return "empleados/formEmpleado";
 	}
@@ -47,9 +46,9 @@ public class EmpleadosController {
 	@GetMapping("/eliminar")
 	public String eliminarEmpleado(@RequestParam("id") int idEmpleado, RedirectAttributes model) {
 		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
-		serviceEmpleados.eliminar(idEmpleado);
-		serviceUsuarios.eliminar(empleado.getUsuario().getId());
-		model.addFlashAttribute("msg", "Empleado Eliminado");
+		serviceEmpleados.eliminarPorId(idEmpleado);
+		serviceUsuarios.eliminarPorId(empleado.getUsuario().getId());
+		model.addFlashAttribute("msg", "La información del empleado ha sido eliminada correctamente.");
 		return "redirect:/empleados/indexPaginado";
 	}
 
@@ -67,19 +66,19 @@ public class EmpleadosController {
 			Perfil perfil = new Perfil();
 			perfil.setId(2);
 			usuario.agregar(perfil);
-			serviceUsuarios.agregar(usuario);
+			serviceUsuarios.agregarUsuario(usuario);
 			empleado.setPassword(passwordEncoder.encode(empleado.getPassword()));
 			empleado.setUsuario(usuario);
-			model.addFlashAttribute("msg", "Empleado Agregado");
+			model.addFlashAttribute("msg", "La información del empleado ha sido agregada correctamente.");
 		} else {
 			Usuario usuario = serviceUsuarios.buscarPorId(empleado.getUsuario().getId());
 			usuario.setUsername(empleado.getUsername());
 			usuario.setEmail(empleado.getEmail());
-			serviceUsuarios.agregar(usuario);
-			model.addFlashAttribute("msg", "Empleado Modificado");
+			serviceUsuarios.agregarUsuario(usuario);
+			model.addFlashAttribute("msg", "La información del empleado ha sido modificada correctamente.");
 		}
-        serviceEmpleados.agregar(empleado);
-        return "redirect:/empleados/indexPaginado";
+		serviceEmpleados.agregarEmpleado(empleado);
+		return "redirect:/empleados/indexPaginado";
 	}
 
 	@GetMapping("/nuevo")
@@ -91,7 +90,7 @@ public class EmpleadosController {
 	public String mostrarIndexPaginado(Model model, Pageable page) {
 		Page<Empleado> empleados = serviceEmpleados.buscarTodas(page);
 		model.addAttribute("empleados", empleados);
-		model.addAttribute("total", serviceEmpleados.numeroEmpleados());
+		model.addAttribute("total", serviceEmpleados.contarEmpleados());
 		return "empleados/listaEmpleados";
 	}
 
