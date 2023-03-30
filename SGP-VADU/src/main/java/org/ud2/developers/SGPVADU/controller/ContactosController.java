@@ -39,10 +39,10 @@ public class ContactosController {
 	}
 	
 	@PostMapping("/agregar")
-	public String agregarEmpleado(Contacto contacto, Model model, RedirectAttributes model2) {
-		model2.addFlashAttribute("msg", "El mensaje de contacto se envió correctamente");
+	public String agregarEmpleado(Contacto contacto, RedirectAttributes model) {
+		model.addFlashAttribute("msg", "Gracias por tu comentario, será tomado en cuenta.");
         serviceContactos.guardarContacto(contacto);
-        return "redirect:/contactos/indexPaginado";
+        return "redirect:/contactanos";
 	}
 	
 	@GetMapping(value = "/indexPaginado")

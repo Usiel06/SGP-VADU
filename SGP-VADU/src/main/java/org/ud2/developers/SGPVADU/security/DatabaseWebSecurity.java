@@ -34,7 +34,7 @@ public class DatabaseWebSecurity {
 				// Las vistas públicas no requieren autenticación
 				.requestMatchers("/", "/signup", "/contactos/agregar/**", "/guardar", "/acerca", "/contactanos", "/productos/detalle/**").permitAll()
 				// asignar permisos a URL'S por roles
-				.requestMatchers("/carrito/**").hasAnyAuthority("Cliente")
+				//.requestMatchers("/carrito/**").hasAnyAuthority("Cliente")
 				.requestMatchers("/categorias/**").hasAnyAuthority("Gerente", "Empleado")
 				.requestMatchers("/clientes/**").hasAnyAuthority("Gerente", "Empleado")
 				.requestMatchers("/contactos/**").hasAnyAuthority("Gerente")
