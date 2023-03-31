@@ -20,7 +20,7 @@
 
     <hr>
     <div th:insert="~{fragmentos/social.html::social}"></div>
-    
+
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-3">
             <div class="col pb-3 text-black" th:each="producto:${productos}">
@@ -37,7 +37,8 @@
                         <div class="col-md-7">
                             <div class="card-body">
                                 <h3 class="card-title" th:text="${producto.nombre}"></h3>
-                                <p class="card-text fs-5" style="text-align: justify;" th:text="${producto.descripcion}"></p>
+                                <p class="card-text fs-5" style="text-align: justify;"
+                                    th:text="${producto.descripcion}"></p>
                                 <h5 class="card-text text-success">
                                     <small th:text="'$ ' + ${producto.precioKg} + ' Kg'"></small>
                                 </h5>
@@ -53,6 +54,21 @@
             </div>
         </div>
     </div>
+    <!--<nav th:if="${productos.totalPages > 0}" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${productos.number == 0 ? 'disabled' : ''}">
+                <a th:href="@{/indexPaginado(page=${productos.number - 1})}" class="page-link">Anterior</a>
+            </li>
+            <li class="page-item" th:classappend="${i eq productos.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, productos.totalPages, 1)}">
+                <a class="page-link" th:href="@{/indexPaginado?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}"
+                    th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item" th:classappend="${productos.number == (productos.totalPages - 1) ? 'disabled' : ''}">
+                <a th:href="@{/indexPaginado(page=${productos.number + 1})}" class="page-link">Siguiente</a>
+            </li>
+        </ul>
+    </nav>-->
     <br><br><br><br>
 
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
