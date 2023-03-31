@@ -27,6 +27,7 @@ public class Usuario {
 	private String username;
 	private String email;
 	private String password;
+	private String confirmPassword;
 	private Integer estatus;
 	private LocalDate fechaRegistro = LocalDate.now();
 
@@ -93,6 +94,14 @@ public class Usuario {
 		this.password = password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public Integer getEstatus() {
 		return estatus;
 	}
@@ -136,8 +145,8 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
 				+ ", apellidoMaterno=" + apellidoMaterno + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", ordenes=" + ordenes
-				+ ", perfiles=" + perfiles + "]";
+				+ password + ", confirmPassword=" + confirmPassword + ", estatus=" + estatus + ", fechaRegistro="
+				+ fechaRegistro + ", ordenes=" + ordenes + ", perfiles=" + perfiles + "]";
 	}
 
 }

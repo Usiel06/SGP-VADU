@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.ud2.developers.SGPVADU.entity.Categoria;
@@ -80,20 +81,28 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/guardar")
-	public String guardarUsuario(Usuario usuario) {
+	@PostMapping("/registrar")
+	public String guardarUsuario(Usuario usuario, BindingResult bindingResult, Model model) {
 		Cliente cliente = new Cliente();
 		cliente.setNombre(usuario.getNombre());
 		cliente.setApellidoPaterno(usuario.getApellidoPaterno());
 		cliente.setApellidoMaterno(usuario.getApellidoMaterno());
 		cliente.setUsername(usuario.getUsername());
 		cliente.setEmail(usuario.getEmail());
+		if (!usuario.getPassword().equals(usuario.getConfirmPassword())) {
+	        bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Las contraseñas no coinciden");
+	    }
+	    if (bindingResult.hasErrors()) {
+	    	model.addAttribute("usuario", usuario);
+	        return "formRegistro";
+	    }
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		usuario.setConfirmPassword(passwordEncoder.encode(usuario.getConfirmPassword()));
 		cliente.setPassword(usuario.getPassword());
 		cliente.setFechaRegistro(usuario.getFechaRegistro());
 		usuario.setEstatus(1);
 		Perfil perfil = new Perfil();
-		perfil.setId(3);
+		perfil.setId(1);
 		usuario.agregar(perfil);
 		cliente.setUsuario(usuario);
 		serviceUsuarios.agregarUsuario(usuario);
@@ -102,7 +111,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/signup")
-	public String mostrarFormRegistro() {
+	public String mostrarFormRegistro(Usuario usuario) {
 		return "formRegistro";
 	}
 

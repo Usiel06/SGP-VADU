@@ -34,4 +34,5 @@ public class Utileria {
 			throw new RuntimeException("Error al cargar la imagen", e);
 		}
 	}
+	
 }

@@ -126,3 +126,11 @@ ul, li {
 a {
 	color: inherit;
 }
+
+input:valid, textarea:valid {
+	border: 2px green solid;
+}
+
+input:invalid, textarea:invalid {
+	border: 2px red solid;
+}
