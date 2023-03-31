@@ -102,7 +102,7 @@ public class HomeController {
 		cliente.setFechaRegistro(usuario.getFechaRegistro());
 		usuario.setEstatus(1);
 		Perfil perfil = new Perfil();
-		perfil.setId(1);
+		perfil.setId(3);
 		usuario.agregar(perfil);
 		cliente.setUsuario(usuario);
 		serviceUsuarios.agregarUsuario(usuario);
