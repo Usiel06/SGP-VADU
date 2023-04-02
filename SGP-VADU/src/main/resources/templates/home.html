@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/logo.png}">
+    <title>SGP-VADU | Sistema de Gestión de Procesos</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/mdb5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="sticky-top" th:insert="~{fragmentos/menu.html::menu}"></header>
+
+    <h2 class="text-center text-black mt-3">PRODUCTOS EN VENTA</h2>
+
+    <hr>
+    <div th:insert="~{fragmentos/social.html::social}"></div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+            <div class="col pb-3 text-black" th:each="producto:${productos}">
+                <div class="card bg-light h-100">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="bg-image hover-overlay hover-zoom ripple rounded">
+                                <a th:href="@{/productos/detalle(id=${producto.id})}">
+                                    <img th:src="@{/images/{img}(img=${producto.imagen})}"
+                                        class="img-fluid rounded-start" th:alt="${producto.nombre}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h3 class="card-title" th:text="${producto.nombre}"></h3>
+                                <p class="card-text fs-5" style="text-align: justify;"
+                                    th:text="${producto.descripcion}"></p>
+                                <h5 class="card-text">
+                                    <small th:text="'$' + ${producto.precioKg} + ' Kg'" class="text-success"></small> | <small th:text="${producto.cantidadIngreso} + ' Kg disponibles'" class="text-warning"></small>
+                                </h5>
+                            </div>
+                            <div class="pb-3">
+                                <a class="my-cart-b ms-4 me-3 btn btn-black btn-rounded btn-sm"
+                                    th:href="@{/productos/detalle(id=${producto.id})}"><i
+                                        class="fa-solid fa-eye fa-lg"></i> Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<nav th:if="${productos.totalPages > 0}" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${productos.number == 0 ? 'disabled' : ''}">
+                <a th:href="@{/indexPaginado(page=${productos.number - 1})}" class="page-link">Anterior</a>
+            </li>
+            <li class="page-item" th:classappend="${i eq productos.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, productos.totalPages, 1)}">
+                <a class="page-link" th:href="@{/indexPaginado?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}"
+                    th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item" th:classappend="${productos.number == (productos.totalPages - 1) ? 'disabled' : ''}">
+                <a th:href="@{/indexPaginado(page=${productos.number + 1})}" class="page-link">Siguiente</a>
+            </li>
+        </ul>
+    </nav>-->
+    <br><br><br><br>
+
+    <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
+
+    <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
+    <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+</body>
+
+</html>
