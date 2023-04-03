@@ -42,13 +42,23 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	}
 
 	@Override
-	public void eliminarPorId(Integer idProducto) {
-		repoProductos.deleteById(idProducto);
+	public List<Producto> buscarPorCategoria(Integer idCategoria) {
+		return repoProductos.buscarTodosPorCategoria(idCategoria);
 	}
 
 	@Override
-	public Integer contarProductos() {
-		return repoProductos.cantidadProductos();
+	public List<Producto> buscarPorDescripcion(String descripcion) {
+		return repoProductos.buscarTodosPorDescripcion(descripcion);
+	}
+
+	@Override
+	public List<Producto> buscarTodasPorDescripcionYCategoria(String descripcion, Integer idCategoria) {
+		return repoProductos.findAllProductosByDescripcionAndCategoria(descripcion, idCategoria);
+	}
+
+	@Override
+	public void eliminarPorId(Integer idProducto) {
+		repoProductos.deleteById(idProducto);
 	}
 
 	@Override
@@ -60,4 +70,15 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	public Page<Producto> buscarTodasEnVenta(Pageable page) {
 		return repoProductos.findAllProductosByEstatus(1, page);
 	}
+
+	@Override
+	public Page<Producto> buscarTodasPorCategoria(Integer idCategoria, Pageable page) {
+		return repoProductos.findAllProductosByEstatusAndCategoria(1, idCategoria, page);
+	}
+
+	@Override
+	public Integer contarProductos() {
+		return repoProductos.cantidadProductos();
+	}
+
 }

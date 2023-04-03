@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.ud2.developers.SGPVADU.entity.Categoria;
 import org.ud2.developers.SGPVADU.entity.Cliente;
 import org.ud2.developers.SGPVADU.entity.Perfil;
 import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.entity.Usuario;
+import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceClientes;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceOrdenes;
@@ -27,6 +29,9 @@ public class HomeController {
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
+
+	@Autowired
+	private IntServiceCategorias serviceCategorias;
 
 	@Autowired
 	private IntServiceUsuarios serviceUsuarios;
@@ -45,6 +50,22 @@ public class HomeController {
 
 	@Autowired
 	private CarritoController carritoCtrl;
+
+	@PostMapping("/busqueda")
+	public String buscarPorCategoria(Model model, String descripcion, Integer idCategoria) {
+		Integer id = 0;
+		if (descripcion.equals("") && idCategoria != null) {
+			model.addAttribute("productos", serviceProductos.buscarPorCategoria(idCategoria));
+		} else if (!descripcion.equals("") && idCategoria == null) {
+			model.addAttribute("productos", serviceProductos.buscarPorDescripcion(descripcion));
+		} else {
+			model.addAttribute("productos",
+					serviceProductos.buscarTodasPorDescripcionYCategoria(descripcion, idCategoria));
+		}
+		model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
+		model.addAttribute("id", id);
+		return "home";
+	}
 
 	@GetMapping("/contactanos")
 	public String contactanos(Model model, org.springframework.security.core.Authentication auth) {
@@ -141,7 +162,7 @@ public class HomeController {
 
 	@GetMapping(value = "/")
 	public String mostrarIndexPaginado(Model model, Pageable page,
-			org.springframework.security.core.Authentication auth) {
+			org.springframework.security.core.Authentication auth, Categoria categoria) {
 		if (auth != null) {
 			Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
 			Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
@@ -153,6 +174,7 @@ public class HomeController {
 			}
 		}
 		Page<Producto> productos = serviceProductos.buscarTodasEnVenta(page);
+		model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 		model.addAttribute("productos", productos);
 		return "home";
 	}
