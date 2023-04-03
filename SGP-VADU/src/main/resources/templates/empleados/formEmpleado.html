@@ -123,6 +123,18 @@
                             </div>
                         </div>
                         <div class="row">
+                        	<div class="col-md-4 mb-3">
+                                <div class="form-outline">
+                                    <input th:if="${empleado.id!=null}" type="text" class="form-control bg-light"
+                                        th:field="*{confirmPassword}" id="confirmPassword" name="confirmPassword"
+                                        placeholder="Password del empleado" required readonly>
+                                    <input th:unless="${empleado.id!=null}" type="password"
+                                        class="form-control bg-light" th:field="*{confirmPassword}" id="confirmPassword"
+                                        name="confirmPassword" placeholder="Confirme el password del empleado" required> <label
+                                        class="form-label" for="password"><strong class="text-danger">*</strong>
+                                        Confirmación</label>
+                                </div>
+                            </div>
                             <div class="col-md-4 mb-3">
                                 <strong class="text-danger">*</strong> Sexo
                                 <div class="btn-group ms-3" th:if="${empleado.id!=null}">
@@ -150,7 +162,9 @@
                                         Salario</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                        	<div class="col-md-4">
                                 <div class="form-outline mb-3">
                                     <input type="text" class="form-control bg-light" th:field="*{fechaContratacion}"
                                         name="fechaRegistro" id="fechaRegistro" placeholder="Fecha de contratación"
