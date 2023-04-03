@@ -52,8 +52,31 @@ public class HomeController {
 	private CarritoController carritoCtrl;
 
 	@PostMapping("/busqueda")
-	public String buscarPorCategoria(Model model, String descripcion, Integer idCategoria) {
+	public String buscarPorCategoria(Model model, String descripcion, Integer idCategoria,
+			org.springframework.security.core.Authentication auth) {
 		Integer id = 0;
+		if (auth != null) {
+			Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
+			Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
+			for (Perfil perfil : usuario.getPerfiles()) {
+				if (perfil.getPerfil().compareTo("Cliente") == 0) {
+					if (descripcion.equals("") && idCategoria != null) {
+						model.addAttribute("productos", serviceProductos.buscarPorCategoria(idCategoria));
+					} else if (!descripcion.equals("") && idCategoria == null) {
+						model.addAttribute("productos", serviceProductos.buscarPorDescripcion(descripcion));
+					} else if (descripcion.equals("") && idCategoria == null) {
+						return "redirect:/";
+					} else {
+						model.addAttribute("productos",
+								serviceProductos.buscarTodasPorDescripcionYCategoria(descripcion, idCategoria));
+					}
+					model.addAttribute("items", carritoCtrl.contarItems(cliente.getUsername()));
+					model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
+					model.addAttribute("id", id);
+					return "home";
+				}
+			}
+		}
 		if (descripcion.equals("") && idCategoria != null) {
 			model.addAttribute("productos", serviceProductos.buscarPorCategoria(idCategoria));
 		} else if (!descripcion.equals("") && idCategoria == null) {
@@ -161,14 +184,17 @@ public class HomeController {
 	 */
 
 	@GetMapping(value = "/")
-	public String mostrarIndexPaginado(Model model, Pageable page,
-			org.springframework.security.core.Authentication auth, Categoria categoria) {
+	public String mostrarIndex(Model model, Pageable page, org.springframework.security.core.Authentication auth,
+			Categoria categoria) {
 		if (auth != null) {
 			Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
 			Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
 			for (Perfil perfil : usuario.getPerfiles()) {
 				if (perfil.getPerfil().compareTo("Cliente") == 0) {
+					Page<Producto> productos = serviceProductos.buscarTodasEnVenta(page);
 					model.addAttribute("items", carritoCtrl.contarItems(cliente.getUsername()));
+					model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
+					model.addAttribute("productos", productos);
 					return "home";
 				}
 			}
