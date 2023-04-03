@@ -1,9 +1,8 @@
 package org.ud2.developers.SGPVADU.controller;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -11,11 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.ud2.developers.SGPVADU.entity.Categoria;
 import org.ud2.developers.SGPVADU.entity.Cliente;
 import org.ud2.developers.SGPVADU.entity.Perfil;
+import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.entity.Usuario;
-import org.ud2.developers.SGPVADU.service.IntServiceCategorias;
 import org.ud2.developers.SGPVADU.service.IntServiceClientes;
 import org.ud2.developers.SGPVADU.service.IntServiceDetallesOrdenes;
 import org.ud2.developers.SGPVADU.service.IntServiceOrdenes;
@@ -26,9 +24,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
-
-	@Autowired
-	private IntServiceCategorias serviceCategorias;
 
 	@Autowired
 	private IntServiceProductos serviceProductos;
@@ -128,15 +123,25 @@ public class HomeController {
 		return "formLogin";
 	}
 
-	@GetMapping("/")
-	public String mostrarIndex(Model model, org.springframework.security.core.Authentication auth) {
-		List<Categoria> categorias = new LinkedList<>();
-		model.addAttribute("productos", serviceProductos.obtenerEnVenta());
-		for (Categoria categoria : serviceCategorias.obtenerCategorias()) {
-			if (categoria.getId().compareTo(1) == 1) {
-				categorias.add(categoria);
-			}
-		}
+	/*
+	 * @GetMapping("/") public String mostrarIndex(Model model,
+	 * org.springframework.security.core.Authentication auth) { /*List<Categoria>
+	 * categorias = new LinkedList<>(); for (Categoria categoria :
+	 * serviceCategorias.obtenerCategorias()) { if (categoria.getId().compareTo(1)
+	 * == 1) { categorias.add(categoria); } } if (auth != null) { Usuario usuario =
+	 * serviceUsuarios.buscarPorUsername(auth.getName()); Cliente cliente =
+	 * serviceClientes.buscarPorUsuario(usuario); for (Perfil perfil :
+	 * usuario.getPerfiles()) { if (perfil.getPerfil().compareTo("Cliente") == 0) {
+	 * model.addAttribute("items", carritoCtrl.contarItems(cliente.getUsername()));
+	 * return "home"; } } } model.addAttribute("productos",
+	 * serviceProductos.obtenerEnVenta()); //model.addAttribute("categoria",
+	 * serviceCategorias.buscarPorId(1)); //model.addAttribute("categorias",
+	 * categorias); return "home"; }
+	 */
+
+	@GetMapping(value = "/")
+	public String mostrarIndexPaginado(Model model, Pageable page,
+			org.springframework.security.core.Authentication auth) {
 		if (auth != null) {
 			Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
 			Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
@@ -147,8 +152,8 @@ public class HomeController {
 				}
 			}
 		}
-		//model.addAttribute("categoria", serviceCategorias.buscarPorId(1));
-		//model.addAttribute("categorias", categorias);
+		Page<Producto> productos = serviceProductos.buscarTodasEnVenta(page);
+		model.addAttribute("productos", productos);
 		return "home";
 	}
 }

@@ -1,5 +1,8 @@
 package org.ud2.developers.SGPVADU.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.ud2.developers.SGPVADU.entity.Contacto;
 import org.ud2.developers.SGPVADU.service.IntServiceContactos;
+import org.ud2.developers.SGPVADU.util.ExporterExcel;
+import org.ud2.developers.SGPVADU.util.ExporterPDF;
+import org.ud2.developers.SGPVADU.util.reports.ContactosExporterExcel;
+import org.ud2.developers.SGPVADU.util.reports.ContactosExporterPDF;
+
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/contactos")
@@ -19,6 +30,24 @@ public class ContactosController {
 
 	@Autowired
 	private IntServiceContactos serviceContactos;
+
+	@GetMapping("/exportarExcel")
+	public void exportarListadoDeProductosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		ExporterExcel exEx = new ExporterExcel();
+		List<Contacto> contactos = serviceContactos.obtenerContactos();
+		exEx.exportarListadoEnExcel(response, "Listado_Msj's_De_Contacto", contactos);
+		ContactosExporterExcel exporter = new ContactosExporterExcel(contactos);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportarPDF")
+	public void exportarListadoDeProductosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		ExporterPDF exPDF = new ExporterPDF();
+		List<Contacto> contactos = serviceContactos.obtenerContactos();
+		exPDF.exportarListadoEnPDF(response, "Listado_Msj's_De_Contacto", contactos);
+		ContactosExporterPDF exporter = new ContactosExporterPDF(contactos);
+		exporter.exportar(response);
+	}
 
 	@GetMapping("/noLeido")
 	public String cambiarNoLeido(@RequestParam("id") Integer idContacto, RedirectAttributes model) {

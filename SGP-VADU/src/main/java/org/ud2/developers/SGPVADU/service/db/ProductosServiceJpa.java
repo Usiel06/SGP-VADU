@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.ud2.developers.SGPVADU.entity.Producto;
 import org.ud2.developers.SGPVADU.repository.ProductosRepository;
 import org.ud2.developers.SGPVADU.service.IntServiceProductos;
@@ -54,5 +54,10 @@ public class ProductosServiceJpa implements IntServiceProductos {
 	@Override
 	public Page<Producto> buscarTodas(Pageable page) {
 		return repoProductos.findAll(page);
+	}
+
+	@Override
+	public Page<Producto> buscarTodasEnVenta(Pageable page) {
+		return repoProductos.findAllProductosByEstatus(1, page);
 	}
 }

@@ -24,6 +24,17 @@
                     <strong>Listado de Mensajes de Contacto</strong>
                 </h4>
                 <div class="card-body">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn text-white" th:classappend="${contactos.isEmpty() ? 'disabled' : 'enabled'}"
+                            th:href="@{/contactos/exportarPDF}" title="Exportar a PDF" role="button"
+                            data-mdb-toggle="tooltip" style="background-color: #c62020;"><i
+                                class="fa-solid fa-file-pdf fa-lg"></i></a>
+                        <a class="btn text-white" th:classappend="${contactos.isEmpty() ? 'disabled' : 'enabled'}"
+                            th:href="@{/contactos/exportarExcel}" title="Exportar a Excel" role="button"
+                            data-mdb-toggle="tooltip" style="background-color: #1d7044"><i
+                                class="fa-solid fa-file-excel fa-lg"></i></a>
+                    </div>
+                    <hr>
                     <div class="alert alert-success" role="alert" th:if="${msg!=null}">
                         <i class="fa-solid fa-circle-check"></i> <strong th:text="${msg}"></strong>
                     </div>
@@ -50,7 +61,7 @@
                                     <td th:text="${contacto.asunto}"></td>
                                     <td th:text="${contacto.mensaje}"></td>
                                     <td>
-                                    	<span th:if="${contacto.estatus==1}"
+                                        <span th:if="${contacto.estatus==1}"
                                             class="badge badge-success rounded-pill d-inline fs-6">Leído
                                         </span>
                                         <span th:unless="${contacto.estatus==1}"
@@ -58,25 +69,26 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                    	<a th:classappend="${contacto.estatus == 1 ? 'disabled' : ''}"
-                                    		class="btn btn-success btn-sm"
-                                    		th:href="@{/contactos/leido(id=${contacto.id})}" role="button"
+                                        <a th:classappend="${contacto.estatus == 1 ? 'disabled' : ''}"
+                                            class="btn btn-success btn-sm"
+                                            th:href="@{/contactos/leido(id=${contacto.id})}" role="button"
                                             title="Marcar el msj como leído" data-mdb-toggle="tooltip">
                                             <i class="fas fa-check fa-lg" aria-hidden="true"></i>
                                         </a><br>
                                         <a th:classappend="${contacto.estatus == 0 ? 'disabled' : ''}"
-                                        	class="btn btn-sm mt-2 text-white"
+                                            class="btn btn-sm mt-2 text-white"
                                             th:href="@{/contactos/noLeido(id=${contacto.id})}" role="button"
                                             title="Marcar el msj como no leído" data-mdb-toggle="tooltip"
                                             style="background-color: #c62020;">
                                             <i class="fas fa-xmark fa-lg" aria-hidden="true"></i>
-                                         </a>
-									</td>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8" th:text="'Cantidad Total de Mensajes: ' + ${total}" class="fw-bold"></td>
+                                    <td colspan="8" th:text="'Cantidad Total de Mensajes: ' + ${total}" class="fw-bold">
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>

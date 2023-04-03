@@ -20,4 +20,6 @@ public interface IntServiceProductos {
 	public Integer contarProductos();
 
 	public Page<Producto> buscarTodas(Pageable page);
+	
+    public Page<Producto> buscarTodasEnVenta(Pageable page);
 }
