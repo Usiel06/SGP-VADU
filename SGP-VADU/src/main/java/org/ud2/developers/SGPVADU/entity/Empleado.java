@@ -21,6 +21,7 @@ public class Empleado {
 	private String apellidoMaterno;
 	private String username;
 	private String password;
+	private String confirmPassword;
 	private String telefono;
 	private String email;
 	private String sexo;
@@ -79,6 +80,14 @@ public class Empleado {
 		this.password = password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -131,8 +140,9 @@ public class Empleado {
 	public String toString() {
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
 				+ ", apellidoMaterno=" + apellidoMaterno + ", username=" + username + ", password=" + password
-				+ ", telefono=" + telefono + ", email=" + email + ", sexo=" + sexo + ", salario=" + salario
-				+ ", fechaContratacion=" + fechaContratacion + ", usuario=" + usuario + "]";
+				+ ", confirmPassword=" + confirmPassword + ", telefono=" + telefono + ", email=" + email + ", sexo="
+				+ sexo + ", salario=" + salario + ", fechaContratacion=" + fechaContratacion + ", usuario=" + usuario
+				+ "]";
 	}
 
 }

@@ -76,14 +76,17 @@ public class HomeController {
 					return "home";
 				}
 			}
-		}
-		if (descripcion.equals("") && idCategoria != null) {
-			model.addAttribute("productos", serviceProductos.buscarPorCategoria(idCategoria));
-		} else if (!descripcion.equals("") && idCategoria == null) {
-			model.addAttribute("productos", serviceProductos.buscarPorDescripcion(descripcion));
 		} else {
-			model.addAttribute("productos",
-					serviceProductos.buscarTodasPorDescripcionYCategoria(descripcion, idCategoria));
+			if (descripcion.equals("") && idCategoria != null) {
+				model.addAttribute("productos", serviceProductos.buscarPorCategoria(idCategoria));
+			} else if (!descripcion.equals("") && idCategoria == null) {
+				model.addAttribute("productos", serviceProductos.buscarPorDescripcion(descripcion));
+			} else if (descripcion.equals("") && idCategoria == null) {
+				return "redirect:/";
+			} else {
+				model.addAttribute("productos",
+						serviceProductos.buscarTodasPorDescripcionYCategoria(descripcion, idCategoria));
+			}
 		}
 		model.addAttribute("categorias", serviceCategorias.obtenerCategorias());
 		model.addAttribute("id", id);
@@ -187,6 +190,7 @@ public class HomeController {
 	public String mostrarIndex(Model model, Pageable page, org.springframework.security.core.Authentication auth,
 			Categoria categoria) {
 		if (auth != null) {
+			System.out.println("dsfdndksdfj");
 			Usuario usuario = serviceUsuarios.buscarPorUsername(auth.getName());
 			Cliente cliente = serviceClientes.buscarPorUsuario(usuario);
 			for (Perfil perfil : usuario.getPerfiles()) {
