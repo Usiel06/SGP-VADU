@@ -183,11 +183,11 @@
                             </div>
                         </div>
                         <div class="text-center pt-3">
-                            <button type="submit" class="btn btn-success me-3"
+                            <button type="submit" class="btn btn-success btn-rounded me-3"
                                 th:if="${cliente.id==null}">Guardar</button>
-                            <button type="submit" class="btn btn-success me-3"
+                            <button type="submit" class="btn btn-success btn-rounded me-3"
                                 th:unless="${cliente.id==null}">Modificar</button>
-                            <a class="btn text-white" th:href="@{/clientes/indexPaginado}"
+                            <a class="btn btn-rounded text-white" th:href="@{/clientes/indexPaginado}"
                                 style="background-color: #c62020;">Cancelar</a>
                         </div>
                     </form>

@@ -27,7 +27,11 @@ public interface IntServiceProductos {
 
 	public Page<Producto> buscarTodasEnVenta(Pageable page);
 
-	public Page<Producto> buscarTodasPorCategoria(Integer idCategoria, Pageable page);
+	/*public Page<Producto> buscarTodasPorEstatusYDescripcion(Pageable page, String descripcion);
+
+	public Page<Producto> buscarTodasPorEstatusYCategoria(Pageable page, Integer idCategoria);
+
+	public Page<Producto> buscarTodasPorEstatusYDescripcionYCategoria(Pageable page, String descripcion, Integer idCategoria);*/
 
 	public Integer contarProductos();
 }

@@ -19,7 +19,7 @@
     <div class="py-4" style="background-image: url('/images/vaca.png'); background-color: black">
         <div class="d-flex align-items-center h-100">
             <div class="container-fluid">
-                <form method="post" th:action="@{/busqueda}">
+                <form method="post" th:action="@{/busqueda}" th:object="${categoria}">
                     <div class="row">
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <div class="card mb-2">
@@ -28,8 +28,8 @@
                                         <span class="input-group-text border-0 px-1 pe-3" id="basic-addon2"><i
                                                 class="fas fa-search fa-lg text-black"></i></span>
                                         <input type="text" class="form-control form-control-lg rounded"
-                                            placeholder="Búsqueda por descripción" name="descripcion"
-                                            aria-label="Search" aria-describedby="basic-addon2" />
+                                            placeholder="Búsqueda por descripción" name="descripcion" id="myInput"
+                                            aria-label="Search" aria-describedby="basic-addon2" th:value="${descripcion}"/>
                                     </div>
                                 </div>
                             </div>
@@ -38,17 +38,27 @@
                                     <div class="row py-2">
                                         <div class="col-md-12 mb-3">
                                             <div class="dropdown">
-                                                <select class="form-control btn-rounded text-center text-black bg-light"
-                                                    name="idCategoria" id="categoria">
+                                            	<select th:if="${categoria.id == null}" class="form-control btn-rounded text-center text-black bg-light"
+                                                    name="idCategoria" id="mySelect">
                                                     <option th:value="null">Selecciona una categoría</option>
                                                     <option th:each="categoria : ${categorias}"
                                                         th:value="${categoria.id}" th:text="${categoria.nombre}">
                                                     </option>
                                                 </select>
+                                                <select th:unless="${categoria.id == null}" class="form-control btn-rounded text-center text-black bg-light"
+                                                    name="idCategoria" id="mySelect">
+                                                    <option th:value="null">Selecciona una categoría</option>
+                                                    <option th:each="categoria : ${categorias}"
+                                                        th:value="${categoria.id}"
+                                                        th:text="${categoria.nombre}"
+                                                        th:selected="(${categoria.id} == *{id})">
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-black btn-rounded">Buscar</button>
+                                    <button type="submit" class="btn btn-rounded text-white" style="background-color: #c62020;">Buscar</button>
+                                    <button type="button" class="btn btn-black btn-rounded" onclick="limpiar()">Limpiar</button>
                                 </div>
                             </div>
                         </div>
@@ -63,9 +73,12 @@
 
     <hr>
     <div th:insert="~{fragmentos/social.html::social}"></div>
+	
 
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-3">
+        <div class="alert alert-primary mt-4 container-fluid" role="alert" th:if="${productos.isEmpty()}"><i
+        	class="fa-solid fa-circle-info"></i> No existen productos a mostrar con ese criterio de búsqueda.</div>
             <div class="col pb-3 text-black" th:each="producto:${productos}">
                 <div class="card bg-light h-100">
                     <div class="row">
@@ -117,12 +130,19 @@
             </ul>
         </nav>
     </div>
+    
     <br><br><br><br>
 
     <footer th:insert="~{fragmentos/pie.html::pie}"></footer>
 
     <script type="text/javascript" th:src="@{https://kit.fontawesome.com/6626a63f5b.js}"></script>
     <script type="text/javascript" th:src="@{/mdb5/js/mdb.min.js}"></script>
+    <script type="text/javascript">
+    	function limpiar() {
+    	  document.getElementById("myInput").value = ""; // Limpiar el input de texto
+    	  document.getElementById("mySelect").selectedIndex = 0; // Seleccionar la primera opción en el select
+    	}
+    </script>
 </body>
 
 </html>

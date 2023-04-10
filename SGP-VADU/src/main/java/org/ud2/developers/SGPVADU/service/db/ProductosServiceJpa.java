@@ -71,10 +71,20 @@ public class ProductosServiceJpa implements IntServiceProductos {
 		return repoProductos.findAllProductosByEstatus(1, page);
 	}
 
-	@Override
-	public Page<Producto> buscarTodasPorCategoria(Integer idCategoria, Pageable page) {
-		return repoProductos.findAllProductosByEstatusAndCategoria(1, idCategoria, page);
+	/*@Override
+	public Page<Producto> buscarTodasPorEstatusYDescripcion(Pageable page, String descripcion) {
+		return repoProductos.findByCriteria(descripcion, page);
 	}
+
+	@Override
+	public Page<Producto> buscarTodasPorEstatusYCategoria(Pageable page, Integer idCategoria) {
+		return repoProductos.findByCriteria(idCategoria, page);
+	}
+	
+	@Override
+	public Page<Producto> buscarTodasPorEstatusYDescripcionYCategoria(Pageable page, String descripcion, Integer idCategoria) {
+		return repoProductos.findByCriteria(descripcion, idCategoria, page);
+	}*/
 
 	@Override
 	public Integer contarProductos() {

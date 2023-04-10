@@ -24,9 +24,8 @@
                     <strong>Listado de Productos</strong>
                 </h4>
                 <div class="card-body">
-                    <a class="btn btn-primary" th:classappend="${productos.isEmpty() ? 'disabled' : 'enabled'}"
-                        th:href="@{/productos/nuevo}" title="Agregar producto nuevo" role="button"><i
-                            class="fas fa-drumstick-bite fa-lg"></i> Nuevo</a>
+                    <a class="btn btn-primary" th:href="@{/productos/nuevo}" title="Agregar producto nuevo"
+                    	role="button"><i class="fas fa-drumstick-bite fa-lg"></i> Nuevo</a>
                     <div style="float: right;">
                         <a class="btn text-white" th:href="@{/productos/exportarPDF}" title="Exportar a PDF"
                             role="button" data-mdb-toggle="tooltip" style="background-color: #c62020;"><i
